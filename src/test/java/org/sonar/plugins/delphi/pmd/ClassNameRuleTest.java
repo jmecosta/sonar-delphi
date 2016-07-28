@@ -45,8 +45,8 @@ public class ClassNameRuleTest extends BasePmdRuleTest {
         builder.appendDecl("  MyClass = class");
         builder.appendDecl("  end;");
 
-        Issue issue = analyse(builder).get(0);
-
+        analyse(builder);
+        Issue issue = issues.get(0);
         assertThat(issues, hasSize(1));
         assertThat(issue.ruleKey().toString(), equalTo("delph:ClassNameRule"));
         assertThat(issue.line(), is(builder.getOffsetDecl() + 2));

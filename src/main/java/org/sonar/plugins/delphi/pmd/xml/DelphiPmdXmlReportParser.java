@@ -78,7 +78,7 @@ public class DelphiPmdXmlReportParser {
                         //String endLine = violationCursor.getAttrValue("beginline");
                         String ruleKey = violationCursor.getAttrValue("rule");
                         String message = StringUtils.trim(violationCursor.collectDescendantText());
-                        toReturn.add(addIssue(ruleKey, fileName, Integer.parseInt(beginLine), message));
+                        addIssue(ruleKey, fileName, Integer.parseInt(beginLine), message);
                     }
                 }
             }

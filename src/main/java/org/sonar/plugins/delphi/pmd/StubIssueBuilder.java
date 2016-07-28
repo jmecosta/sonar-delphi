@@ -43,12 +43,13 @@ public class StubIssueBuilder implements IssueBuilder {
 
     @Override
     public IssueBuilder line(@Nullable Integer integer) {
-        return null;
+        this.line = integer;
+        return this;
     }
 
     @Override
     public IssueBuilder message(@Nullable String s) {
-        return null;
+        return this;
     }
 
     @Override
@@ -58,17 +59,17 @@ public class StubIssueBuilder implements IssueBuilder {
 
     @Override
     public IssueBuilder at(NewIssueLocation newIssueLocation) {
-        return null;
+        return this;
     }
 
     @Override
     public IssueBuilder addLocation(NewIssueLocation newIssueLocation) {
-        return null;
+        return this;
     }
 
     @Override
     public IssueBuilder addFlow(Iterable<NewIssueLocation> iterable) {
-        return null;
+        return this;
     }
 
     @Override
@@ -93,6 +94,7 @@ public class StubIssueBuilder implements IssueBuilder {
 
     @Override
     public Issue build() {
+        System.out.println("HERE");
         return new DelphiIssue(line, ruleKey);
     }
 
@@ -100,10 +102,6 @@ public class StubIssueBuilder implements IssueBuilder {
         this.line = lineTU;
         this.ruleKey = ruleKeyTU;
         return new DelphiIssue(lineTU, ruleKeyTU);
-    }
-
-    public IssueBuilder getIssueBuilder() {
-        return this;
     }
     //(Issue)defaultIssue;
 }

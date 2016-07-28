@@ -74,6 +74,7 @@ public abstract class BasePmdRuleTest {
 
         DebugSensorContext sensorContext = new DebugSensorContext();
         sensor.analyse(project, sensorContext);
+        issues.addAll(sensor.getListIssuesForTests());
 
 
         assertThat("Errors: " + sensor.getErrors(), sensor.getErrors(), is(empty()));
