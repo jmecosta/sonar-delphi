@@ -59,7 +59,7 @@ public class DelphiPmdXmlReportParser {
      * Parses XML file
      *
      * @param xmlFile PMD xml file
-     * @return ArrayList<Issue>  returns a list of issues which can be used for further usage
+     * @return returns a list of issues which can be used for further usage
      */
     public List<Issue> parse(File xmlFile) {
         StaxParser parser = new StaxParser(new StaxParser.XmlStreamHandler() {

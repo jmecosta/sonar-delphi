@@ -313,6 +313,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/pmd/DelphiUnitBuilderTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/pmd/UnusedArgumentsRuleTest.java">
           <value>
             <set />
