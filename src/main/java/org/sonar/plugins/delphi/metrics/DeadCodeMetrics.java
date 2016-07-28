@@ -50,19 +50,17 @@ import java.util.Set;
  */
 public class DeadCodeMetrics extends DefaultMetrics implements MetricsInterface {
 
+    public static final RuleKey RULE_KEY_UNUSED_UNIT = RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, "UnusedUnitRule");
+    public static final RuleKey RULE_KEY_UNUSED_FUNCTION = RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, "UnusedFunctionRule");
     private static final String DEAD_UNIT_VIOLATION_MESSAGE = " - unused unit. No other unit nor project has this unit in it's uses section. Probably you could remove this unit from project.";
     private static final String DEAD_FUNCTION_VIOLATION_MESSAGE = " - unused function/procedure. No other function and procedure in a project refers to it. Probably you could remove it.";
-
+    private final ActiveRule unitRule;
+    private final ActiveRule functionRule;
+    private final ResourcePerspectives perspectives;
     private boolean isCalculated;
     private List<String> unusedUnits;
     private Set<FunctionInterface> unusedFunctions;
     private List<UnitInterface> allUnits;
-    private final ActiveRule unitRule;
-    private final ActiveRule functionRule;
-    private final ResourcePerspectives perspectives;
-
-    public static final RuleKey RULE_KEY_UNUSED_UNIT = RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, "UnusedUnitRule");
-    public static final RuleKey RULE_KEY_UNUSED_FUNCTION = RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, "UnusedFunctionRule");
 
     /**
      * {@inheritDoc}
@@ -228,7 +226,7 @@ public class DeadCodeMetrics extends DefaultMetrics implements MetricsInterface 
         Set<String> usedUnits = new HashSet<String>();
         List<String> result = new ArrayList<String>();
         for (UnitInterface unit : units) {
-            if (unit.getFileName().toLowerCase().endsWith(".pas")) {
+            if (unit != null && unit.getFileName() != null && unit.getFileName().toLowerCase().endsWith(".pas")) {
                 result.add(unit.getName().toLowerCase());
                 allUnits.add(unit);
             }

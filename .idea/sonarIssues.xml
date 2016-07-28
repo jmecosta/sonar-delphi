@@ -158,6 +158,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/metrics/DeadCodeMetrics.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/pmd/DelphiIssue.java">
           <value>
             <set />
