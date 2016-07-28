@@ -560,7 +560,7 @@ withStatement                : 'with' withItem 'do' statement
 withItem                     : designator 'as' designator       //ADDED
                              | designator (',' designator)*
                              ;
-compoundStatement            : 'begin' (statementList)? 'end' -> ^('begin' (statementList)? 'end')
+compoundStatement            : 'begin' (statementList)? 'end' -> ^('begin' (statementList)? 'end' ';')
                              ;
 statementList                : (statement)? (';' (statement)?)*
                              ;

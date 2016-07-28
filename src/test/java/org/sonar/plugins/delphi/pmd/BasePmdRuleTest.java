@@ -59,26 +59,25 @@ public abstract class BasePmdRuleTest {
 
     protected static final String ROOT_DIR_NAME = "/org/sonar/plugins/delphi/PMDTest";
     protected static final File ROOT_DIR = DelphiUtils.getResource(ROOT_DIR_NAME);
-
-    private ResourcePerspectives perspectives;
-    private DelphiProjectHelper delphiProjectHelper;
-    private Issuable issuable;
-
     protected DelphiPmdSensor sensor;
     protected Project project;
     protected List<Issue> issues = new LinkedList<Issue>();
+    private ResourcePerspectives perspectives;
+    private DelphiProjectHelper delphiProjectHelper;
+    private Issuable issuable;
     private File testFile;
     private DelphiPmdProfileExporter profileExporter;
     private RulesProfile rulesProfile;
 
-    public void analyse(DelphiUnitBuilderTest builder) {
+    public List<Issue> analyse(DelphiUnitBuilderTest builder) {
         configureTest(builder);
 
         DebugSensorContext sensorContext = new DebugSensorContext();
         sensor.analyse(project, sensorContext);
 
-        assertThat("Errors: " + sensor.getErrors(), sensor.getErrors(), is(empty()));
 
+        assertThat("Errors: " + sensor.getErrors(), sensor.getErrors(), is(empty()));
+        return sensor.getListIssuesForTests();
     }
 
     private void configureTest(DelphiUnitBuilderTest builder) {
@@ -124,8 +123,6 @@ public abstract class BasePmdRuleTest {
         when(issuable.addIssue(Matchers.any(Issue.class))).then(new Answer<Boolean>() {
             @Override
             public Boolean answer(InvocationOnMock invocation) throws Throwable {
-                System.out.println("HIER:" + invocation.getArguments()[0]);
-                System.out.println("HIER2:" + invocation.getArguments()[0]);
                 Issue issue = (Issue) invocation.getArguments()[0];
                 issues.add(issue);
                 return Boolean.TRUE;

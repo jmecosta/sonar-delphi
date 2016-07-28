@@ -93,8 +93,17 @@ public class StubIssueBuilder implements IssueBuilder {
 
     @Override
     public Issue build() {
-        //DefaultIssue defaultIssue = new DefaultIssue().forRule(ruleKey);
-        return new DelphiIssue(line, ruleKey, message)
-                .getIssue();
-    }//(Issue)defaultIssue;
+        return new DelphiIssue(line, ruleKey);
+    }
+
+    public Issue build(Integer lineTU, RuleKey ruleKeyTU) {
+        this.line = lineTU;
+        this.ruleKey = ruleKeyTU;
+        return new DelphiIssue(lineTU, ruleKeyTU);
+    }
+
+    public IssueBuilder getIssueBuilder() {
+        return this;
+    }
+    //(Issue)defaultIssue;
 }

@@ -55,9 +55,9 @@ public class ExcludeResolverTest extends FileTestsCommon {
     @Test
     public void getAllExcludesTest() {
         SubRange expectedResults[] = {new IntegerSubRange(42, 60), new IntegerSubRange(62, 118),
-                new IntegerSubRange(329, 365),
-                new IntegerSubRange(375, 400), new IntegerSubRange(402, 411), new IntegerSubRange(420, 436),
-                new IntegerSubRange(449, 478)};
+                new IntegerSubRange(343, 385),
+                new IntegerSubRange(397, 422), new IntegerSubRange(427, 436), new IntegerSubRange(448, 464),
+                new IntegerSubRange(480, 509)};
 
         SourceResolverResults result = new SourceResolverResults(testFile.getAbsolutePath(), testFileString);
         resolver.resolve(result);

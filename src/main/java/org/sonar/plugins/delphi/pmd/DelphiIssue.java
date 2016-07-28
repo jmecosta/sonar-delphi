@@ -24,21 +24,21 @@ import org.sonar.api.issue.IssueComment;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.Duration;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DelphiIssue implements Issue {
 
-    private final int line;
     private final RuleKey ruleKey;
     private final String message;
+    private final Integer line;
+    List<String> tags = new ArrayList<>();
 
-    public DelphiIssue(int line, RuleKey ruleKey, String message) {
+    //user other constructor this is just a work around for debugging
+    public DelphiIssue(int line, RuleKey ruleKey) {
         this.line = line;
+        this.tags.add("THIS IS A TAG, change thsi in code to be useful");
         this.ruleKey = ruleKey;
-        this.message = message;
+        this.message = "MSG is deprecated, changed for debugging";
     }
 
     public Issue getIssue() {
@@ -54,14 +54,6 @@ public class DelphiIssue implements Issue {
         return "(" + line + ", " + ruleKey() + ")";
     }
 
-    int getLine() {
-        return line;
-    }
-
-    public RuleKey getRuleKey() {
-        return ruleKey;
-    }
-
     @Override
     public String key() {
         return null;
@@ -74,7 +66,7 @@ public class DelphiIssue implements Issue {
 
     @Override
     public RuleKey ruleKey() {
-        return null;
+        return this.ruleKey;
     }
 
     @Override
@@ -94,7 +86,7 @@ public class DelphiIssue implements Issue {
 
     @Override
     public Integer line() {
-        return null;
+        return this.line;
     }
 
     @Override
@@ -212,6 +204,6 @@ public class DelphiIssue implements Issue {
 
     @Override
     public Collection<String> tags() {
-        return null;
+        return tags;
     }
 }

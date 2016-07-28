@@ -239,8 +239,6 @@ public class DelphiProjectHelper implements BatchExtension {
     }
 
     public Directory getDirectory(java.io.File dir, Project module) {
-        System.out.println(("THIS IS DIR:" + dir.getPath()));
-        System.out.println(("THIS IS MODULE:" + module.toString()));
         //findFileInDirectories("");
 
         Directory directory = new Directory(dir.getPath());//Directory.fromIOFile(dir, module);

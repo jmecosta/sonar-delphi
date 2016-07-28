@@ -28,14 +28,18 @@ import org.codehaus.staxmate.in.SMInputCursor;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.component.ResourcePerspectives;
 import org.sonar.api.issue.Issuable;
+import org.sonar.api.issue.Issue;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.StaxParser;
 import org.sonar.plugins.delphi.core.helpers.DelphiProjectHelper;
 import org.sonar.plugins.delphi.pmd.DelphiPmdConstants;
+import org.sonar.plugins.delphi.pmd.StubIssueBuilder;
 import org.sonar.plugins.delphi.utils.DelphiUtils;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Parses PMD xml report
@@ -44,6 +48,7 @@ public class DelphiPmdXmlReportParser {
 
     private final DelphiProjectHelper delphiProjectHelper;
     private final ResourcePerspectives perspectives;
+    private List<Issue> toReturn = new ArrayList<>();
 
     public DelphiPmdXmlReportParser(DelphiProjectHelper delphiProjectHelper, ResourcePerspectives perspectives) {
         this.delphiProjectHelper = delphiProjectHelper;
@@ -55,7 +60,7 @@ public class DelphiPmdXmlReportParser {
      *
      * @param xmlFile PMD xml file
      */
-    public void parse(File xmlFile) {
+    public List<Issue> parse(File xmlFile) {
         StaxParser parser = new StaxParser(new StaxParser.XmlStreamHandler() {
 
             @Override
@@ -72,8 +77,7 @@ public class DelphiPmdXmlReportParser {
                         //String endLine = violationCursor.getAttrValue("beginline");
                         String ruleKey = violationCursor.getAttrValue("rule");
                         String message = StringUtils.trim(violationCursor.collectDescendantText());
-                        System.out.println("HIER parse1:" + ruleKey + message + beginLine);
-                        addIssue(ruleKey, fileName, Integer.parseInt(beginLine), message);
+                        toReturn.add(addIssue(ruleKey, fileName, Integer.parseInt(beginLine)));
                     }
                 }
             }
@@ -84,25 +88,23 @@ public class DelphiPmdXmlReportParser {
         } catch (XMLStreamException e) {
             DelphiUtils.LOG.error("Error parsing file : {}", xmlFile);
         }
+        return toReturn;
     }
 
-    private void addIssue(String ruleKey, String fileName, Integer beginLine, String message) {
+    private Issue addIssue(String ruleKey, String fileName, Integer beginLine) {
 
-        DelphiUtils.LOG.debug("PMD Violation - rule: " + ruleKey + " file: " + fileName + " message: " + message);
-
+        DelphiUtils.LOG.debug("PMD Violation - rule: " + ruleKey + " file: " + fileName);
         InputFile inputFile = delphiProjectHelper.getFile(fileName);
         Issuable issuable = perspectives.as(Issuable.class, inputFile);
         if (issuable != null) {
             //note this has been added to get compatibility with sonar 5.2
             issuable.addIssue(
-                    issuable.newIssueBuilder()
-                            .ruleKey(RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, ruleKey))
-                            .effortToFix(0.0)
-                            .message(message)
-                            .build()
+                    new StubIssueBuilder()
+                            .build(beginLine, RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, ruleKey))
             );
             //System.out.println("ISSUE TOSTRING: "+issue.toString());
         }
-
+        return new StubIssueBuilder()
+                .build(beginLine, RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, ruleKey));
     }
 }

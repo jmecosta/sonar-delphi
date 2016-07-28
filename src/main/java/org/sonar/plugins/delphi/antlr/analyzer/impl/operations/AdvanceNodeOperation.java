@@ -36,7 +36,6 @@ public class AdvanceNodeOperation implements NodeOperation {
         if (node == null) {
             return new CodeNode<Tree>(null);
         }
-
         if (node.getChildCount() == 0) {
             // no child, traceback to parent
             return (new TraceBackNodeOperation().execute(node));

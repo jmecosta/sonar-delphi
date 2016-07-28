@@ -69,14 +69,13 @@ public class DeadCodeMetricsTest {
 
     private static final String TEST_FILE = "/org/sonar/plugins/delphi/metrics/DeadCodeMetricsTest.pas";
     private static final String DEAD_FILE = "/org/sonar/plugins/delphi/metrics/DeadCodeUnit.pas";
-
+    private final List<Issue> issues = new ArrayList<Issue>();
     private DeadCodeMetrics metrics;
     private Set<UnitInterface> units;
     private List<ClassInterface> classes;
     private List<FunctionInterface> functions;
     private ResourcePerspectives perspectives;
     private Issuable issuable;
-    private final List<Issue> issues = new ArrayList<Issue>();
     private ActiveRules activeRules;
 
     @Before
@@ -179,11 +178,6 @@ public class DeadCodeMetricsTest {
         metrics.analyse(null, context, results.getClasses(), results.getFunctions(), results.getCachedUnitsAsList());
 
         metrics.save(new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", DEAD_FILE), context);
-
-        for (Issue issue : issues) {
-            System.out.println("issue: " + issue.key() + " line: " + issue.line() + " message: " + issue.message());
-        }
-
         assertThat(issues, hasSize(2));
     }
 

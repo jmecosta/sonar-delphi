@@ -2245,6 +2245,7 @@ public class DelphiLexer extends Lexer {
             state.channel = _channel;
         } finally {
             // do for sure before leaving
+            // Bug fix Sandro, should be done more elegant
         }
     }
     // $ANTLR end "HELPER"
@@ -6208,7 +6209,6 @@ public class DelphiLexer extends Lexer {
                 // org\\sonar\\plugins\\delphi\\antlr\\Delphi.g:1:255: END
             {
                 mEND();
-
             }
             break;
             case 37:

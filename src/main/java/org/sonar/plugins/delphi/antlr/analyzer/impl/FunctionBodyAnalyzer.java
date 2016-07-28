@@ -41,12 +41,11 @@ import org.sonar.plugins.delphi.core.language.verifiers.StatementVerifier;
  */
 public class FunctionBodyAnalyzer extends CodeAnalyzer {
 
-    private CodeAnalysisResults results = null;
-    private StatementVerifier statementverifier;
-
     private static final LexerMetrics[] BRANCHING_NODES = {LexerMetrics.IF, LexerMetrics.FOR, LexerMetrics.WHILE,
             LexerMetrics.CASE,
             LexerMetrics.REPEAT, LexerMetrics.AND, LexerMetrics.OR};
+    private CodeAnalysisResults results = null;
+    private StatementVerifier statementverifier;
 
     public FunctionBodyAnalyzer(CodeAnalysisResults results, DelphiProjectHelper delphiProjectHelper) {
         if (results == null) {
@@ -98,6 +97,7 @@ public class FunctionBodyAnalyzer extends CodeAnalyzer {
         Tree parent = currentCodeNode.getParent();
         for (int i = currentCodeNode.getChildIndex() - 1; i >= 0; i--) {
             Tree child = parent.getChild(i);
+
             if (child.getType() == DelphiLexer.FUNCTION
                     || child.getType() == DelphiLexer.PROCEDURE
                     || child.getType() == DelphiLexer.CONSTRUCTOR

@@ -41,7 +41,6 @@ public class GrammarTest {
     }
 
     private void parseFile(String fileName, String encoding) throws IOException {
-        System.out.println("Parsing file: " + BASE_DIR + fileName);
         DelphiAST ast = new DelphiAST(DelphiUtils.getResource(BASE_DIR + fileName), encoding);
         assertEquals(false, ast.isError());
 
@@ -49,7 +48,6 @@ public class GrammarTest {
 
         String outputFileName = File.createTempFile(name, "").getParentFile().getAbsolutePath() + File.separatorChar + "AST_" + name + ".xml";
         ast.generateXML(outputFileName);
-        System.out.println("Generated AST XML file at " + outputFileName);
     }
 
     @Test

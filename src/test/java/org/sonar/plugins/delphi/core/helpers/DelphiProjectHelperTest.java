@@ -58,10 +58,6 @@ public class DelphiProjectHelperTest {
 
     @Test
     public void getDirectory() {
-        System.out.println(("THIS IS PROJ:" + project.toString()));
-        System.out.println(("THIS IS CURDIR:" + currentDir.toString()));
-        System.out.println(("THIS IS BASEDIR:" + baseDir.toString()));
-
         Directory directory = delphiProjectHelper.getDirectory(currentDir, project);
         assertThat(directory, notNullValue());
         assertThat(directory.getKey(), is("[default]"));

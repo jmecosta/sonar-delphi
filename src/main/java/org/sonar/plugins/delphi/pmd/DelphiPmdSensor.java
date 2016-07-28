@@ -32,6 +32,7 @@ import org.apache.commons.io.FileUtils;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.component.ResourcePerspectives;
+import org.sonar.api.issue.Issue;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.delphi.core.helpers.DelphiProjectHelper;
@@ -57,6 +58,7 @@ public class DelphiPmdSensor implements Sensor {
     private final List<String> errors = new ArrayList<String>();
     private final DelphiPmdProfileExporter profileExporter;
     private final RulesProfile rulesProfile;
+    private List<Issue> listIssuesForTests;
 
     /**
      * C-tor
@@ -92,7 +94,7 @@ public class DelphiPmdSensor implements Sensor {
         // analysing report
         DelphiPmdXmlReportParser parser = new DelphiPmdXmlReportParser(delphiProjectHelper, perspectives);
 
-        parser.parse(reportFile);
+        this.listIssuesForTests = parser.parse(reportFile);
     }
 
     private RuleSets createRuleSets() {
@@ -204,4 +206,7 @@ public class DelphiPmdSensor implements Sensor {
         return errors;
     }
 
+    public List<Issue> getListIssuesForTests() {
+        return listIssuesForTests;
+    }
 }

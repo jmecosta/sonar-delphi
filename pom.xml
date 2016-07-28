@@ -107,10 +107,11 @@
             <scope>provided</scope>
         </dependency>
         <!-- Plugin's specific deps -->
+        <!-- Plugin's specific deps -->
         <dependency>
             <groupId>org.antlr</groupId>
-            <artifactId>antlr4</artifactId>
-            <version>4.5.3</version>
+            <artifactId>antlr-runtime</artifactId>
+            <version>3.3</version>
         </dependency>
         <dependency>
             <groupId>pmd</groupId>
@@ -255,11 +256,6 @@
                 <extensions>true</extensions>
             </plugin>
             <plugin>
-                <groupId>org.antlr</groupId>
-                <artifactId>antlr4-maven-plugin</artifactId>
-                <version>4.5.3</version>
-            </plugin>
-            <plugin>
                 <groupId>com.mycila.maven-license-plugin</groupId>
                 <artifactId>maven-license-plugin</artifactId>
                 <version>1.8.0</version>
@@ -270,6 +266,11 @@
                         <value>/src/COLOMBO_LICENSE.txt</value>
                     </validHeaders>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.antlr</groupId>
+                <artifactId>antlr3-maven-plugin</artifactId>
+                <version>3.5.2</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -283,6 +284,9 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <source>1.8</source>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>

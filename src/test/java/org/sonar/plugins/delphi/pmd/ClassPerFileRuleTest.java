@@ -22,7 +22,8 @@ import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.sonar.plugins.delphi.IssueMatchers.*;
+import static org.sonar.plugins.delphi.IssueMatchers.hasRuleKey;
+import static org.sonar.plugins.delphi.IssueMatchers.hasRuleLine;
 
 public class ClassPerFileRuleTest extends BasePmdRuleTest {
 
@@ -52,7 +53,7 @@ public class ClassPerFileRuleTest extends BasePmdRuleTest {
         assertThat(issues, hasSize(1));
         assertThat(issues, hasItem(hasRuleKey("OneClassPerFileRule")));
         assertThat(issues, hasItem(hasRuleLine(builder.getOffsetDecl() + 4)));
-        assertThat(issues, hasItem(hasRuleMessage("File has too many classes, maximum number of classes is 1.")));
+        //Messages have been killed, maybe reintroduce assertThat(issues, hasItem(hasRuleMessage("File has too many classes, maximum number of classes is 1.")));
     }
 
     @Test

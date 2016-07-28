@@ -42,7 +42,7 @@ public class UnusedArgumentsRuleTest extends BasePmdRuleTest {
 
         // all expected rule violations and their lines
         RuleData ruleData[] = {
-                new RuleData("UnusedArgumentsRule", 31)
+                new RuleData("UnusedArgumentsRule", 29)
         };
 
         // Sort the violations by line number, so we don't have to add

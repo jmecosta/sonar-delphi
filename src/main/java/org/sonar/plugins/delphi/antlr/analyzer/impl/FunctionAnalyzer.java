@@ -68,7 +68,7 @@ public class FunctionAnalyzer extends CodeAnalyzer {
                 return true;
             }
         }
-        return false;
+        return false;//Change for debugging false;
     }
 
     @Override

@@ -38,6 +38,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/.idea/sonarIssues.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/pom.xml">
           <value>
             <set />
@@ -48,7 +53,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/antlr3/org/sonar/plugins/delphi/antlr/Delphi.g">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/DelphiPlugin.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/DelphiPlugin.java.url">
           <value>
             <set />
           </value>
@@ -64,6 +79,31 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/antlr/DelphiParser.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/antlr/analyzer/impl/FunctionAnalyzer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/antlr/analyzer/impl/FunctionBodyAnalyzer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/antlr/analyzer/impl/TypeAnalyzer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/antlr/analyzer/impl/operations/AdvanceNodeOperation.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/antlr/analyzer/impl/operations/AdvanceToNodeOperation.java">
           <value>
             <set />
           </value>
@@ -88,6 +128,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/core/helpers/DelphiProjectHelper.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/cpd/DelphiCpdTokenizer.java">
           <value>
             <set />
@@ -98,7 +143,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/metrics/ComplexityMetrics.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/pmd/DelphiIssue.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/pmd/DelphiPmdSensor.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/pmd/StubIssueBuilder.java">
           <value>
             <set />
           </value>
@@ -129,6 +189,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/pmd/rules/UnusedArgumentsRule.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/pmd/xml/DelphiPmdXmlReportParser.java">
           <value>
             <set />
           </value>
@@ -173,7 +238,42 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/antlr/GrammarTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/antlr/analyzer/impl/FunctionAnalyzerTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/antlr/analyzer/impl/FunctionBodyAnalyzerTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/antlr/analyzer/impl/IncludeAnalyzerTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/antlr/sanitizer/resolvers/DefineResolverTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/antlr/sanitizer/resolvers/ExcludeResolverTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/core/helpers/DelphiProjectHelperTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/core/language/impl/verifiers/StatementVerifierTest.java">
           <value>
             <set />
           </value>
@@ -188,12 +288,57 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/metrics/ComplexityMetricsTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/metrics/DeadCodeMetricsTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/pmd/BasePmdRuleTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/pmd/ClassNameRuleTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/pmd/ClassPerFileRuleTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/pmd/UnusedArgumentsRuleTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/pmd/xml/DelphiRuleTest.java">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/test/java/org/sonar/squid/text/delphi/LineTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/target/generated-sources/antlr3/Delphi.tokens">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/target/generated-sources/antlr3/org/sonar/plugins/delphi/antlr/DelphiLexer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/target/generated-sources/antlr3/org/sonar/plugins/delphi/antlr/DelphiParser.java">
           <value>
             <set />
           </value>
