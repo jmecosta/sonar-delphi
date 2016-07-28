@@ -83,6 +83,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/antlr/analyzer/CodeAnalyzer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/antlr/analyzer/impl/FunctionAnalyzer.java">
           <value>
             <set />
@@ -94,6 +99,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/antlr/analyzer/impl/TypeAnalyzer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/antlr/analyzer/impl/UnitAnalyzer.java">
           <value>
             <set />
           </value>

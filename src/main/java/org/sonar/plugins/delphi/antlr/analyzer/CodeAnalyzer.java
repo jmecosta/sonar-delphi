@@ -50,7 +50,7 @@ public abstract class CodeAnalyzer {
         if (canAnalyze(codeTree)) {
             doAnalyze(codeTree, results);
         }
-        if (successor != null) {
+        if (successor != null && codeTree != null && results != null) {
             successor.analyze(codeTree, results);
         }
     }
