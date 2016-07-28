@@ -59,6 +59,7 @@ public class DelphiPmdXmlReportParser {
      * Parses XML file
      *
      * @param xmlFile PMD xml file
+     * @return ArrayList<Issue>  returns a list of issues which can be used for further usage
      */
     public List<Issue> parse(File xmlFile) {
         StaxParser parser = new StaxParser(new StaxParser.XmlStreamHandler() {
@@ -77,7 +78,7 @@ public class DelphiPmdXmlReportParser {
                         //String endLine = violationCursor.getAttrValue("beginline");
                         String ruleKey = violationCursor.getAttrValue("rule");
                         String message = StringUtils.trim(violationCursor.collectDescendantText());
-                        toReturn.add(addIssue(ruleKey, fileName, Integer.parseInt(beginLine)));
+                        toReturn.add(addIssue(ruleKey, fileName, Integer.parseInt(beginLine), message));
                     }
                 }
             }
@@ -91,20 +92,25 @@ public class DelphiPmdXmlReportParser {
         return toReturn;
     }
 
-    private Issue addIssue(String ruleKey, String fileName, Integer beginLine) {
+    private Issue addIssue(String ruleKey, String fileName, Integer beginLine, String message) {
 
         DelphiUtils.LOG.debug("PMD Violation - rule: " + ruleKey + " file: " + fileName);
         InputFile inputFile = delphiProjectHelper.getFile(fileName);
         Issuable issuable = perspectives.as(Issuable.class, inputFile);
+        Issue issue = new StubIssueBuilder()
+                .build(beginLine, RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, ruleKey));
         if (issuable != null) {
             //note this has been added to get compatibility with sonar 5.2
             issuable.addIssue(
-                    new StubIssueBuilder()
-                            .build(beginLine, RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, ruleKey))
+                    issuable.newIssueBuilder()
+                            .line(beginLine)
+                            .ruleKey(RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, ruleKey))
+                            .effortToFix(0.0)
+                            .message(message)
+                            .build()
             );
             //System.out.println("ISSUE TOSTRING: "+issue.toString());
         }
-        return new StubIssueBuilder()
-                .build(beginLine, RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, ruleKey));
+        return issue;
     }
 }

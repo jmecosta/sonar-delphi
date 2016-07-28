@@ -56,7 +56,7 @@ public class DelphiIssue implements Issue {
 
     @Override
     public String key() {
-        return null;
+        return ruleKey().toString() + "   This is just Rulekey.toSTring()";
     }
 
     @Override
@@ -71,7 +71,7 @@ public class DelphiIssue implements Issue {
 
     @Override
     public String language() {
-        return null;
+        return "Delphi";
     }
 
     @Override
