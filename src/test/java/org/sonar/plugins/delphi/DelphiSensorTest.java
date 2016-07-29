@@ -43,12 +43,16 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.util.*;
 
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class DelphiSensorTest {
 
+    private static final String ROOT_NAME = "/org/sonar/plugins/delphi/SimpleDelphiProject";
+    private final DelphiProject delphiProject = new DelphiProject("Default Project");
     private Project project = null;
     private DelphiSensor sensor = null;
     private File baseDir = null;
@@ -56,9 +60,6 @@ public class DelphiSensorTest {
     private DelphiProjectHelper delphiProjectHelper;
     private ActiveRules activeRules;
     private ResourcePerspectives perspectives;
-
-    private static final String ROOT_NAME = "/org/sonar/plugins/delphi/SimpleDelphiProject";
-    private final DelphiProject delphiProject = new DelphiProject("Default Project");
 
     @Before
     public void init() {
@@ -242,12 +243,12 @@ public class DelphiSensorTest {
         delphiProject.getSourceFiles().add(new File(baseDir + "/Globals.pas"));
         delphiProject.getSourceFiles().add(new File(baseDir + "/../BadSyntax.pas"));
         DebugSensorContext context = new DebugSensorContext();
-//    sensor.analyse(project, context);
+        sensor.analyse(project, context);
 
-        //assertThat("processed files", sensor.getProcessedFilesCount(), is(1));
-        //assertThat("units", sensor.getUnits(), hasSize(1));
-        //assertThat("file classes", sensor.getFileClasses().size(), is(1));
-        //assertThat("file functions", sensor.getFileFunctions().size(), is(1));
+        assertThat("processed files", sensor.getProcessedFilesCount(), is(1));
+        assertThat("units", sensor.getUnits(), hasSize(1));
+        assertThat("file classes", sensor.getFileClasses().size(), is(1));
+        assertThat("file functions", sensor.getFileFunctions().size(), is(1));
     }
 
 }

@@ -115,25 +115,31 @@ public class DelphiSensor implements Sensor {
         DelphiUtils.LOG.info("Processing metrics...");
         ProgressReporter progressReporter = new ProgressReporter(resourceList.size(), 10, new ProgressReporterLogger(
                 DelphiUtils.LOG));
+        try {
+            //handles bad input and catches exceptions
+            for (InputFile resource : resourceList) {
 
-        for (InputFile resource : resourceList) {
-            DelphiUtils.LOG.debug(">> PROCESSING " + resource.file().getPath());
+                DelphiUtils.LOG.debug(">> PROCESSING " + resource.file().getPath());
 
-            processMetric(basicMetrics, sensorContext, resource);
-            processMetric(complexityMetrics, sensorContext, resource);
-            processMetric(deadCodeMetrics, sensorContext, resource);
+                processMetric(basicMetrics, sensorContext, resource);
+                processMetric(complexityMetrics, sensorContext, resource);
+                processMetric(deadCodeMetrics, sensorContext, resource);
 
-            if (basicMetrics.hasMetric("PUBLIC_DOC_API") && complexityMetrics.hasMetric("PUBLIC_API")) {
-                double undocumentedApi = DelphiUtils.checkRange(complexityMetrics.getMetric("PUBLIC_API") - basicMetrics.getMetric("PUBLIC_DOC_API"), 0.0, Double.MAX_VALUE);
+                if (basicMetrics.hasMetric("PUBLIC_DOC_API") && complexityMetrics.hasMetric("PUBLIC_API")) {
+                    double undocumentedApi = DelphiUtils.checkRange(complexityMetrics.getMetric("PUBLIC_API") - basicMetrics.getMetric("PUBLIC_DOC_API"), 0.0, Double.MAX_VALUE);
 
-                // Number of public API without a documentation block
-                sensorContext.saveMeasure(resource, CoreMetrics.PUBLIC_UNDOCUMENTED_API, undocumentedApi);
+                    // Number of public API without a documentation block
+                    sensorContext.saveMeasure(resource, CoreMetrics.PUBLIC_UNDOCUMENTED_API, undocumentedApi);
+                }
+
+                progressReporter.progress();
+
+
+                DelphiUtils.LOG.info("Done");
             }
-
-            progressReporter.progress();
+        } catch (Exception e) {
+            DelphiUtils.LOG.debug("Due to bad input ,Error occured:" + e.getStackTrace().toString());
         }
-
-        DelphiUtils.LOG.info("Done");
     }
 
     public void processMetric(MetricsInterface metric, SensorContext sensorContext, InputFile resource) {

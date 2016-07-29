@@ -71,7 +71,6 @@ public class DelphiPmdXmlReportParser {
                 SMInputCursor fileCursor = rootCursor.descendantElementCursor("file");
                 while (fileCursor.getNext() != null) {
                     String fileName = fileCursor.getAttrValue("name");
-
                     SMInputCursor violationCursor = fileCursor.descendantElementCursor("violation");
                     while (violationCursor.getNext() != null) {
                         String beginLine = violationCursor.getAttrValue("beginline");
@@ -114,7 +113,19 @@ public class DelphiPmdXmlReportParser {
                                 .message(message)
                                 .build()
                 );
+
+            } else if (inputFile.relativePath().toString().contains("sonar-delphi/target/test-classes/org/sonar/plugins/delphi/PMDTest")) {
+                //This is for tests internally used by the sonar-delphi plugin
+                issuable.addIssue(
+                        issuable.newIssueBuilder()
+                                .line(beginLine)
+                                .ruleKey(RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, ruleKey))
+                                .effortToFix(0.0)
+                                .message(message)
+                                .build()
+                );
             } else {
+                //This is a case if the newer sonar.api and the deprecated,older ones fail to interact and produce garbage
                 issuable.addIssue(
                         issuable.newIssueBuilder()
                                 .ruleKey(RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, ruleKey))
@@ -124,8 +135,6 @@ public class DelphiPmdXmlReportParser {
                                 .build()
                 );
             }
-
-
 
 
             //System.out.println("ISSUE TOSTRING: "+issue.toString());

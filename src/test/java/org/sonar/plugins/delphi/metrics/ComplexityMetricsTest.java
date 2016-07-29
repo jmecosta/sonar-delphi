@@ -86,7 +86,7 @@ public class ComplexityMetricsTest {
 
     @Test
     public void analyseTest() throws Exception {
-        //This does not work so tests are not correct
+        ////Test not working, Due too deprecated methods TODO: Fix this test
         // init
         File testFile = DelphiUtils.getResource(FILE_NAME);
         CodeAnalysisCacheResults.resetCache();
@@ -101,10 +101,10 @@ public class ComplexityMetricsTest {
         String[] keys = {"ACCESSORS", "CLASS_COMPLEXITY", "CLASSES", "COMPLEXITY", "FUNCTIONS", "FUNCTION_COMPLEXITY",
                 "PUBLIC_API",
                 "STATEMENTS"};
-        double[] values = {2.0, 3.5, 2.0, 10.0, 4.0, 2.5, 5.0, 20.0};
+        double[] values = {0.0, 2.0, 3.5, 2.0, 10.0, 4.0, 2.5, 5.0, 20.0};
 
         for (int i = 0; i < keys.length; ++i) {
-            //assertEquals(keys[i] + " failure ->", values[i], metrics.getMetric(keys[i]), 0.0); This changed TODO: Fix this test
+            // assertEquals(keys[i] + " failure ->", values[i], metrics.getMetric(keys[i]), 0.0); //This changed TODO: Fix this test
         }
 
         //assertThat(issues, hasSize(1));

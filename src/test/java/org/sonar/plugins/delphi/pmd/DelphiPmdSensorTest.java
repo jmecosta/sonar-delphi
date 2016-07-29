@@ -188,6 +188,7 @@ public class DelphiPmdSensorTest {
         // violations order
         Arrays.sort(ruleData, RuleData.getComparator());
 
+        //Test not working, internal order change here
         //assertThat("number of issues", issues, hasSize(ruleData.length));
 
         for (int i = 0; i < issues.size(); ++i) {

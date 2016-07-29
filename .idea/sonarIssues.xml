@@ -218,6 +218,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/pmd/rules/XPathRule.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/pmd/xml/DelphiPmdXmlReportParser.java">
           <value>
             <set />
@@ -338,6 +343,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/pmd/DelphiPmdSensorTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/pmd/DelphiUnitBuilderTest.java">
           <value>
             <set />
@@ -349,6 +359,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/pmd/xml/DelphiRuleTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/surefire/SurefireSensorTest.java">
           <value>
             <set />
           </value>

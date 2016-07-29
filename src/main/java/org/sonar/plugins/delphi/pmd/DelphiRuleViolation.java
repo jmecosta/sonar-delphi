@@ -148,7 +148,7 @@ public class DelphiRuleViolation implements IRuleViolation {
                                     .getChild(i)
                                     .getText());
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            DelphiUtils.LOG.debug(e.getStackTrace().toString());
                         }
                     }
                     methodName = name.toString();

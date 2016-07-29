@@ -67,7 +67,7 @@ public class IncludeAnalyzerTest {
 
     @Test
     public void analyzeTest() {
-        //Test not working TODO: Fix this test
+        //Test not working, Due too deprecated methods TODO: Fix this test
         //code.setCurrentNode(advanceToUses.execute(code.getCurrentCodeNode().getNode()));
         analyzer.analyze(code, results);
 
@@ -79,6 +79,7 @@ public class IncludeAnalyzerTest {
         Arrays.sort(includes);
         Arrays.sort(expected);
         int index = 0;
+        System.out.println("HERE:" + includes.toString());
         //assertEquals(11, includes.length);
         for (String exp : expected) {
             //assertEquals(exp, includes[index++]);

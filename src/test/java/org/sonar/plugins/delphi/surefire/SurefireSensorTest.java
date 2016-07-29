@@ -84,6 +84,7 @@ public class SurefireSensorTest {
 
     @Test
     public void analyzeTest() {
+        //Test not working, Due too deprecated methods TODO: Fix this test
         settings.setProperty(SurefireUtils.SUREFIRE_REPORTS_PATH_PROPERTY, SUREFIRE_REPORT_DIR);
         DebugSensorContext context = new DebugSensorContext();
         SurefireSensor sensor = new SurefireSensor(settings, delphiProjectHelper);
@@ -94,6 +95,7 @@ public class SurefireSensorTest {
 
     @Test
     public void analyzeTestUsingDefaultSurefireReportsPath() {
+        //Test not working, Due too deprecated methods TODO: Fix this test
         DebugSensorContext context = new DebugSensorContext();
         SurefireSensor sensor = new SurefireSensor(settings, delphiProjectHelper);
         //sensor.analyse(project, context);
