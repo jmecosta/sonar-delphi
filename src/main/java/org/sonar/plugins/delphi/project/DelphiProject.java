@@ -38,9 +38,9 @@ import java.util.List;
 public class DelphiProject {
 
     private String name = "";
-    private List<String> definitions = new ArrayList<String>();
-    private List<File> files = new ArrayList<File>();
-    private List<File> includeDirectories = new ArrayList<File>();
+    private List<String> definitions = new ArrayList<>();
+    private List<File> files = new ArrayList<>();
+    private List<File> includeDirectories = new ArrayList<>();
     private File file = null;
 
     /**
@@ -156,7 +156,7 @@ public class DelphiProject {
     }
 
     public void setSourceFiles(List<InputFile> list) {
-        List<File> files = new ArrayList<File>();
+        List<File> files = new ArrayList<>();
         for (InputFile inputFile : list) {
             files.add(inputFile.file());
         }

@@ -32,7 +32,6 @@ import org.sonar.plugins.delphi.antlr.ast.ASTTree;
 import org.sonar.plugins.delphi.antlr.ast.DelphiPMDNode;
 import org.sonar.plugins.delphi.pmd.DelphiRuleViolation;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -41,16 +40,13 @@ import java.util.List;
  */
 public class DelphiRule extends AbstractJavaRule {
 
-    protected int lastLineParsed;
-
-    private int currentVisibility;
-
-    private boolean inImplementationSection = false;
-
     public static final PropertyDescriptor LIMIT = new IntegerProperty("limit", "The max limit.", 1, 1.0f);
     public static final PropertyDescriptor START = new StringProperty("start", "The AST node to start from", "", 1.0f);
     public static final PropertyDescriptor END = new StringProperty("end", "The AST node to stop the search", "", 1.0f);
     public static final PropertyDescriptor LOOK_FOR = new StringProperty("lookFor", "What nodes look for", "", 1.0f);
+    protected int lastLineParsed;
+    private int currentVisibility;
+    private boolean inImplementationSection = false;
 
     public DelphiRule() {
     }
@@ -75,8 +71,8 @@ public class DelphiRule extends AbstractJavaRule {
         currentVisibility = DelphiLexer.PUBLISHED;
         inImplementationSection = false;
         init();
-        for (Iterator<?> i = acus.iterator(); i.hasNext(); ) {
-            DelphiPMDNode node = (DelphiPMDNode) i.next();
+        for (Object acu : acus) {
+            DelphiPMDNode node = (DelphiPMDNode) acu;
             ASTTree ast = node.getASTTree();
             if (ast != null) {
                 String codeLine = node.getASTTree().getFileSourceLine(node.getLine());

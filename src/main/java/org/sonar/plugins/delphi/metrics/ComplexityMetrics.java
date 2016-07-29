@@ -123,7 +123,7 @@ public class ComplexityMetrics extends DefaultMetrics implements MetricsInterfac
                         List<FunctionInterface> functions,
                         Set<UnitInterface> units) {
         reset();
-        Set<String> processedFunc = new HashSet<String>();
+        Set<String> processedFunc = new HashSet<>();
         if (classes != null) {
             for (ClassInterface cl : classes) {
                 if (cl == null) {
@@ -263,7 +263,7 @@ public class ComplexityMetrics extends DefaultMetrics implements MetricsInterfac
     }
 
     private void addIssue(InputFile resource, FunctionInterface func) {
-        if (func.getComplexity() > threshold.intValue()) {
+        if (func.getComplexity() > threshold) {
             Issuable issuable = perspectives.as(Issuable.class, resource);
             //This line has been added to debug since it'soften a problem
             DelphiUtils.LOG.debug("Line of the issue is:" + methodCyclomaticComplexityRule.ruleKey() + "     And the File has, amount lines:" + resource.lines());

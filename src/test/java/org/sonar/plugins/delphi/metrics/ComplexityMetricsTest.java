@@ -54,7 +54,7 @@ public class ComplexityMetricsTest {
 
     private static final String FILE_NAME = "/org/sonar/plugins/delphi/metrics/ComplexityMetricsTest.pas";
     private static final String FILE_NAME_LIST_UTILS = "/org/sonar/plugins/delphi/metrics/ListUtils.pas";
-    private final List<Issue> issues = new ArrayList<Issue>();
+    private final List<Issue> issues = new ArrayList<>();
     private ResourcePerspectives perspectives;
     private ActiveRules activeRules;
 

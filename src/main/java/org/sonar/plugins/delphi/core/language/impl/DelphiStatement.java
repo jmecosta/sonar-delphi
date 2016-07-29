@@ -75,8 +75,26 @@ public class DelphiStatement implements StatementInterface {
      */
 
     @Override
+    public final void setLine(int value) {
+        line = value;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+
+    @Override
     public final int getColumn() {
         return column;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+
+    @Override
+    public final void setColumn(int value) {
+        column = value;
     }
 
     /**
@@ -102,30 +120,12 @@ public class DelphiStatement implements StatementInterface {
      */
 
     @Override
-    public final void setLine(int value) {
-        line = value;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-
-    @Override
-    public final void setColumn(int value) {
-        column = value;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-
-    @Override
     public ClassFieldInterface[] getFields(ClassInterface fromClass) {
         if (fromClass == null) {
             return null;
         }
         ClassFieldInterface[] fields = fromClass.getFields();
-        List<ClassFieldInterface> result = new ArrayList<ClassFieldInterface>();
+        List<ClassFieldInterface> result = new ArrayList<>();
 
         List<Token> tokens = new DelphiCpdTokenizer(delphiProjectHelper).tokenize(new String[]{text});
 

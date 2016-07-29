@@ -24,7 +24,6 @@ package org.sonar.plugins.delphi.antlr.analyzer;
 
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.tree.CommonTree;
-import org.antlr.runtime.tree.Tree;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.plugins.delphi.antlr.ast.ASTTree;
@@ -57,7 +56,7 @@ public class CodeAnalyzedTest {
         nodes[4].addChild(nodes[6]); // ab2 -> ab2c2
         nodes[4].addChild(nodes[7]); // ab2 -> ab2c3
 
-        code = new CodeTree(new CodeNode<ASTTree>(ast), new CodeNode<Tree>(ast.getChild(0)));
+        code = new CodeTree(new CodeNode<>(ast), new CodeNode<>(ast.getChild(0)));
     }
 
   /*

@@ -89,6 +89,20 @@ public enum LexerMetrics {
     }
 
     /**
+     * @param code delphi lexer id
+     * @return lexer metrics
+     */
+    public static LexerMetrics getLexerMetricsForType(int code) {
+        LexerMetrics[] values = LexerMetrics.values();
+        for (LexerMetrics value : values) {
+            if (value.metrics == code) {
+                return value;
+            }
+        }
+        throw new IllegalStateException("No LexerMetrics for metric: " + code);
+    }
+
+    /**
      * @return Delphi lexer metrics
      */
     public int toMetrics() {
@@ -100,20 +114,5 @@ public enum LexerMetrics {
      */
     public int toCode() {
         return code;
-    }
-
-    /**
-     * @param code delphi lexer id
-     * @return lexer metrics
-     */
-    public static LexerMetrics getLexerMetricsForType(int code) {
-        LexerMetrics[] values = LexerMetrics.values();
-        for (int i = 0; i < values.length; i++) {
-            LexerMetrics value = values[i];
-            if (value.metrics == code) {
-                return value;
-            }
-        }
-        throw new IllegalStateException("No LexerMetrics for metric: " + code);
     }
 }

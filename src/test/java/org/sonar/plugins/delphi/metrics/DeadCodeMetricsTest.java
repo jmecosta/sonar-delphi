@@ -69,7 +69,7 @@ public class DeadCodeMetricsTest {
 
     private static final String TEST_FILE = "/org/sonar/plugins/delphi/metrics/DeadCodeMetricsTest.pas";
     private static final String DEAD_FILE = "/org/sonar/plugins/delphi/metrics/DeadCodeUnit.pas";
-    private final List<Issue> issues = new ArrayList<Issue>();
+    private final List<Issue> issues = new ArrayList<>();
     private DeadCodeMetrics metrics;
     private Set<UnitInterface> units;
     private List<ClassInterface> classes;

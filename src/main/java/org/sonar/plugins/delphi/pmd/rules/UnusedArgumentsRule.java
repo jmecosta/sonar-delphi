@@ -41,13 +41,13 @@ public class UnusedArgumentsRule extends DelphiRule {
     private static final PropertyDescriptor EXCLUDED_ARGS = new StringProperty("excluded_args",
             "The argument names to ignore", new String[]{}, 1.0f, ',');
 
-    private final List<String> excludedArgs = new ArrayList<String>();
+    private final List<String> excludedArgs = new ArrayList<>();
 
     @Override
     public void visit(DelphiPMDNode node, RuleContext ctx) {
         if (isMethodNode(node)) {
-            final Stack<Tree> functionNodes = new Stack<Tree>();
-            final Stack<Tree> beginNodes = new Stack<Tree>();
+            final Stack<Tree> functionNodes = new Stack<>();
+            final Stack<Tree> beginNodes = new Stack<>();
 
             Tree argsNode = node.getFirstChildWithType(DelphiLexer.TkFunctionArgs);
             if (argsNode == null) {
@@ -163,7 +163,7 @@ public class UnusedArgumentsRule extends DelphiRule {
      * @return Argument map
      */
     private Map<String, Integer> processFunctionArgs(Tree argsNode) {
-        Map<String, Integer> args = new HashMap<String, Integer>();
+        Map<String, Integer> args = new HashMap<>();
         for (int i = 0; i < argsNode.getChildCount(); i += 2) {
             Tree idents = argsNode.getChild(i);
 
@@ -175,7 +175,7 @@ public class UnusedArgumentsRule extends DelphiRule {
             }
 
             for (int c = 0; c < idents.getChildCount(); ++c) {
-                args.put(idents.getChild(c).getText().toLowerCase(), Integer.valueOf(0));
+                args.put(idents.getChild(c).getText().toLowerCase(), 0);
             }
         }
         return args;

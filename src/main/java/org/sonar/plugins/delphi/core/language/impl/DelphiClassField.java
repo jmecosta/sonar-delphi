@@ -55,13 +55,13 @@ public class DelphiClassField extends DelphiArgument implements ClassFieldInterf
     }
 
     @Override
-    public void setParent(ClassInterface cl) {
-        parent = cl;
+    public ClassInterface getParent() {
+        return parent;
     }
 
     @Override
-    public ClassInterface getParent() {
-        return parent;
+    public void setParent(ClassInterface cl) {
+        parent = cl;
     }
 
     @Override
@@ -84,10 +84,7 @@ public class DelphiClassField extends DelphiArgument implements ClassFieldInterf
 
     @Override
     public boolean equals(Object o) {
-        if (o == null) {
-            return false;
-        }
-        return toString().equals(o.toString());
+        return o != null && toString().equals(o.toString());
     }
 
     @Override

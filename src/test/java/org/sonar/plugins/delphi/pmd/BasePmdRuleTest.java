@@ -44,7 +44,7 @@ import org.sonar.plugins.delphi.utils.DelphiUtils;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -61,7 +61,7 @@ public abstract class BasePmdRuleTest {
     protected static final File ROOT_DIR = DelphiUtils.getResource(ROOT_DIR_NAME);
     protected DelphiPmdSensor sensor;
     protected Project project;
-    protected List<Issue> issues = new LinkedList<Issue>();
+    protected List<Issue> issues = new LinkedList<>();
     private ResourcePerspectives perspectives;
     private Issuable issuable;
     private File testFile;
@@ -81,7 +81,7 @@ public abstract class BasePmdRuleTest {
     private void configureTest(DelphiUnitBuilderTest builder) {
         testFile = builder.buildFile(ROOT_DIR);
 
-        String relativePathTestFile = DelphiUtils.getRelativePath(testFile, Arrays.asList(ROOT_DIR));
+        String relativePathTestFile = DelphiUtils.getRelativePath(testFile, Collections.singletonList(ROOT_DIR));
 
         configureTest(ROOT_DIR_NAME + "/" + relativePathTestFile);
     }
@@ -99,11 +99,11 @@ public abstract class BasePmdRuleTest {
         InputFile inputFile = new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", srcFile.getPath()).setModuleBaseDir(Paths.get(ROOT_DIR_NAME));
 
         DelphiProject delphiProject = new DelphiProject("Default Project");
-        delphiProject.setSourceFiles(Arrays.asList(inputFile));
+        delphiProject.setSourceFiles(Collections.singletonList(inputFile));
 
         issuable = mock(Issuable.class);
 
-        when(delphiProjectHelper.getWorkgroupProjects()).thenReturn(Arrays.asList(delphiProject));
+        when(delphiProjectHelper.getWorkgroupProjects()).thenReturn(Collections.singletonList(delphiProject));
         when(delphiProjectHelper.getFile(anyString())).thenAnswer(new Answer<InputFile>() {
             @Override
             public InputFile answer(InvocationOnMock invocation) throws Throwable {

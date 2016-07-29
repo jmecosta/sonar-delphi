@@ -29,7 +29,6 @@ import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Metric;
-import org.sonar.api.resources.Project;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.api.utils.StaxParser;
 import org.sonar.plugins.delphi.core.helpers.DelphiProjectHelper;
@@ -82,7 +81,7 @@ public class DelphiSureFireParser {
         return null;
     }
 
-    public void collect(Project project, SensorContext context, File reportsDir) {
+    public void collect(SensorContext context, File reportsDir) {
         File[] xmlFiles = getReports(reportsDir);
         if (xmlFiles.length > 0) {
             parseFiles(context, xmlFiles);

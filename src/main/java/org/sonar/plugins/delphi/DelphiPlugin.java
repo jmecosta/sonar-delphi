@@ -86,7 +86,7 @@ public class DelphiPlugin extends SonarPlugin {
 
     @Override
     public List<Class> getExtensions() {
-        List<Class> list = new ArrayList<Class>();
+        List<Class> list = new ArrayList<>();
 
         // Sensors
         list.add(DelphiSensor.class);

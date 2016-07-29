@@ -31,6 +31,10 @@ public class HasRuleMessage<T extends Issue> extends TypeSafeMatcher<T> {
         this.message = message;
     }
 
+    public static <T extends Issue> Matcher<T> hasRuleMessage(String message) {
+        return new HasRuleMessage<>(message);
+    }
+
     @Override
     protected boolean matchesSafely(T item) {
         return message.equals(item.message());
@@ -44,10 +48,6 @@ public class HasRuleMessage<T extends Issue> extends TypeSafeMatcher<T> {
     @Override
     protected void describeMismatchSafely(T item, Description mismatchDescription) {
         mismatchDescription.appendText("was ").appendValue(item.message());
-    }
-
-    public static <T extends Issue> Matcher<T> hasRuleMessage(String message) {
-        return new HasRuleMessage<T>(message);
     }
 
 }

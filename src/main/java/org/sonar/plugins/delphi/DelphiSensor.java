@@ -65,9 +65,9 @@ public class DelphiSensor implements Sensor {
     private int scannedFiles = 0;
     private Set<Directory> packageList = new HashSet<>();
     private Map<Directory, Integer> filesCount = new HashMap<>();
-    private List<InputFile> resourceList = new ArrayList<InputFile>();
-    private Map<InputFile, List<ClassInterface>> fileClasses = new HashMap<InputFile, List<ClassInterface>>();
-    private Map<InputFile, List<FunctionInterface>> fileFunctions = new HashMap<InputFile, List<FunctionInterface>>();
+    private List<InputFile> resourceList = new ArrayList<>();
+    private Map<InputFile, List<ClassInterface>> fileClasses = new HashMap<>();
+    private Map<InputFile, List<FunctionInterface>> fileFunctions = new HashMap<>();
     private Set<UnitInterface> units = new HashSet<>();
 
     public DelphiSensor(DelphiProjectHelper delphiProjectHelper, ActiveRules activeRules,
@@ -227,7 +227,7 @@ public class DelphiSensor implements Sensor {
         if (filesCount.containsKey(directory)) {
             filesCount.put(directory, filesCount.get(directory) + 1);
         } else {
-            filesCount.put(directory, Integer.valueOf(1));
+            filesCount.put(directory, 1);
         }
         resourceList.add(resource);
 

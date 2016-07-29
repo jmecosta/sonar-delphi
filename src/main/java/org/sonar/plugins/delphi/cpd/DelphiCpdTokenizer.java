@@ -88,10 +88,7 @@ public class DelphiCpdTokenizer implements Tokenizer {
 
     private boolean canTokenize(String fileName) {
         Set<String> includedFiles = DelphiSourceSanitizer.getIncludedFiles();
-        if (includedFiles.contains(fileName)) {
-            return false;
-        }
-        return !delphiProjectHelper.isExcluded(fileName, excluded);
+        return !includedFiles.contains(fileName) && !delphiProjectHelper.isExcluded(fileName, excluded);
     }
 
     /**
@@ -101,7 +98,7 @@ public class DelphiCpdTokenizer implements Tokenizer {
      * @return List of found tokens
      */
     public final List<Token> tokenize(String[] source) {
-        List<Token> tokens = new ArrayList<Token>();
+        List<Token> tokens = new ArrayList<>();
 
         for (String string : source) {
             DelphiLexer lexer = new DelphiLexer(new ANTLRStringStream(string));

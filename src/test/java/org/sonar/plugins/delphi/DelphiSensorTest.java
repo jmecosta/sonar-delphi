@@ -71,8 +71,8 @@ public class DelphiSensorTest {
         // all
         // directories
 
-        List<File> sourceDirs = new ArrayList<File>(dirs.length);
-        List<InputFile> sourceFiles = new ArrayList<InputFile>();
+        List<File> sourceDirs = new ArrayList<>(dirs.length);
+        List<InputFile> sourceFiles = new ArrayList<>();
 
         sourceDirs.add(baseDir); // include baseDir
         for (File source : baseDir.listFiles(DelphiUtils.getFileFilter())) {
@@ -96,7 +96,7 @@ public class DelphiSensorTest {
 
         delphiProject.setSourceFiles(sourceFiles);
 
-        when(delphiProjectHelper.getWorkgroupProjects()).thenReturn(Arrays.asList(delphiProject));
+        when(delphiProjectHelper.getWorkgroupProjects()).thenReturn(Collections.singletonList(delphiProject));
         when(delphiProjectHelper.getDirectory(Matchers.any(File.class))).thenCallRealMethod();
 
         ActiveRules activeRules = mock(ActiveRules.class);
@@ -123,7 +123,7 @@ public class DelphiSensorTest {
 //    sensor.analyse(project, context); // analysing project
 
         // create a map of expected values for each file
-        Map<String, Double[]> expectedValues = new HashMap<String, Double[]>();
+        Map<String, Double[]> expectedValues = new HashMap<>();
         for (String fileName : xmlParser.getFileNames()) {
             expectedValues.put(fileName.toLowerCase(), xmlParser.getFileValues(fileName));
         }
@@ -156,7 +156,7 @@ public class DelphiSensorTest {
     }
 
     private void createKeyMetricIndexMap() {
-        keyMetricIndex = new HashMap<String, Integer>();
+        keyMetricIndex = new HashMap<>();
         keyMetricIndex.put("complexity", 0);
         keyMetricIndex.put("functions", 1);
         keyMetricIndex.put("function_complexity", 2);
@@ -191,7 +191,7 @@ public class DelphiSensorTest {
         // information
 //    sensor.analyse(project, context); // analysing project
 
-        Map<String, Double[]> expectedValues = new HashMap<String, Double[]>(); // create
+        Map<String, Double[]> expectedValues = new HashMap<>(); // create
         // a
         // map
         // of

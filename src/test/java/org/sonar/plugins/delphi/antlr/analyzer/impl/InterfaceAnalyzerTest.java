@@ -25,7 +25,6 @@ package org.sonar.plugins.delphi.antlr.analyzer.impl;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.CommonTree;
-import org.antlr.runtime.tree.Tree;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.plugins.delphi.antlr.analyzer.CodeAnalysisResults;
@@ -59,7 +58,7 @@ public class InterfaceAnalyzerTest {
         ast.addChild(new CommonTree(new CommonToken(LexerMetrics.IDENT.toMetrics(), "ident")));
         ast.addChild(new CommonTree(new CommonToken(LexerMetrics.IMPLEMENTATION.toMetrics(), "impl")));
 
-        code = new CodeTree(new CodeNode<ASTTree>(ast), new CodeNode<Tree>(ast.getChild(0)));
+        code = new CodeTree(new CodeNode<>(ast), new CodeNode<>(ast.getChild(0)));
         advanceOp = new AdvanceNodeOperation();
     }
 

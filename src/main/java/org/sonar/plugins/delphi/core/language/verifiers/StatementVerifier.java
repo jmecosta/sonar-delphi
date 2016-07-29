@@ -43,12 +43,11 @@ public class StatementVerifier {
             LexerMetrics.BREAK,
             LexerMetrics.CONTINUE};
     private static final int MIN_TOKENS_FOR_COMPLEX_STMT = 4;
-
+    private final DelphiProjectHelper delphiProjectHelper;
     private Tree checkedNode = null;
     private boolean isComplex = false;
     private String lastStatementText = null;
-    private Stack<Integer> statementIndex = new Stack<Integer>();
-    private final DelphiProjectHelper delphiProjectHelper;
+    private Stack<Integer> statementIndex = new Stack<>();
 
     public StatementVerifier(DelphiProjectHelper delphiProjectHelper) {
         this.delphiProjectHelper = delphiProjectHelper;

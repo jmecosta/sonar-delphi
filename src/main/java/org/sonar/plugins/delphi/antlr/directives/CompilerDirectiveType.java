@@ -41,15 +41,13 @@ public enum CompilerDirectiveType {
     INCLUDE(8, "include,i"),
     UNUSED(100, "warn,r,h+,h-,i+,i-,m+,m-");
 
-    private int number;
-    private String name;
     private static Map<String, CompilerDirectiveType> mappedValues = null;
 
     /**
      * create a hash map for faster values lookup
      */
     static {
-        mappedValues = new HashMap<String, CompilerDirectiveType>();
+        mappedValues = new HashMap<>();
         CompilerDirectiveType[] values = CompilerDirectiveType.values();
         for (CompilerDirectiveType type : values) {
             String names[] = type.getName().split(",");
@@ -57,6 +55,25 @@ public enum CompilerDirectiveType {
                 mappedValues.put(name, type);
             }
         }
+    }
+
+    private int number;
+    private String name;
+
+    CompilerDirectiveType(int number, String name) {
+        this.number = number;
+        this.name = name;
+    }
+
+    /**
+     * @param directiveName directive name
+     * @return directive type with given name
+     */
+    public static CompilerDirectiveType getTypeByName(String directiveName) {
+        if (!mappedValues.containsKey(directiveName)) {
+            return UNKNOWN;
+        }
+        return mappedValues.get(directiveName);
     }
 
     /**
@@ -71,21 +88,5 @@ public enum CompilerDirectiveType {
      */
     public int getNumber() {
         return number;
-    }
-
-    /**
-     * @param directiveName directive name
-     * @return directive type with given name
-     */
-    public static CompilerDirectiveType getTypeByName(String directiveName) {
-        if (!mappedValues.containsKey(directiveName)) {
-            return UNKNOWN;
-        }
-        return mappedValues.get(directiveName);
-    }
-
-    CompilerDirectiveType(int number, String name) {
-        this.number = number;
-        this.name = name;
     }
 }

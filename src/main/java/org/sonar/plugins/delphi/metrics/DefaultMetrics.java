@@ -30,7 +30,7 @@ import java.util.Map;
  */
 public abstract class DefaultMetrics implements MetricsInterface {
 
-    protected Map<String, Double> metrics = new HashMap<String, Double>();
+    protected Map<String, Double> metrics = new HashMap<>();
 
     /**
      * {@inheritDoc}

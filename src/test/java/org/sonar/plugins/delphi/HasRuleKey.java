@@ -31,6 +31,10 @@ public class HasRuleKey<T extends Issue> extends TypeSafeMatcher<T> {
         this.key = key;
     }
 
+    public static <T extends Issue> Matcher<T> hasRuleKey(String key) {
+        return new HasRuleKey<>(key);
+    }
+
     @Override
     protected boolean matchesSafely(T item) {
         return key.equals(item.ruleKey().rule());
@@ -44,10 +48,6 @@ public class HasRuleKey<T extends Issue> extends TypeSafeMatcher<T> {
     @Override
     protected void describeMismatchSafely(T item, Description mismatchDescription) {
         mismatchDescription.appendText("was ").appendValue(item.ruleKey().rule());
-    }
-
-    public static <T extends Issue> Matcher<T> hasRuleKey(String key) {
-        return new HasRuleKey<T>(key);
     }
 
 }

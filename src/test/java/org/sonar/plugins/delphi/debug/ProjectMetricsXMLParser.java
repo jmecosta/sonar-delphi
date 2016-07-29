@@ -40,7 +40,7 @@ public class ProjectMetricsXMLParser extends SimpleXMLParser {
         if (xmlFile == null) {
             throw new IllegalArgumentException("xmlFile cannot be null.");
         }
-        fileMap = new HashMap<String, Node>();
+        fileMap = new HashMap<>();
         Document doc = parseXML(xmlFile);
         NodeList filesNode = doc.getElementsByTagName("file");
         parse(filesNode);
@@ -81,7 +81,7 @@ public class ProjectMetricsXMLParser extends SimpleXMLParser {
             return null;
         }
         NodeList att = getValueNodes(fileMap.get(filename), "metric");
-        List<Double> data = new ArrayList<Double>();
+        List<Double> data = new ArrayList<>();
 
         for (int i = 0; i < att.getLength(); ++i) {
             Node metric = att.item(i);

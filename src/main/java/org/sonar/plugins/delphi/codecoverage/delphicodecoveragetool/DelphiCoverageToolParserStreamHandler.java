@@ -60,10 +60,10 @@ public class DelphiCoverageToolParserStreamHandler implements XmlStreamHandler {
         if (data == null) {
             return;
         }
-        Measure<Double> overallCoverage = new Measure<Double>(CoreMetrics.COVERAGE, data.getCoverage());
-        Measure<Double> lineCoverage = new Measure<Double>(CoreMetrics.LINE_COVERAGE, data.getCoverage());
-        Measure<Double> linesToCover = new Measure<Double>(CoreMetrics.LINES_TO_COVER, data.getTotalLines());
-        Measure<Double> uncoveredLines = new Measure<Double>(CoreMetrics.UNCOVERED_LINES, data.getUncoveredLines());
+        Measure<Double> overallCoverage = new Measure<>(CoreMetrics.COVERAGE, data.getCoverage());
+        Measure<Double> lineCoverage = new Measure<>(CoreMetrics.LINE_COVERAGE, data.getCoverage());
+        Measure<Double> linesToCover = new Measure<>(CoreMetrics.LINES_TO_COVER, data.getTotalLines());
+        Measure<Double> uncoveredLines = new Measure<>(CoreMetrics.UNCOVERED_LINES, data.getUncoveredLines());
         Measure<?> lineHits = data.getLineHitsBuilder().build().setPersistenceMode(PersistenceMode.DATABASE);
         try {
             context.saveMeasure(data.getResource(), overallCoverage);

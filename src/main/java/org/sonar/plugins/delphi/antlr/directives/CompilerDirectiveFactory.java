@@ -45,7 +45,7 @@ public class CompilerDirectiveFactory {
      *                                                 occurs
      */
     public List<CompilerDirective> produce(String data) throws CompilerDirectiveFactorySyntaxException {
-        List<CompilerDirective> result = new ArrayList<CompilerDirective>();
+        List<CompilerDirective> result = new ArrayList<>();
         int directivePos = getDirectiveFirstChar(data, 0);
         while (directivePos > -1) {
             int closingBracket = getDirectiveLastChar(data, directivePos);

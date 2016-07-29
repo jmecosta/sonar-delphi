@@ -45,6 +45,7 @@ import org.sonar.plugins.delphi.utils.DelphiUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -64,7 +65,7 @@ public class DelphiPmdSensorTest {
     private DelphiPmdSensor sensor;
     private ResourcePerspectives perspectives;
     private Issuable issuable;
-    private List<Issue> issues = new LinkedList<Issue>();
+    private List<Issue> issues = new LinkedList<>();
 
     @Before
     public void init() {
@@ -84,7 +85,7 @@ public class DelphiPmdSensorTest {
 
         issuable = mock(Issuable.class);
 
-        when(delphiProjectHelper.getWorkgroupProjects()).thenReturn(Arrays.asList(delphiProject));
+        when(delphiProjectHelper.getWorkgroupProjects()).thenReturn(Collections.singletonList(delphiProject));
         when(delphiProjectHelper.getFile(anyString())).thenAnswer(new Answer<InputFile>() {
             @Override
             public InputFile answer(InvocationOnMock invocation) throws Throwable {

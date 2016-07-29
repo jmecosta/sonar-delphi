@@ -75,14 +75,14 @@ class CustomFileFilter implements FileFilter {
  */
 public final class DelphiUtils {
 
-    private DelphiUtils() {
-    }
-
     /**
      * Logger class, use it for logging/debugging at Sonar window
      */
     public static final Logger LOG = LoggerFactory.getLogger(DelphiPlugin.class
             .getName());
+
+    private DelphiUtils() {
+    }
 
     /**
      * Normalizes file name, changes all '\' into '/'
@@ -163,10 +163,7 @@ public final class DelphiUtils {
 
             @Override
             public boolean accept(File pathname) {
-                if (!pathname.isFile()) {
-                    return false;
-                }
-                return acceptFile(pathname.getAbsolutePath());
+                return pathname.isFile() && acceptFile(pathname.getAbsolutePath());
             }
 
         };
@@ -282,7 +279,7 @@ public final class DelphiUtils {
     }
 
     public static String getRelativePath(File file, List<File> dirs) {
-        List<String> stack = new ArrayList<String>();
+        List<String> stack = new ArrayList<>();
         String path = FilenameUtils.normalize(file.getAbsolutePath());
         File cursor = new File(path);
         while (cursor != null) {

@@ -43,6 +43,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * DelphiLanguage AST tree.
@@ -78,7 +79,7 @@ public class DelphiAST extends CommonTree implements ASTTree {
         DelphiParser parser = new DelphiParser(new TokenRewriteStream(new DelphiLexer(fileStream)));
         parser.setTreeAdaptor(new DelphiTreeAdaptor(this));
         try {
-            children = (java.util.List) ((CommonTree) parser.file().getTree()).getChildren();
+            children = ((CommonTree) parser.file().getTree()).getChildren();
 
         } catch (RecognitionException e) {
             throw new RuntimeException("Failed to parse the file " + file.getAbsolutePath(), e);
@@ -203,7 +204,6 @@ public class DelphiAST extends CommonTree implements ASTTree {
     /**
      * Some characters are forbidden as XML node, so process them
      *
-     * @param str String to process
      * @return Fixed string
      */
     private String processNodeName(Tree node) {
@@ -212,6 +212,7 @@ public class DelphiAST extends CommonTree implements ASTTree {
             NodeName nodeName = NodeName.findByCode(code);
             return nodeName.getName();
         } catch (NodeNameForCodeDoesNotExistException e) {
+            DelphiUtils.LOG.debug(Arrays.toString(e.getStackTrace()));
         }
         return code;
     }

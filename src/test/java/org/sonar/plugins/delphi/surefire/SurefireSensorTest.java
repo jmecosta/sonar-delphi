@@ -58,7 +58,7 @@ public class SurefireSensorTest {
 
     @Before
     public void setup() throws FileNotFoundException {
-        List<File> testDirs = new ArrayList<File>();
+        List<File> testDirs = new ArrayList<>();
         testDirs.add(DelphiUtils.getResource(PROJECT_TEST_DIR));
 
         project = mock(Project.class);

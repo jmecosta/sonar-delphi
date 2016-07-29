@@ -39,6 +39,9 @@ import java.util.Scanner;
  */
 public final class DelphiRulesUtils {
 
+    private static final String RESOURCE_PATH = "/org/sonar/plugins/delphi/pmd/";
+    public static final String RULES_PATH = RESOURCE_PATH + "rules.xml";
+
     /**
      * Default c-tor
      */
@@ -102,10 +105,6 @@ public final class DelphiRulesUtils {
 
     }
 
-    private static final String RESOURCE_PATH = "/org/sonar/plugins/delphi/pmd/";
-
-    public static final String RULES_PATH = RESOURCE_PATH + "rules.xml";
-
     /**
      * @return rules xml file
      */
@@ -121,7 +120,7 @@ public final class DelphiRulesUtils {
      */
     public static List<Rule> parseReferential(String path) {
         Ruleset ruleset = DelphiRulesUtils.buildRuleSetFromXml(DelphiRulesUtils.getConfigurationFromFile(path));
-        List<Rule> rulesRepository = new ArrayList<Rule>();
+        List<Rule> rulesRepository = new ArrayList<>();
         for (DelphiRule fRule : ruleset.getRules()) {
             rulesRepository.add(createRepositoryRule(fRule));
         }
@@ -137,7 +136,7 @@ public final class DelphiRulesUtils {
      */
     public static List<ActiveRule> importConfiguration(String configuration, List<Rule> rulesRepository) {
         Ruleset ruleset = DelphiRulesUtils.buildRuleSetFromXml(configuration);
-        List<ActiveRule> activeRules = new ArrayList<ActiveRule>();
+        List<ActiveRule> activeRules = new ArrayList<>();
         for (DelphiRule fRule : ruleset.getRules()) {
             ActiveRule activeRule = createActiveRule(fRule, rulesRepository);
             if (activeRule != null) {
@@ -206,7 +205,7 @@ public final class DelphiRulesUtils {
 
     static List<ActiveRuleParam>
     buildActiveRuleParams(DelphiRule delphiRule, Rule repositoryRule, ActiveRule activeRule) {
-        List<ActiveRuleParam> activeRuleParams = new ArrayList<ActiveRuleParam>();
+        List<ActiveRuleParam> activeRuleParams = new ArrayList<>();
         if (delphiRule.getProperties() != null) {
             for (Property property : delphiRule.getProperties()) {
                 if (repositoryRule.getParams() != null) {

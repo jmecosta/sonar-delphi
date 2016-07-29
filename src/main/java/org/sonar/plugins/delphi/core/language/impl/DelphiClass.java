@@ -40,20 +40,18 @@ import java.util.Set;
  */
 public class DelphiClass implements ClassInterface {
 
-    private static final String UNKNOWN_CLASS_NAME = "UnknownClass";
-
     public static final String UNKNOWN_FILE_NAME = "UnknownUnit";
-
+    private static final String UNKNOWN_CLASS_NAME = "UnknownClass";
     private String name = null;
     private String fileName = null;
     private int visibility = DelphiParser.PRIVATE;
 
-    private List<ClassFieldInterface> fields = new ArrayList<ClassFieldInterface>();
-    private List<ClassPropertyInterface> properties = new ArrayList<ClassPropertyInterface>();
-    private Set<FunctionInterface> functions = new HashSet<FunctionInterface>();
-    private Set<FunctionInterface> declarations = new HashSet<FunctionInterface>();
-    private Set<ClassInterface> parents = new HashSet<ClassInterface>();
-    private Set<ClassInterface> children = new HashSet<ClassInterface>();
+    private List<ClassFieldInterface> fields = new ArrayList<>();
+    private List<ClassPropertyInterface> properties = new ArrayList<>();
+    private Set<FunctionInterface> functions = new HashSet<>();
+    private Set<FunctionInterface> declarations = new HashSet<>();
+    private Set<ClassInterface> parents = new HashSet<>();
+    private Set<ClassInterface> children = new HashSet<>();
     private String realName = null;
 
     /**
@@ -122,6 +120,15 @@ public class DelphiClass implements ClassInterface {
      */
 
     @Override
+    public void setVisibility(int value) {
+        visibility = value;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+
+    @Override
     public void addParent(ClassInterface parent) {
         if (parent != null && !parent.equals(this)) {
             parents.add(parent);
@@ -138,15 +145,6 @@ public class DelphiClass implements ClassInterface {
         ClassInterface p[] = new ClassInterface[parents.size()];
         parents.toArray(p);
         return p;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-
-    @Override
-    public void setVisibility(int value) {
-        visibility = value;
     }
 
     /**
@@ -185,6 +183,11 @@ public class DelphiClass implements ClassInterface {
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -286,7 +289,7 @@ public class DelphiClass implements ClassInterface {
 
     @Override
     public ClassInterface[] getDescendants() {
-        List<ClassInterface> allChildren = new ArrayList<ClassInterface>();
+        List<ClassInterface> allChildren = new ArrayList<>();
         for (ClassInterface child : children) {
             processChild((DelphiClass) child, allChildren);
         }
@@ -327,8 +330,8 @@ public class DelphiClass implements ClassInterface {
      */
 
     @Override
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public String getFileName() {
+        return fileName;
     }
 
     /**
@@ -336,8 +339,8 @@ public class DelphiClass implements ClassInterface {
      */
 
     @Override
-    public String getFileName() {
-        return fileName;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     @Override
@@ -373,11 +376,6 @@ public class DelphiClass implements ClassInterface {
     @Override
     public ClassPropertyInterface[] getProperties() {
         return properties.toArray(new ClassPropertyInterface[properties.size()]);
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override

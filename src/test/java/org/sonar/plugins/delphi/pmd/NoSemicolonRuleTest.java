@@ -44,7 +44,7 @@ public class NoSemicolonRuleTest extends BasePmdRuleTest {
         analyse(builder);
 
         assertThat(issues, not(empty()));
-        List<Issue> matchIssues = new ArrayList<Issue>();
+        List<Issue> matchIssues = new ArrayList<>();
         for (Issue issue : issues) {
             if (issue.ruleKey().rule().equals("NoSemicolonRule")) {
                 matchIssues.add(issue);
@@ -70,7 +70,7 @@ public class NoSemicolonRuleTest extends BasePmdRuleTest {
         analyse(builder);
 
         assertThat(issues, not(empty()));
-        List<Issue> matchIssues = new ArrayList<Issue>();
+        List<Issue> matchIssues = new ArrayList<>();
         for (Issue issue : issues) {
             if (issue.ruleKey().rule().equals("NoSemicolonRule")) {
                 matchIssues.add(issue);
@@ -96,7 +96,7 @@ public class NoSemicolonRuleTest extends BasePmdRuleTest {
         analyse(builder);
 
         assertThat(issues, not(empty()));
-        List<Issue> matchIssues = new ArrayList<Issue>();
+        List<Issue> matchIssues = new ArrayList<>();
         for (Issue issue : issues) {
             if (issue.ruleKey().rule().equals("NoSemicolonRule")) {
                 matchIssues.add(issue);

@@ -114,7 +114,7 @@ public class DelphiPmdXmlReportParser {
                                 .build()
                 );
 
-            } else if (inputFile.relativePath().toString().contains("sonar-delphi/target/test-classes/org/sonar/plugins/delphi/PMDTest")) {
+            } else if (inputFile.relativePath().contains("sonar-delphi/target/test-classes/org/sonar/plugins/delphi/PMDTest")) {
                 //This is for tests internally used by the sonar-delphi plugin
                 issuable.addIssue(
                         issuable.newIssueBuilder()

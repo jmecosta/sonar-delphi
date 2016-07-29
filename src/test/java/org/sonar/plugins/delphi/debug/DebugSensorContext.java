@@ -57,8 +57,8 @@ import java.util.Set;
 @SuppressWarnings("rawtypes")
 public class DebugSensorContext implements SensorContext {
 
-    private Map<String, Double> data = new HashMap<String, Double>();
-    private Map<String, String> sdata = new HashMap<String, String>();
+    private Map<String, Double> data = new HashMap<>();
+    private Map<String, String> sdata = new HashMap<>();
     /**
      * Gets the violation by its index
      *
@@ -81,11 +81,11 @@ public class DebugSensorContext implements SensorContext {
             if (!sdata.containsKey(key)) {
                 throw new IllegalStateException("No key (" + key + ") for sensor context.");
             }
-            Measure<G> m = new Measure<G>();
+            Measure<G> m = new Measure<>();
             m.setData(sdata.get(key));
             return m;
         }
-        Measure<G> m = new Measure<G>();
+        Measure<G> m = new Measure<>();
         m.setValue(data.get(key));
         m.setData(key);
         return m;

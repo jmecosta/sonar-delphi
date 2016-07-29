@@ -78,10 +78,7 @@ public class DelphiArgument implements ArgumentInterface {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null) {
-            return false;
-        }
-        return toString().equals(o.toString());
+        return o != null && toString().equals(o.toString());
     }
 
     @Override

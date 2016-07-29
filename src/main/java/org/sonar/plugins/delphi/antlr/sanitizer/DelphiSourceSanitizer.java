@@ -39,9 +39,9 @@ import java.util.Set;
  */
 public class DelphiSourceSanitizer extends ANTLRFileStream {
 
-    private static List<File> includeDirectories = new ArrayList<File>();
-    private static Set<String> includedFiles = new HashSet<String>();
-    private static Set<String> definitions = new HashSet<String>();
+    private static List<File> includeDirectories = new ArrayList<>();
+    private static Set<String> includedFiles = new HashSet<>();
+    private static Set<String> definitions = new HashSet<>();
 
     /**
      * Ctor with file name
@@ -88,6 +88,15 @@ public class DelphiSourceSanitizer extends ANTLRFileStream {
     }
 
     /**
+     * Gets the set of files, that already have been included in other files
+     *
+     * @return The set of files, that already have been included in other files
+     */
+    public static Set<String> getIncludedFiles() {
+        return includedFiles;
+    }
+
+    /**
      * Overrides AntlrStringStream LookAhead for case insensitivity.
      */
     @Override
@@ -108,7 +117,7 @@ public class DelphiSourceSanitizer extends ANTLRFileStream {
             return;
         }
 
-        Set<String> defs = new HashSet<String>(definitions);
+        Set<String> defs = new HashSet<>(definitions);
 
         // TODO delphiProjectHelper.shouldExtendIncludes();
         boolean extendIncludes = true;
@@ -126,15 +135,6 @@ public class DelphiSourceSanitizer extends ANTLRFileStream {
         data = resolverResult.getFileData().toString().toCharArray();
 
         super.n = data.length;
-    }
-
-    /**
-     * Gets the set of files, that already have been included in other files
-     *
-     * @return The set of files, that already have been included in other files
-     */
-    public static Set<String> getIncludedFiles() {
-        return includedFiles;
     }
 
 }

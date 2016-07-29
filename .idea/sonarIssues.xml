@@ -150,16 +150,7 @@
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/antlr/analyzer/LexerMetrics.java">
           <value>
-            <set>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aU9JpgTdwGA86BhJ" />
-                <option name="line" value="86" />
-                <option name="message" value="Remove this unused private &quot;LexerMetrics&quot; constructor." />
-                <option name="ruleKey" value="squid:UnusedPrivateMethod" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-            </set>
+            <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/antlr/analyzer/impl/FunctionAnalyzer.java">
@@ -216,24 +207,7 @@
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/antlr/analyzer/impl/FunctionParametersAnalyzer.java">
           <value>
-            <set>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aU95pgTdwGA86BhQ" />
-                <option name="line" value="93" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aU93pgTdwGA86BhP" />
-                <option name="line" value="64" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-            </set>
+            <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/antlr/analyzer/impl/IncludeAnalyzer.java">
@@ -318,24 +292,7 @@
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/antlr/analyzer/impl/operations/AdvanceToNodeOperation.java">
           <value>
-            <set>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aU_GpgTdwGA86BhZ" />
-                <option name="line" value="59" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aU_FpgTdwGA86BhY" />
-                <option name="line" value="37" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-            </set>
+            <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/antlr/analyzer/impl/operations/NodeOperation.java">
@@ -387,8 +344,16 @@
             <set>
               <SonarIssue>
                 <option name="isNew" value="false" />
+                <option name="key" value="AVY2aU_lpgTdwGA86Bhg" />
+                <option name="line" value="188" />
+                <option name="message" value="Either log or rethrow this exception." />
+                <option name="ruleKey" value="squid:S1166" />
+                <option name="severity" value="CRITICAL" />
+              </SonarIssue>
+              <SonarIssue>
+                <option name="isNew" value="false" />
                 <option name="key" value="AVY2aU_npgTdwGA86Bhl" />
-                <option name="line" value="94" />
+                <option name="line" value="95" />
                 <option name="message" value="Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation." />
                 <option name="ruleKey" value="squid:S1186" />
                 <option name="severity" value="MAJOR" />
@@ -405,14 +370,6 @@
                 <option name="isNew" value="false" />
                 <option name="key" value="AVY2aU_mpgTdwGA86Bhh" />
                 <option name="line" value="214" />
-                <option name="message" value="Either log or rethrow this exception." />
-                <option name="ruleKey" value="squid:S1166" />
-                <option name="severity" value="CRITICAL" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aU_lpgTdwGA86Bhg" />
-                <option name="line" value="187" />
                 <option name="message" value="Either log or rethrow this exception." />
                 <option name="ruleKey" value="squid:S1166" />
                 <option name="severity" value="CRITICAL" />
@@ -817,7 +774,7 @@
               <SonarIssue>
                 <option name="isNew" value="false" />
                 <option name="key" value="AVY2aVElpgTdwGA86Bim" />
-                <option name="line" value="242" />
+                <option name="line" value="241" />
                 <option name="message" value="This block of commented-out lines of code should be removed." />
                 <option name="ruleKey" value="squid:CommentedOutCodeLine" />
                 <option name="severity" value="MAJOR" />
@@ -825,7 +782,7 @@
               <SonarIssue>
                 <option name="isNew" value="false" />
                 <option name="key" value="AVY2aVEkpgTdwGA86Bil" />
-                <option name="line" value="332" />
+                <option name="line" value="331" />
                 <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
                 <option name="ruleKey" value="squid:S2293" />
                 <option name="severity" value="MAJOR" />
@@ -833,7 +790,7 @@
               <SonarIssue>
                 <option name="isNew" value="false" />
                 <option name="key" value="AVY2aVEipgTdwGA86Bii" />
-                <option name="line" value="88" />
+                <option name="line" value="87" />
                 <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
                 <option name="ruleKey" value="squid:S2293" />
                 <option name="severity" value="MAJOR" />
@@ -841,7 +798,7 @@
               <SonarIssue>
                 <option name="isNew" value="false" />
                 <option name="key" value="AVY2aVEkpgTdwGA86Bik" />
-                <option name="line" value="175" />
+                <option name="line" value="174" />
                 <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
                 <option name="ruleKey" value="squid:S2293" />
                 <option name="severity" value="MAJOR" />
@@ -849,7 +806,7 @@
               <SonarIssue>
                 <option name="isNew" value="false" />
                 <option name="key" value="AVY2aVElpgTdwGA86Bin" />
-                <option name="line" value="244" />
+                <option name="line" value="243" />
                 <option name="message" value="This block of commented-out lines of code should be removed." />
                 <option name="ruleKey" value="squid:CommentedOutCodeLine" />
                 <option name="severity" value="MAJOR" />
@@ -857,12 +814,17 @@
               <SonarIssue>
                 <option name="isNew" value="false" />
                 <option name="key" value="AVY2aVEjpgTdwGA86Bij" />
-                <option name="line" value="123" />
+                <option name="line" value="122" />
                 <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
                 <option name="ruleKey" value="squid:S2293" />
                 <option name="severity" value="MAJOR" />
               </SonarIssue>
             </set>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/core/language/impl/DelphiArgument.java">
+          <value>
+            <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/core/language/impl/DelphiClass.java">
@@ -945,30 +907,12 @@
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/core/language/impl/DelphiClassField.java">
           <value>
-            <set>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVFYpgTdwGA86Biz" />
-                <option name="line" value="42" />
-                <option name="message" value="Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation." />
-                <option name="ruleKey" value="squid:S1186" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-            </set>
+            <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/core/language/impl/DelphiClassProperty.java">
           <value>
-            <set>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVFhpgTdwGA86Bi0" />
-                <option name="line" value="41" />
-                <option name="message" value="Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation." />
-                <option name="ruleKey" value="squid:S1186" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-            </set>
+            <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/core/language/impl/DelphiFunction.java">
@@ -1041,56 +985,7 @@
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/core/language/impl/DelphiUnit.java">
           <value>
-            <set>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVGEpgTdwGA86BjB" />
-                <option name="line" value="54" />
-                <option name="message" value="Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation." />
-                <option name="ruleKey" value="squid:S1186" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVGEpgTdwGA86BjA" />
-                <option name="line" value="293" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVGEpgTdwGA86Bi_" />
-                <option name="line" value="273" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVGDpgTdwGA86Bi9" />
-                <option name="line" value="47" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVGDpgTdwGA86Bi-" />
-                <option name="line" value="48" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVGBpgTdwGA86Bi8" />
-                <option name="line" value="46" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-            </set>
+            <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/core/language/verifiers/CalledFunctionVerifier.java">
@@ -1163,24 +1058,7 @@
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/cpd/DelphiCpdTokenizer.java">
           <value>
-            <set>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHApgTdwGA86BjL" />
-                <option name="line" value="104" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVG_pgTdwGA86BjK" />
-                <option name="line" value="116" />
-                <option name="message" value="Remove those useless parentheses." />
-                <option name="ruleKey" value="squid:UselessParenthesesCheck" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-            </set>
+            <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/metrics/BasicMetrics.java">
@@ -1199,182 +1077,12 @@
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/metrics/ComplexityMetrics.java">
           <value>
-            <set>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHapgTdwGA86BjR" />
-                <option name="line" value="273" />
-                <option name="message" value="Complete the task associated to this TODO comment." />
-                <option name="ruleKey" value="squid:S1135" />
-                <option name="severity" value="INFO" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHZpgTdwGA86BjQ" />
-                <option name="line" value="174" />
-                <option name="message" value="Equality tests should not be made with floating point values." />
-                <option name="ruleKey" value="squid:S1244" />
-                <option name="severity" value="CRITICAL" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHZpgTdwGA86BjP" />
-                <option name="line" value="171" />
-                <option name="message" value="Equality tests should not be made with floating point values." />
-                <option name="ruleKey" value="squid:S1244" />
-                <option name="severity" value="CRITICAL" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHZpgTdwGA86BjO" />
-                <option name="line" value="148" />
-                <option name="message" value="Reduce the total number of break and continue statements in this loop to use at most one." />
-                <option name="ruleKey" value="squid:S135" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHYpgTdwGA86BjN" />
-                <option name="line" value="126" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHapgTdwGA86BjS" />
-                <option name="line" value="122" />
-                <option name="message" value="The Cyclomatic Complexity of this method &quot;analyse&quot; is 12 which is greater than 10 authorized." />
-                <option name="ruleKey" value="squid:MethodCyclomaticComplexity" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-            </set>
+            <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/metrics/DeadCodeMetrics.java">
           <value>
-            <set>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHrpgTdwGA86Bji" />
-                <option name="line" value="249" />
-                <option name="message" value="NullPointerException might be thrown as 'unit' is nullable here" />
-                <option name="ruleKey" value="squid:S2259" />
-                <option name="severity" value="BLOCKER" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHrpgTdwGA86Bjh" />
-                <option name="line" value="103" />
-                <option name="message" value="The Cyclomatic Complexity of this method &quot;save&quot; is 23 which is greater than 10 authorized." />
-                <option name="ruleKey" value="squid:MethodCyclomaticComplexity" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHqpgTdwGA86Bjg" />
-                <option name="line" value="169" />
-                <option name="message" value="Complete the task associated to this TODO comment." />
-                <option name="ruleKey" value="squid:S1135" />
-                <option name="severity" value="INFO" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHqpgTdwGA86Bjf" />
-                <option name="line" value="91" />
-                <option name="message" value="Complete the task associated to this TODO comment." />
-                <option name="ruleKey" value="squid:S1135" />
-                <option name="severity" value="INFO" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHqpgTdwGA86Bje" />
-                <option name="line" value="167" />
-                <option name="message" value="Refactor this code to not nest more than 3 if/for/while/switch/try statements." />
-                <option name="ruleKey" value="squid:S134" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHppgTdwGA86Bjd" />
-                <option name="line" value="149" />
-                <option name="message" value="Refactor this code to not nest more than 3 if/for/while/switch/try statements." />
-                <option name="ruleKey" value="squid:S134" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHppgTdwGA86Bjc" />
-                <option name="line" value="136" />
-                <option name="message" value="Refactor this code to not nest more than 3 if/for/while/switch/try statements." />
-                <option name="ruleKey" value="squid:S134" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHppgTdwGA86Bjb" />
-                <option name="line" value="127" />
-                <option name="message" value="Reduce the total number of break and continue statements in this loop to use at most one." />
-                <option name="ruleKey" value="squid:S135" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHopgTdwGA86Bja" />
-                <option name="line" value="243" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHopgTdwGA86BjZ" />
-                <option name="line" value="242" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHopgTdwGA86BjY" />
-                <option name="line" value="220" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHopgTdwGA86BjX" />
-                <option name="line" value="219" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHnpgTdwGA86BjW" />
-                <option name="line" value="209" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHnpgTdwGA86BjV" />
-                <option name="line" value="198" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVHmpgTdwGA86BjU" />
-                <option name="line" value="72" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-            </set>
+            <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/metrics/DefaultMetrics.java">
@@ -1736,14 +1444,6 @@
             <set>
               <SonarIssue>
                 <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVLGpgTdwGA86BkM" />
-                <option name="line" value="105" />
-                <option name="message" value="Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation." />
-                <option name="ruleKey" value="squid:S1186" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
                 <option name="key" value="AVY2aVLGpgTdwGA86BkL" />
                 <option name="line" value="55" />
                 <option name="message" value="Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation." />
@@ -1752,10 +1452,10 @@
               </SonarIssue>
               <SonarIssue>
                 <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVLFpgTdwGA86BkK" />
-                <option name="line" value="140" />
-                <option name="message" value="Add a default case to this switch." />
-                <option name="ruleKey" value="squid:SwitchLastCaseIsDefaultCheck" />
+                <option name="key" value="AVY2aVLGpgTdwGA86BkM" />
+                <option name="line" value="105" />
+                <option name="message" value="Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation." />
+                <option name="ruleKey" value="squid:S1186" />
                 <option name="severity" value="MAJOR" />
               </SonarIssue>
             </set>
@@ -1977,80 +1677,7 @@
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/pmd/rules/UnusedArgumentsRule.java">
           <value>
-            <set>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVNNpgTdwGA86Bkp" />
-                <option name="line" value="50" />
-                <option name="message" value="Replace the synchronized class &quot;Stack&quot; by an unsynchronized one such as &quot;Deque&quot;." />
-                <option name="ruleKey" value="squid:S1149" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVNMpgTdwGA86Bko" />
-                <option name="line" value="49" />
-                <option name="message" value="Replace the synchronized class &quot;Stack&quot; by an unsynchronized one such as &quot;Deque&quot;." />
-                <option name="ruleKey" value="squid:S1149" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVNMpgTdwGA86Bkn" />
-                <option name="line" value="105" />
-                <option name="message" value="Remove this useless assignment to local variable &quot;candidateNode&quot;." />
-                <option name="ruleKey" value="squid:S1854" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVNMpgTdwGA86Bkm" />
-                <option name="line" value="47" />
-                <option name="message" value="The Cyclomatic Complexity of this method &quot;visit&quot; is 13 which is greater than 10 authorized." />
-                <option name="ruleKey" value="squid:MethodCyclomaticComplexity" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVNLpgTdwGA86Bkl" />
-                <option name="line" value="166" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVNLpgTdwGA86Bkk" />
-                <option name="line" value="50" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVNLpgTdwGA86Bkj" />
-                <option name="line" value="49" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVNLpgTdwGA86Bki" />
-                <option name="line" value="44" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVNKpgTdwGA86Bkh" />
-                <option name="line" value="171" />
-                <option name="message" value="Refactor the code in order to not assign to this loop counter from within the loop body." />
-                <option name="ruleKey" value="squid:ForLoopCounterChangedCheck" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-            </set>
+            <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/pmd/rules/UppercaseReservedWordsRule.java">
@@ -2123,32 +1750,7 @@
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/pmd/xml/DelphiPmdXmlReportParser.java">
           <value>
-            <set>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVNxpgTdwGA86Bkz" />
-                <option name="line" value="140" />
-                <option name="message" value="This block of commented-out lines of code should be removed." />
-                <option name="ruleKey" value="squid:CommentedOutCodeLine" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVNxpgTdwGA86Bk0" />
-                <option name="line" value="107" />
-                <option name="message" value="Complete the task associated to this TODO comment." />
-                <option name="ruleKey" value="squid:S1135" />
-                <option name="severity" value="INFO" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVNwpgTdwGA86Bky" />
-                <option name="line" value="77" />
-                <option name="message" value="This block of commented-out lines of code should be removed." />
-                <option name="ruleKey" value="squid:CommentedOutCodeLine" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-            </set>
+            <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/pmd/xml/DelphiRule.java">
@@ -2408,86 +2010,17 @@
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/surefire/DelphiSureFireParser.java">
           <value>
-            <set>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVPPpgTdwGA86Bld" />
-                <option name="line" value="130" />
-                <option name="message" value="Define and throw a dedicated exception instead of using a generic one." />
-                <option name="ruleKey" value="squid:S00112" />
-                <option name="severity" value="CRITICAL" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVPPpgTdwGA86Blc" />
-                <option name="line" value="108" />
-                <option name="message" value="Make this anonymous inner class a lambda (sonar.java.source not set. Assuming 8 or greater.)" />
-                <option name="ruleKey" value="squid:S1604" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVPOpgTdwGA86Blb" />
-                <option name="line" value="79" />
-                <option name="message" value="Either log or rethrow this exception." />
-                <option name="ruleKey" value="squid:S1166" />
-                <option name="severity" value="CRITICAL" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVPOpgTdwGA86Bla" />
-                <option name="line" value="85" />
-                <option name="message" value="Remove this unused method parameter &quot;project&quot;." />
-                <option name="ruleKey" value="squid:S1172" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-            </set>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/surefire/SurefireSensor.java">
+          <value>
+            <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/utils/DelphiUtils.java">
           <value>
-            <set>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVPppgTdwGA86Bli" />
-                <option name="line" value="197" />
-                <option name="message" value="Make this anonymous inner class a lambda (sonar.java.source not set. Assuming 8 or greater.)" />
-                <option name="ruleKey" value="squid:S1604" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVPopgTdwGA86Blh" />
-                <option name="line" value="162" />
-                <option name="message" value="Make this anonymous inner class a lambda (sonar.java.source not set. Assuming 8 or greater.)" />
-                <option name="ruleKey" value="squid:S1604" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVPopgTdwGA86Blg" />
-                <option name="line" value="261" />
-                <option name="message" value="Introduce a new variable instead of reusing the parameter &quot;currentDir&quot;." />
-                <option name="ruleKey" value="squid:S1226" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVPopgTdwGA86Blf" />
-                <option name="line" value="84" />
-                <option name="message" value="Move this variable to comply with Java Code Conventions." />
-                <option name="ruleKey" value="squid:S1213" />
-                <option name="severity" value="MINOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVPnpgTdwGA86Ble" />
-                <option name="line" value="285" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-            </set>
+            <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/org/sonar/plugins/delphi/utils/ProgressReporterLogger.java">
@@ -3203,19 +2736,19 @@
             <set>
               <SonarIssue>
                 <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVUhpgTdwGA86BnG" />
-                <option name="line" value="60" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
                 <option name="key" value="AVY2aVUhpgTdwGA86BnF" />
                 <option name="line" value="58" />
                 <option name="message" value="Move the array designator from the variable to the type." />
                 <option name="ruleKey" value="squid:S1197" />
                 <option name="severity" value="MINOR" />
+              </SonarIssue>
+              <SonarIssue>
+                <option name="isNew" value="false" />
+                <option name="key" value="AVY2aVUhpgTdwGA86BnG" />
+                <option name="line" value="60" />
+                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
+                <option name="ruleKey" value="squid:S2293" />
+                <option name="severity" value="MAJOR" />
               </SonarIssue>
             </set>
           </value>
@@ -3597,7 +3130,7 @@
               <SonarIssue>
                 <option name="isNew" value="false" />
                 <option name="key" value="AVY2aVWupgTdwGA86Bn3" />
-                <option name="line" value="85" />
+                <option name="line" value="83" />
                 <option name="message" value="Rename this local variable name to match the regular expression '^[a-z][a-zA-Z0-9]*$'." />
                 <option name="ruleKey" value="squid:S00117" />
                 <option name="severity" value="MINOR" />
@@ -3605,7 +3138,7 @@
               <SonarIssue>
                 <option name="isNew" value="false" />
                 <option name="key" value="AVY2aVWspgTdwGA86Bnx" />
-                <option name="line" value="85" />
+                <option name="line" value="83" />
                 <option name="message" value="Move the array designator from the variable to the type." />
                 <option name="ruleKey" value="squid:S1197" />
                 <option name="severity" value="MINOR" />
@@ -3613,7 +3146,7 @@
               <SonarIssue>
                 <option name="isNew" value="false" />
                 <option name="key" value="AVY2aVWupgTdwGA86Bn5" />
-                <option name="line" value="87" />
+                <option name="line" value="85" />
                 <option name="message" value="Rename this local variable name to match the regular expression '^[a-z][a-zA-Z0-9]*$'." />
                 <option name="ruleKey" value="squid:S00117" />
                 <option name="severity" value="MINOR" />
@@ -3621,7 +3154,7 @@
               <SonarIssue>
                 <option name="isNew" value="false" />
                 <option name="key" value="AVY2aVWspgTdwGA86Bnz" />
-                <option name="line" value="87" />
+                <option name="line" value="85" />
                 <option name="message" value="Move the array designator from the variable to the type." />
                 <option name="ruleKey" value="squid:S1197" />
                 <option name="severity" value="MINOR" />
@@ -3629,7 +3162,7 @@
               <SonarIssue>
                 <option name="isNew" value="false" />
                 <option name="key" value="AVY2aVWtpgTdwGA86Bn1" />
-                <option name="line" value="73" />
+                <option name="line" value="72" />
                 <option name="message" value="Immediately return this expression instead of assigning it to the temporary variable &quot;inputFile&quot;." />
                 <option name="ruleKey" value="squid:S1488" />
                 <option name="severity" value="MINOR" />
@@ -3637,7 +3170,7 @@
               <SonarIssue>
                 <option name="isNew" value="false" />
                 <option name="key" value="AVY2aVWrpgTdwGA86Bnv" />
-                <option name="line" value="73" />
+                <option name="line" value="72" />
                 <option name="message" value="Remove those useless parentheses." />
                 <option name="ruleKey" value="squid:UselessParenthesesCheck" />
                 <option name="severity" value="MAJOR" />
@@ -3645,7 +3178,7 @@
               <SonarIssue>
                 <option name="isNew" value="false" />
                 <option name="key" value="AVY2aVWupgTdwGA86Bn4" />
-                <option name="line" value="86" />
+                <option name="line" value="84" />
                 <option name="message" value="Rename this local variable name to match the regular expression '^[a-z][a-zA-Z0-9]*$'." />
                 <option name="ruleKey" value="squid:S00117" />
                 <option name="severity" value="MINOR" />
@@ -3653,7 +3186,7 @@
               <SonarIssue>
                 <option name="isNew" value="false" />
                 <option name="key" value="AVY2aVWspgTdwGA86Bny" />
-                <option name="line" value="86" />
+                <option name="line" value="84" />
                 <option name="message" value="Move the array designator from the variable to the type." />
                 <option name="ruleKey" value="squid:S1197" />
                 <option name="severity" value="MINOR" />
@@ -3661,7 +3194,7 @@
               <SonarIssue>
                 <option name="isNew" value="false" />
                 <option name="key" value="AVY2aVWtpgTdwGA86Bn2" />
-                <option name="line" value="84" />
+                <option name="line" value="82" />
                 <option name="message" value="Rename this local variable name to match the regular expression '^[a-z][a-zA-Z0-9]*$'." />
                 <option name="ruleKey" value="squid:S00117" />
                 <option name="severity" value="MINOR" />
@@ -3669,7 +3202,7 @@
               <SonarIssue>
                 <option name="isNew" value="false" />
                 <option name="key" value="AVY2aVWspgTdwGA86Bnw" />
-                <option name="line" value="84" />
+                <option name="line" value="82" />
                 <option name="message" value="Move the array designator from the variable to the type." />
                 <option name="ruleKey" value="squid:S1197" />
                 <option name="severity" value="MINOR" />
@@ -3677,7 +3210,7 @@
               <SonarIssue>
                 <option name="isNew" value="false" />
                 <option name="key" value="AVY2aVWtpgTdwGA86Bn0" />
-                <option name="line" value="62" />
+                <option name="line" value="60" />
                 <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
                 <option name="ruleKey" value="squid:S2293" />
                 <option name="severity" value="MAJOR" />
@@ -4053,31 +3586,7 @@
         </entry>
         <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/pmd/BasePmdRuleTest.java">
           <value>
-            <set>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVY4pgTdwGA86Boi" />
-                <option name="message" value="1 duplicated blocks of code must be removed." />
-                <option name="ruleKey" value="common-java:DuplicatedBlocks" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVY5pgTdwGA86Boj" />
-                <option name="line" value="64" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVY5pgTdwGA86Bok" />
-                <option name="line" value="138" />
-                <option name="message" value="Define and throw a dedicated exception instead of using a generic one." />
-                <option name="ruleKey" value="squid:S00112" />
-                <option name="severity" value="CRITICAL" />
-              </SonarIssue>
-            </set>
+            <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/pmd/ClassNameRuleTest.java">
@@ -4186,119 +3695,7 @@
         </entry>
         <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/pmd/DelphiPmdSensorTest.java">
           <value>
-            <set>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVZmpgTdwGA86Bo9" />
-                <option name="line" value="83" />
-                <option name="message" value="Remove this useless assignment to local variable &quot;inputFile&quot;." />
-                <option name="ruleKey" value="squid:S1854" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVZlpgTdwGA86Bo8" />
-                <option name="line" value="123" />
-                <option name="message" value="Define and throw a dedicated exception instead of using a generic one." />
-                <option name="ruleKey" value="squid:S00112" />
-                <option name="severity" value="CRITICAL" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVZlpgTdwGA86Bo7" />
-                <option name="line" value="83" />
-                <option name="message" value="Remove this unused &quot;inputFile&quot; local variable." />
-                <option name="ruleKey" value="squid:S1481" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVZlpgTdwGA86Bo6" />
-                <option name="line" value="138" />
-                <option name="message" value="Complete the task associated to this TODO comment." />
-                <option name="ruleKey" value="squid:S1135" />
-                <option name="severity" value="INFO" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVZlpgTdwGA86Bo5" />
-                <option name="line" value="197" />
-                <option name="message" value="This block of commented-out lines of code should be removed." />
-                <option name="ruleKey" value="squid:CommentedOutCodeLine" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVZlpgTdwGA86Bo4" />
-                <option name="line" value="192" />
-                <option name="message" value="This block of commented-out lines of code should be removed." />
-                <option name="ruleKey" value="squid:CommentedOutCodeLine" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVZkpgTdwGA86Bo3" />
-                <option name="line" value="86" />
-                <option name="message" value="This block of commented-out lines of code should be removed." />
-                <option name="ruleKey" value="squid:CommentedOutCodeLine" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVZkpgTdwGA86Bo2" />
-                <option name="line" value="68" />
-                <option name="message" value="Replace the type specification in this constructor call with the diamond operator (&quot;&lt;&gt;&quot;). (sonar.java.source not set. Assuming 7 or greater.)" />
-                <option name="ruleKey" value="squid:S2293" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVZjpgTdwGA86Boz" />
-                <option name="line" value="173" />
-                <option name="message" value="Define a constant instead of duplicating this literal &quot;MixedNamesRule&quot; 3 times." />
-                <option name="ruleKey" value="squid:S1192" />
-                <option name="severity" value="MINOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVZjpgTdwGA86Bo1" />
-                <option name="line" value="60" />
-                <option name="message" value="Remove this unused &quot;ROOT_NAME&quot; private field." />
-                <option name="ruleKey" value="squid:S1068" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVZjpgTdwGA86Bo0" />
-                <option name="line" value="181" />
-                <option name="message" value="Define a constant instead of duplicating this literal &quot;NoSemicolonRule&quot; 3 times." />
-                <option name="ruleKey" value="squid:S1192" />
-                <option name="severity" value="MINOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVZipgTdwGA86Boy" />
-                <option name="line" value="168" />
-                <option name="message" value="Define a constant instead of duplicating this literal &quot;AssignedAndFreeRule&quot; 3 times." />
-                <option name="ruleKey" value="squid:S1192" />
-                <option name="severity" value="MINOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVZipgTdwGA86Box" />
-                <option name="line" value="143" />
-                <option name="message" value="Move the array designator from the variable to the type." />
-                <option name="ruleKey" value="squid:S1197" />
-                <option name="severity" value="MINOR" />
-              </SonarIssue>
-              <SonarIssue>
-                <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVZhpgTdwGA86Bow" />
-                <option name="message" value="1 duplicated blocks of code must be removed." />
-                <option name="ruleKey" value="common-java:DuplicatedBlocks" />
-                <option name="severity" value="MAJOR" />
-              </SonarIssue>
-            </set>
+            <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/test/java/org/sonar/plugins/delphi/pmd/DelphiUnitBuilderTest.java">
@@ -4307,7 +3704,7 @@
               <SonarIssue>
                 <option name="isNew" value="false" />
                 <option name="key" value="AVY2aVZzpgTdwGA86Bo-" />
-                <option name="line" value="121" />
+                <option name="line" value="118" />
                 <option name="message" value="Replace this usage of System.out or System.err by a logger." />
                 <option name="ruleKey" value="squid:S106" />
                 <option name="severity" value="MAJOR" />
@@ -4315,23 +3712,23 @@
               <SonarIssue>
                 <option name="isNew" value="false" />
                 <option name="key" value="AVY2aVZ0pgTdwGA86BpB" />
-                <option name="line" value="92" />
+                <option name="line" value="89" />
                 <option name="message" value="%n should be used in place of \n to produce the platform-specific line separator." />
                 <option name="ruleKey" value="squid:S2275" />
                 <option name="severity" value="CRITICAL" />
               </SonarIssue>
               <SonarIssue>
                 <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVZ0pgTdwGA86BpA" />
-                <option name="line" value="124" />
+                <option name="key" value="AVY2aVZ0pgTdwGA86Bo_" />
+                <option name="line" value="78" />
                 <option name="message" value="Define and throw a dedicated exception instead of using a generic one." />
                 <option name="ruleKey" value="squid:S00112" />
                 <option name="severity" value="CRITICAL" />
               </SonarIssue>
               <SonarIssue>
                 <option name="isNew" value="false" />
-                <option name="key" value="AVY2aVZ0pgTdwGA86Bo_" />
-                <option name="line" value="81" />
+                <option name="key" value="AVY2aVZ0pgTdwGA86BpA" />
+                <option name="line" value="121" />
                 <option name="message" value="Define and throw a dedicated exception instead of using a generic one." />
                 <option name="ruleKey" value="squid:S00112" />
                 <option name="severity" value="CRITICAL" />

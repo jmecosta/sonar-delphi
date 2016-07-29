@@ -27,10 +27,7 @@ import org.sonar.plugins.delphi.core.language.FunctionInterface;
 import org.sonar.plugins.delphi.core.language.UnitInterface;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Class for unit (usually one delphi source file), containing list of classes
@@ -94,6 +91,15 @@ public class DelphiUnit implements UnitInterface {
      */
 
     @Override
+    public String getPath() {
+        return file.getAbsolutePath();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+
+    @Override
     public void setPath(String path) {
         file = new File(path);
 
@@ -104,8 +110,8 @@ public class DelphiUnit implements UnitInterface {
      */
 
     @Override
-    public String getPath() {
-        return file.getAbsolutePath();
+    public String getName() {
+        return name;
     }
 
     /**
@@ -115,15 +121,6 @@ public class DelphiUnit implements UnitInterface {
     @Override
     public void setName(String unitName) {
         name = unitName;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-
-    @Override
-    public String getName() {
-        return name;
     }
 
     /**
@@ -220,10 +217,7 @@ public class DelphiUnit implements UnitInterface {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null) {
-            return false;
-        }
-        return toString().equals(o.toString());
+        return o != null && toString().equals(o.toString());
     }
 
     @Override
@@ -251,15 +245,6 @@ public class DelphiUnit implements UnitInterface {
      */
 
     @Override
-    public void setLine(int lineNumber) {
-        line = lineNumber;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-
-    @Override
     public int getLine() {
         return line;
     }
@@ -269,16 +254,23 @@ public class DelphiUnit implements UnitInterface {
      */
 
     @Override
+    public void setLine(int lineNumber) {
+        line = lineNumber;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+
+    @Override
     public FunctionInterface[] getAllFunctions() {
-        Set<FunctionInterface> result = new HashSet<FunctionInterface>();
+        Set<FunctionInterface> result = new HashSet<>();
         for (FunctionInterface globalFunction : functions) {
             result.add(globalFunction);
         }
 
         for (ClassInterface clazz : classes) {
-            for (FunctionInterface function : clazz.getFunctions()) {
-                result.add(function);
-            }
+            Collections.addAll(result, clazz.getFunctions());
         }
 
         return result.toArray(new FunctionInterface[result.size()]);
@@ -290,7 +282,7 @@ public class DelphiUnit implements UnitInterface {
 
     @Override
     public Set<UnitInterface> getIncludedUnits(Set<UnitInterface> allUnits) {
-        Set<UnitInterface> result = new HashSet<UnitInterface>();
+        Set<UnitInterface> result = new HashSet<>();
         if (allUnits == null) {
             return result;
         }

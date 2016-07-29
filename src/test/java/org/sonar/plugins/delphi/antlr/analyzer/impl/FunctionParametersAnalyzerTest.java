@@ -56,13 +56,11 @@ public class FunctionParametersAnalyzerTest {
     private static final Tree PARAMETERS_NODE = new CommonTree(new CommonToken(LexerMetrics.FUNCTION_ARGS.toMetrics()));
     private static final String TEST_FILE = "/org/sonar/plugins/delphi/syntax/FunctionParametersAnalyzerTest.pas";
     private static final String FILE_NAME_OPERATOR_TEST = "/org/sonar/plugins/delphi/metrics/FunctionOperatorTest.pas";
-
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
     private CodeTree code;
     private CodeAnalysisResults results;
     private FunctionParametersAnalyzer analyzer;
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     @Before
     public void setup() {
@@ -73,10 +71,10 @@ public class FunctionParametersAnalyzerTest {
     @Test
     public void canAnalyzeTest() {
         code = new CodeTree(null, null);
-        code.setCurrentNode(new CodeNode<Tree>(EMPTY_NODE));
+        code.setCurrentNode(new CodeNode<>(EMPTY_NODE));
         assertEquals(false, analyzer.canAnalyze(code));
 
-        code.setCurrentNode(new CodeNode<Tree>(PARAMETERS_NODE));
+        code.setCurrentNode(new CodeNode<>(PARAMETERS_NODE));
         assertEquals(true, analyzer.canAnalyze(code));
     }
 
@@ -86,7 +84,7 @@ public class FunctionParametersAnalyzerTest {
 
         File testFile = DelphiUtils.getResource(TEST_FILE);
         ASTTree ast = new DelphiAST(testFile);
-        code = new CodeTree(new CodeNode<ASTTree>(ast), new CodeNode<Tree>(ast.getChild(0)));
+        code = new CodeTree(new CodeNode<>(ast), new CodeNode<>(ast.getChild(0)));
 
         NodeOperation operation = new AdvanceToNodeOperation(LexerMetrics.FUNCTION_ARGS);
         CodeNode<Tree> startNode = operation.execute(ast.getChild(0));
@@ -119,7 +117,7 @@ public class FunctionParametersAnalyzerTest {
 
         File testFile = DelphiUtils.getResource(TEST_FILE);
         ASTTree ast = new DelphiAST(testFile);
-        code = new CodeTree(new CodeNode<ASTTree>(ast), new CodeNode<Tree>(ast.getChild(0)));
+        code = new CodeTree(new CodeNode<>(ast), new CodeNode<>(ast.getChild(0)));
 
         NodeOperation operation = new AdvanceToNodeOperation(LexerMetrics.FUNCTION_ARGS);
         CodeNode<Tree> startNode = operation.execute(ast.getChild(0));

@@ -57,7 +57,7 @@ public class DelphiCoverageToolParserTest {
 
         File baseDir = DelphiUtils.getResource(ROOT_NAME);
 
-        List<File> sourceDirs = new ArrayList<File>();
+        List<File> sourceDirs = new ArrayList<>();
 
         sourceDirs.add(baseDir); // include baseDir
 

@@ -35,13 +35,13 @@ import java.util.List;
  */
 public class DelphiLinesFactory {
 
+    private static final char LF = '\n';
+    private static final char CR = '\r';
+    private static final int EOF = -1;
     private final List<Line> lines = new ArrayList<Line>();
     private char lastReadCharacter;
     private StringBuilder currentStringBuilder = new StringBuilder();
     private Line currentLine;
-    private static final char LF = '\n';
-    private static final char CR = '\r';
-    private static final int EOF = -1;
     private LineContextHandler currentHandler;
     private LineContextHandler[] handlers;
 
@@ -51,7 +51,7 @@ public class DelphiLinesFactory {
      * @param reader File to read
      */
     DelphiLinesFactory(Reader reader) {
-        List<LineContextHandler> tmpHandlers = new ArrayList<LineContextHandler>();
+        List<LineContextHandler> tmpHandlers = new ArrayList<>();
 
         // //comment
         tmpHandlers.add(new SingleLineCommentHandler("//", "*//"));

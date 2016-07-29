@@ -119,7 +119,7 @@ public class DelphiProjectHelper implements BatchExtension {
     }
 
     private List<File> detectExcludedSources() {
-        List<File> result = new ArrayList<File>();
+        List<File> result = new ArrayList<>();
         if (settings == null) {
             return result;
         }
@@ -171,7 +171,7 @@ public class DelphiProjectHelper implements BatchExtension {
      * @return List of DelphiLanguage projects
      */
     public List<DelphiProject> getWorkgroupProjects() {
-        List<DelphiProject> list = new ArrayList<DelphiProject>();
+        List<DelphiProject> list = new ArrayList<>();
 
         String dprojPath = getProjectFile();
         String gprojPath = getWorkgroupFile();
@@ -328,7 +328,7 @@ public class DelphiProjectHelper implements BatchExtension {
      * @return List of excluded directories, empty list if none
      */
     public List<File> getCodeCoverageExcludedDirectories() {
-        List<File> list = new ArrayList<File>();
+        List<File> list = new ArrayList<>();
 
         String[] sources = settings.getStringArray(DelphiPlugin.CC_EXCLUDED_KEY);
         if (sources == null || sources.length == 0) {

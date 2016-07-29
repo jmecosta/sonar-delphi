@@ -111,19 +111,19 @@ public class DelphiRule implements Comparable<String> {
     }
 
     /**
+     * @return Properties
+     */
+    public List<Property> getProperties() {
+        return properties;
+    }
+
+    /**
      * Sets properties
      *
      * @param properties Properties to set
      */
     public void setProperties(List<Property> properties) {
         this.properties = properties;
-    }
-
-    /**
-     * @return Properties
-     */
-    public List<Property> getProperties() {
-        return properties;
     }
 
     /**
@@ -163,7 +163,7 @@ public class DelphiRule implements Comparable<String> {
      */
     public void addProperty(Property property) {
         if (properties == null) {
-            properties = new ArrayList<Property>();
+            properties = new ArrayList<>();
         }
         properties.add(property);
     }

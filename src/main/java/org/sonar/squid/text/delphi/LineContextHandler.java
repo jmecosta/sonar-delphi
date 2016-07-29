@@ -24,12 +24,6 @@ package org.sonar.squid.text.delphi;
 
 public abstract class LineContextHandler {
 
-    abstract boolean matchToEnd(Line line, StringBuilder pendingLine);
-
-    abstract boolean matchWithEndOfLine(Line line, StringBuilder pendingLine);
-
-    abstract boolean matchToBegin(Line line, StringBuilder pendingLine);
-
     static boolean matchEndOfString(CharSequence pendingLine, String end) {
         int pendingLineIndex = pendingLine.length() - end.length();
         if (pendingLineIndex < 0) {
@@ -46,10 +40,7 @@ public abstract class LineContextHandler {
     }
 
     static boolean matchEndOfString(StringBuilder pendingLine, char endChar) {
-        if (pendingLine.length() < 1) {
-            return false;
-        }
-        return pendingLine.charAt(pendingLine.length() - 1) == endChar;
+        return pendingLine.length() >= 1 && pendingLine.charAt(pendingLine.length() - 1) == endChar;
     }
 
     static char getLastCharacter(StringBuilder pendingLine) {
@@ -58,5 +49,11 @@ public abstract class LineContextHandler {
         }
         return pendingLine.charAt(pendingLine.length() - 1);
     }
+
+    abstract boolean matchToEnd(Line line, StringBuilder pendingLine);
+
+    abstract boolean matchWithEndOfLine(Line line, StringBuilder pendingLine);
+
+    abstract boolean matchToBegin(Line line, StringBuilder pendingLine);
 
 }

@@ -31,6 +31,10 @@ public class HasRuleLineNumber<T extends Issue> extends TypeSafeMatcher<T> {
         this.line = line;
     }
 
+    public static <T extends Issue> Matcher<T> hasRuleLine(int line) {
+        return new HasRuleLineNumber<>(line);
+    }
+
     @Override
     protected boolean matchesSafely(T item) {
         return line == item.line();
@@ -44,10 +48,6 @@ public class HasRuleLineNumber<T extends Issue> extends TypeSafeMatcher<T> {
     @Override
     protected void describeMismatchSafely(T item, Description mismatchDescription) {
         mismatchDescription.appendText("was ").appendValue(item.line());
-    }
-
-    public static <T extends Issue> Matcher<T> hasRuleLine(int line) {
-        return new HasRuleLineNumber<T>(line);
     }
 
 }

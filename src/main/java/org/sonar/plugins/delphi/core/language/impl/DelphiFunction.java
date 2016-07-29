@@ -37,6 +37,8 @@ import java.util.Set;
  */
 public class DelphiFunction implements FunctionInterface {
 
+    private static final String UNKNOWN_FUNCTION_NAME = "UnknownFunction_";
+    private static int unknownFunctionCounter = 0;
     private int complexity = 0;
     private int overloads = -1;
     private int line = -1;
@@ -56,10 +58,6 @@ public class DelphiFunction implements FunctionInterface {
     private List<FunctionInterface> overFunc = new ArrayList<FunctionInterface>();
     private UnitInterface parentUnit = null;
     private boolean message = false;
-
-    private static final String UNKNOWN_FUNCTION_NAME = "UnknownFunction_";
-
-    private static int unknownFunctionCounter = 0;
 
     /**
      * Ctor, creates function with default name
@@ -94,15 +92,6 @@ public class DelphiFunction implements FunctionInterface {
      */
 
     @Override
-    public void setDeclaration(boolean value) {
-        isDeclaration = value;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-
-    @Override
     public int getVisibility() {
         return visibility;
     }
@@ -123,6 +112,15 @@ public class DelphiFunction implements FunctionInterface {
     @Override
     public boolean isDeclaration() {
         return isDeclaration;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+
+    @Override
+    public void setDeclaration(boolean value) {
+        isDeclaration = value;
     }
 
     /**
@@ -287,10 +285,7 @@ public class DelphiFunction implements FunctionInterface {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null) {
-            return false;
-        }
-        return toString().equalsIgnoreCase(o.toString());
+        return o != null && toString().equalsIgnoreCase(o.toString());
     }
 
     /**
@@ -316,8 +311,8 @@ public class DelphiFunction implements FunctionInterface {
      */
 
     @Override
-    public void setParentClass(ClassInterface parent) {
-        parentClass = parent;
+    public ClassInterface getParentClass() {
+        return parentClass;
     }
 
     /**
@@ -325,8 +320,8 @@ public class DelphiFunction implements FunctionInterface {
      */
 
     @Override
-    public ClassInterface getParentClass() {
-        return parentClass;
+    public void setParentClass(ClassInterface parent) {
+        parentClass = parent;
     }
 
     /**
@@ -352,8 +347,8 @@ public class DelphiFunction implements FunctionInterface {
      */
 
     @Override
-    public void setLongName(String functionLongName) {
-        longName = functionLongName;
+    public String getLongName() {
+        return longName;
     }
 
     /**
@@ -361,8 +356,8 @@ public class DelphiFunction implements FunctionInterface {
      */
 
     @Override
-    public String getLongName() {
-        return longName;
+    public void setLongName(String functionLongName) {
+        longName = functionLongName;
     }
 
     /**
@@ -423,23 +418,23 @@ public class DelphiFunction implements FunctionInterface {
     }
 
     @Override
-    public void setVirtual(boolean value) {
-        virtual = value;
-    }
-
-    @Override
     public boolean isVirtual() {
         return virtual;
     }
 
     @Override
-    public void setMessage(boolean value) {
-        message = value;
+    public void setVirtual(boolean value) {
+        virtual = value;
     }
 
     @Override
     public boolean isMessage() {
         return message;
+    }
+
+    @Override
+    public void setMessage(boolean value) {
+        message = value;
     }
 
     @Override

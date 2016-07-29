@@ -70,8 +70,26 @@ public class DelphiClassProperty extends DelphiClassField implements ClassProper
      */
 
     @Override
+    public void setReadFunction(FunctionInterface newFunction) {
+        readFunction = newFunction;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+
+    @Override
     public FunctionInterface getWriteFunction() {
         return writeFunction;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+
+    @Override
+    public void setWriteFunction(FunctionInterface newFunction) {
+        writeFunction = newFunction;
     }
 
     /**
@@ -92,29 +110,11 @@ public class DelphiClassProperty extends DelphiClassField implements ClassProper
         return b1 || b2;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-
-    @Override
-    public void setReadFunction(FunctionInterface newFunction) {
-        readFunction = newFunction;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-
-    @Override
-    public void setWriteFunction(FunctionInterface newFunction) {
-        writeFunction = newFunction;
-    }
-
     @Override
     public String toString() {
         StringBuilder suffix = new StringBuilder();
         if (writeFunction != null) {
-            suffix.append("@" + writeFunction.toString());
+            suffix.append("@").append(writeFunction.toString());
         }
         if (readFunction != null) {
             suffix.append("@" + readFunction.toString());
@@ -124,10 +124,7 @@ public class DelphiClassProperty extends DelphiClassField implements ClassProper
 
     @Override
     public boolean equals(Object o) {
-        if (o == null) {
-            return false;
-        }
-        return toString().equals(o.toString());
+        return o != null && toString().equals(o.toString());
     }
 
     @Override

@@ -58,10 +58,7 @@ public class SubRangeMergingAggregator extends SubRangeAggregator {
         if (range2.inRange(range1)) {
             return true;
         }
-        if (range1.inRange(range2.getBegin())) {
-            return true;
-        }
-        return range2.inRange(range1.getBegin());
+        return range1.inRange(range2.getBegin()) || range2.inRange(range1.getBegin());
     }
 
     protected SubRange mergeRanges(SubRange rangeInList, SubRange newRange) {

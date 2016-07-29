@@ -45,7 +45,7 @@ public class CoverageFileData {
      */
     public CoverageFileData(InputFile resource) {
         this.resource = resource;
-        lineHitsBuilder = new PropertiesBuilder<String, Integer>(CoreMetrics.COVERAGE_LINE_HITS_DATA);
+        lineHitsBuilder = new PropertiesBuilder<>(CoreMetrics.COVERAGE_LINE_HITS_DATA);
     }
 
     /**
@@ -63,10 +63,24 @@ public class CoverageFileData {
     }
 
     /**
+     * @param totalLines the totalLines to set
+     */
+    public void setTotalLines(double totalLines) {
+        this.totalLines = totalLines;
+    }
+
+    /**
      * @return the uncoveredLines
      */
     public double getUncoveredLines() {
         return uncoveredLines;
+    }
+
+    /**
+     * @param uncoveredLines the uncoveredLines to set
+     */
+    public void setUncoveredLines(double uncoveredLines) {
+        this.uncoveredLines = uncoveredLines;
     }
 
     /**
@@ -81,19 +95,5 @@ public class CoverageFileData {
      */
     public PropertiesBuilder<String, Integer> getLineHitsBuilder() {
         return lineHitsBuilder;
-    }
-
-    /**
-     * @param totalLines the totalLines to set
-     */
-    public void setTotalLines(double totalLines) {
-        this.totalLines = totalLines;
-    }
-
-    /**
-     * @param uncoveredLines the uncoveredLines to set
-     */
-    public void setUncoveredLines(double uncoveredLines) {
-        this.uncoveredLines = uncoveredLines;
     }
 }

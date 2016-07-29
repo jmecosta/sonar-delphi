@@ -185,10 +185,7 @@ class Line implements Measurable<Metric> {
     }
 
     boolean isThereCode() {
-        if (!isBlank() && !isThereComment()) {
-            return true;
-        }
-        return isThereComment() && isThereCodeBeforeOrAfterComment();
+        return !isBlank() && !isThereComment() || isThereComment() && isThereCodeBeforeOrAfterComment();
     }
 
     private boolean isThereCodeBeforeOrAfterComment() {
