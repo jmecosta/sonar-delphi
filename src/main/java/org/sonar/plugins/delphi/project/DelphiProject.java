@@ -25,12 +25,11 @@ package org.sonar.plugins.delphi.project;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.plugins.delphi.utils.DelphiUtils;
-import org.xml.sax.SAXException;
 
-import javax.xml.stream.XMLStreamException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -65,10 +64,9 @@ public class DelphiProject {
             DelphiUtils.LOG.error("Could not find .dproj file: " + xml.getAbsolutePath());
         } catch (IllegalArgumentException e) {
             DelphiUtils.LOG.error("No .dproj file to parse. (null)");
-        } catch (XMLStreamException e) {
-            DelphiUtils.LOG.error(".dproj xml error: " + e.getMessage());
-        } catch (SAXException e) {
-            DelphiUtils.LOG.error(".dproj xml error: " + e.getMessage());
+        } catch (Exception e) {
+            //TODO: Try to remove this Exception
+            DelphiUtils.LOG.error("This Exception should not be thrown, specifie it if occures" + Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -123,10 +121,9 @@ public class DelphiProject {
      *
      * @param xml File to parse
      * @throws IOException              If file not found
-     * @throws SAXException             when parsing error occurs
      * @throws IllegalArgumentException If file == null
      */
-    private void parseFile(File xml) throws IOException, XMLStreamException, SAXException {
+    private void parseFile(File xml) throws IOException, IllegalArgumentException {
         if (xml == null) {
             throw new IllegalArgumentException("No xml file passed");
         } else if (!xml.exists()) {
@@ -142,36 +139,20 @@ public class DelphiProject {
         return name;
     }
 
-    public List<String> getDefinitions() {
-        return definitions;
-    }
-
-    public List<File> getSourceFiles() {
-        return files;
-    }
-
-    public List<File> getIncludeDirectories() {
-        return includeDirectories;
-    }
-
-    public File getXmlFile() {
-        return file;
-    }
-
     public void setName(String value) {
         name = value;
+    }
+
+    public List<String> getDefinitions() {
+        return definitions;
     }
 
     public void setDefinitions(List<String> defs) {
         this.definitions = defs;
     }
 
-    public void setIncludeDirectories(List<File> includes) {
-        this.includeDirectories = includes;
-    }
-
-    public void setFile(File file) {
-        this.file = file;
+    public List<File> getSourceFiles() {
+        return files;
     }
 
     public void setSourceFiles(List<InputFile> list) {
@@ -180,6 +161,22 @@ public class DelphiProject {
             files.add(inputFile.file());
         }
         this.files = files;
+    }
+
+    public List<File> getIncludeDirectories() {
+        return includeDirectories;
+    }
+
+    public void setIncludeDirectories(List<File> includes) {
+        this.includeDirectories = includes;
+    }
+
+    public File getXmlFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
     }
 
 }

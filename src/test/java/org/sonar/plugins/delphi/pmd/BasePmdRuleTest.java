@@ -63,11 +63,8 @@ public abstract class BasePmdRuleTest {
     protected Project project;
     protected List<Issue> issues = new LinkedList<Issue>();
     private ResourcePerspectives perspectives;
-    private DelphiProjectHelper delphiProjectHelper;
     private Issuable issuable;
     private File testFile;
-    private DelphiPmdProfileExporter profileExporter;
-    private RulesProfile rulesProfile;
 
     public List<Issue> analyse(DelphiUnitBuilderTest builder) {
         configureTest(builder);
@@ -92,7 +89,7 @@ public abstract class BasePmdRuleTest {
     protected void configureTest(String testFileName) {
         project = mock(Project.class);
         perspectives = mock(ResourcePerspectives.class);
-        delphiProjectHelper = DelphiTestUtils.mockProjectHelper();
+        DelphiProjectHelper delphiProjectHelper = DelphiTestUtils.mockProjectHelper();
 
         // Don't pollute current working directory
         when(delphiProjectHelper.workDir()).thenReturn(new File("target"));
@@ -129,8 +126,8 @@ public abstract class BasePmdRuleTest {
                 return Boolean.TRUE;
             }
         });
-        rulesProfile = mock(RulesProfile.class);
-        profileExporter = mock(DelphiPmdProfileExporter.class);
+        RulesProfile rulesProfile = mock(RulesProfile.class);
+        DelphiPmdProfileExporter profileExporter = mock(DelphiPmdProfileExporter.class);
 
         String fileName = getClass().getResource("/org/sonar/plugins/delphi/pmd/rules.xml").getPath();
         File rulesFile = new File(fileName);

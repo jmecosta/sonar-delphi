@@ -31,11 +31,10 @@ import static org.junit.Assert.assertEquals;
 public class StringSubRangeTest {
 
     private SubRange range;
-    private String str;
 
     @Before
     public void setup() {
-        str = "!This is a test string!";
+        String str = "!This is a test string!";
         range = new StringSubRange(0, str.length(), str);
     }
 

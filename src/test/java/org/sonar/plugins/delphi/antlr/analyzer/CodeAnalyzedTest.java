@@ -36,13 +36,12 @@ import static org.junit.Assert.assertTrue;
 public class CodeAnalyzedTest {
 
     private CodeTree code;
-    private CommonTree[] nodes;
     private ASTTree ast;
 
     @Before
     public void init() {
         ast = new DelphiAST();
-        nodes = new CommonTree[]{new CommonTree(new CommonToken(0, "a")), new CommonTree(new CommonToken(0, "ab1")),
+        CommonTree[] nodes = new CommonTree[]{new CommonTree(new CommonToken(0, "a")), new CommonTree(new CommonToken(0, "ab1")),
                 new CommonTree(new CommonToken(0, "ab1c1")), new CommonTree(new CommonToken(0, "ab1c2")),
                 new CommonTree(new CommonToken(0, "ab2")), new CommonTree(new CommonToken(0, "ab2c1")),
                 new CommonTree(new CommonToken(0, "ab2c2")), new CommonTree(new CommonToken(0, "ab2c3"))};

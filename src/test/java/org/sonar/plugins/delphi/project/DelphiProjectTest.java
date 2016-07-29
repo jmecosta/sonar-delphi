@@ -36,7 +36,6 @@ import static org.junit.Assert.assertEquals;
 public class DelphiProjectTest {
 
     private static String XML_FILE = "/org/sonar/plugins/delphi/SimpleDelphiProject/dproj/SimpleDelphiProject.dproj";
-    private static String INC_DIR = "/org/sonar/plugins/delphi/SimpleDelphiProject/includes1";
 
     private DelphiProject project;
 
@@ -62,6 +61,7 @@ public class DelphiProjectTest {
         assertEquals(0, project.getSourceFiles().size());
         project.addFile(sourceFile.getAbsolutePath());
         assertEquals(1, project.getSourceFiles().size());
+        String INC_DIR = "/org/sonar/plugins/delphi/SimpleDelphiProject/includes1";
         project.addIncludeDirectory(DelphiUtils.getResource(INC_DIR).getAbsolutePath());
         assertEquals(1, project.getIncludeDirectories().size());
     }

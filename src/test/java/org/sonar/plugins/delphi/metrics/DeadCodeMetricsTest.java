@@ -74,9 +74,6 @@ public class DeadCodeMetricsTest {
     private Set<UnitInterface> units;
     private List<ClassInterface> classes;
     private List<FunctionInterface> functions;
-    private ResourcePerspectives perspectives;
-    private Issuable issuable;
-    private ActiveRules activeRules;
 
     @Before
     public void init() {
@@ -119,9 +116,9 @@ public class DeadCodeMetricsTest {
         units.add(u2);
         units.add(u3);
 
-        perspectives = mock(ResourcePerspectives.class);
+        ResourcePerspectives perspectives = mock(ResourcePerspectives.class);
 
-        issuable = mock(Issuable.class);
+        Issuable issuable = mock(Issuable.class);
 
         when(perspectives.as(Matchers.eq(Issuable.class), Matchers.isA(InputFile.class))).thenReturn(issuable);
 
@@ -142,7 +139,7 @@ public class DeadCodeMetricsTest {
         when(activeRuleUnusedFunction.ruleKey()).thenReturn(DeadCodeMetrics.RULE_KEY_UNUSED_FUNCTION);
         when(activeRuleUnusedUnit.ruleKey()).thenReturn(DeadCodeMetrics.RULE_KEY_UNUSED_UNIT);
 
-        activeRules = mock(ActiveRules.class);
+        ActiveRules activeRules = mock(ActiveRules.class);
         when(activeRules.find(DeadCodeMetrics.RULE_KEY_UNUSED_FUNCTION)).thenReturn(activeRuleUnusedUnit);
         when(activeRules.find(DeadCodeMetrics.RULE_KEY_UNUSED_UNIT)).thenReturn(activeRuleUnusedUnit);
 

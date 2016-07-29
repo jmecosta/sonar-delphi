@@ -57,9 +57,6 @@ public class DelphiSensorTest {
     private DelphiSensor sensor = null;
     private File baseDir = null;
     private Map<String, Integer> keyMetricIndex = null;
-    private DelphiProjectHelper delphiProjectHelper;
-    private ActiveRules activeRules;
-    private ResourcePerspectives perspectives;
 
     @Before
     public void init() {
@@ -92,17 +89,17 @@ public class DelphiSensorTest {
         }
 
 
-        perspectives = mock(ResourcePerspectives.class);
+        ResourcePerspectives perspectives = mock(ResourcePerspectives.class);
 
-        delphiProjectHelper = DelphiTestUtils.mockProjectHelper();
+        DelphiProjectHelper delphiProjectHelper = DelphiTestUtils.mockProjectHelper();
         DelphiTestUtils.mockGetFileFromString(delphiProjectHelper);
 
         delphiProject.setSourceFiles(sourceFiles);
 
         when(delphiProjectHelper.getWorkgroupProjects()).thenReturn(Arrays.asList(delphiProject));
-        when(delphiProjectHelper.getDirectory(Matchers.any(File.class), Matchers.any(Project.class))).thenCallRealMethod();
+        when(delphiProjectHelper.getDirectory(Matchers.any(File.class))).thenCallRealMethod();
 
-        activeRules = mock(ActiveRules.class);
+        ActiveRules activeRules = mock(ActiveRules.class);
         ActiveRule activeRule = mock(ActiveRule.class);
         when(activeRules.find(Matchers.any(RuleKey.class))).thenReturn(activeRule);
         when(activeRule.param("Threshold")).thenReturn("3");

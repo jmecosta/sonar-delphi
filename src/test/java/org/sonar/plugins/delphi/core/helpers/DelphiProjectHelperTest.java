@@ -58,14 +58,14 @@ public class DelphiProjectHelperTest {
 
     @Test
     public void getDirectory() {
-        Directory directory = delphiProjectHelper.getDirectory(currentDir, project);
+        Directory directory = delphiProjectHelper.getDirectory(currentDir);
         assertThat(directory, notNullValue());
         assertThat(directory.getKey(), is("[default]"));
     }
 
     @Test
     public void getDirectoryEqualsToBaseDir() {
-        Directory directory = delphiProjectHelper.getDirectory(baseDir, project);
+        Directory directory = delphiProjectHelper.getDirectory(baseDir);
         assertThat(directory, notNullValue());
         //changed this to macht sonar api 5.0
         assertThat(directory.getKey(), is("[default]"));
@@ -74,7 +74,7 @@ public class DelphiProjectHelperTest {
     @Test
     public void getInvalidRelativeDirectoryReturnsDefaultPackageName() {
         File rootDirectory = new File("/");
-        Directory directory = delphiProjectHelper.getDirectory(rootDirectory, project);
+        Directory directory = delphiProjectHelper.getDirectory(rootDirectory);
         assertThat(directory, notNullValue());
         assertThat(directory.getKey(), is(DelphiProjectHelper.DEFAULT_PACKAGE_NAME));
     }

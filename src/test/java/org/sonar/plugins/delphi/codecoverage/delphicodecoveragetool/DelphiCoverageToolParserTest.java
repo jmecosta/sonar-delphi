@@ -44,21 +44,18 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 public class DelphiCoverageToolParserTest {
-    private DebugSensorContext context;
-    private File baseDir;
-    private DelphiProjectHelper delphiProjectHelper;
-
     private static final String ROOT_NAME = "/org/sonar/plugins/delphi/SimpleDelphiProject";
     private static final String REPORT_FILE = "/org/sonar/plugins/delphi/SimpleDelphiProject/reports/Coverage.xml";
-
     private final File reportFile = DelphiUtils.getResource(REPORT_FILE);
+    private DebugSensorContext context;
+    private DelphiProjectHelper delphiProjectHelper;
 
     @Before
     public void init() throws FileNotFoundException {
 
         context = new DebugSensorContext();
 
-        baseDir = DelphiUtils.getResource(ROOT_NAME);
+        File baseDir = DelphiUtils.getResource(ROOT_NAME);
 
         List<File> sourceDirs = new ArrayList<File>();
 
@@ -71,9 +68,8 @@ public class DelphiCoverageToolParserTest {
         when(delphiProjectHelper.findFileInDirectories(anyString())).thenAnswer(new Answer<InputFile>() {
             @Override
             public InputFile answer(InvocationOnMock invocation) throws Throwable {
-                InputFile inputFile = new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", ((String) invocation.getArguments()[0])).setModuleBaseDir(Paths.get(ROOT_NAME));
 
-                return inputFile;
+                return new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", ((String) invocation.getArguments()[0])).setModuleBaseDir(Paths.get(ROOT_NAME));
             }
         });
     }

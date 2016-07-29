@@ -33,9 +33,9 @@ import org.sonar.squidbridge.measures.Metric;
  */
 class Line implements Measurable<Metric> {
 
+    private static final String NOSONAR_TAG = "NOSONAR";
     private final int lineIndex;
     private int blankLine = 0;
-    private int line = 1;
     private int lineOfCode = 0;
     private int commentLine = 0;
     private int headerCommentLine = 0;
@@ -47,8 +47,6 @@ class Line implements Measurable<Metric> {
     private boolean isBlank;
     private boolean isThereDoc;
     private boolean isThereLicenseHeaderComment;
-
-    private static final String NOSONAR_TAG = "NOSONAR";
 
     Line() {
         this.lineIndex = 0;
@@ -66,11 +64,6 @@ class Line implements Measurable<Metric> {
 
     Line(int lineIndex) {
         this.lineIndex = lineIndex;
-    }
-
-    final void setString(StringBuilder stringLine) {
-        this.stringLine = stringLine;
-        isBlank = isBlankLine();
     }
 
     private boolean isBlankLine() {
@@ -91,7 +84,6 @@ class Line implements Measurable<Metric> {
         return getInt(metric);
     }
 
-
     /**
      * {@inheritDoc}
      */
@@ -102,6 +94,7 @@ class Line implements Measurable<Metric> {
             case BLANK_LINES:
                 return blankLine;
             case LINES:
+                int line = 1;
                 return line;
             case LINES_OF_CODE:
                 return lineOfCode;
@@ -164,10 +157,6 @@ class Line implements Measurable<Metric> {
         }
     }
 
-    void setComment(String comment) {
-        this.comment = comment;
-    }
-
     void setComment(String comment, boolean isJavadoc) {
         setComment(comment);
         this.isThereDoc = isJavadoc;
@@ -180,6 +169,11 @@ class Line implements Measurable<Metric> {
 
     String getString() {
         return stringLine.toString();
+    }
+
+    final void setString(StringBuilder stringLine) {
+        this.stringLine = stringLine;
+        isBlank = isBlankLine();
     }
 
     boolean isBlank() {
@@ -226,6 +220,10 @@ class Line implements Measurable<Metric> {
 
     String getComment() {
         return comment;
+    }
+
+    void setComment(String comment) {
+        this.comment = comment;
     }
 
     boolean isThereBlankComment() {

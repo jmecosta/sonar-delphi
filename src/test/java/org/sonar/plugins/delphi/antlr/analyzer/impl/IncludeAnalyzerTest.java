@@ -46,11 +46,8 @@ public class IncludeAnalyzerTest {
     private static final String FILE_NAME = "/org/sonar/plugins/delphi/metrics/MetricsTest.pas";
 
     private IncludeAnalyzer analyzer;
-    private ASTTree ast;
     private CodeAnalysisResults results;
     private CodeTree code;
-    private AdvanceToNodeOperation advanceToUses;
-    private AdvanceToNodeOperation advanceToImpl;
 
     @Before
     public void init() throws IOException, RecognitionException {
@@ -59,10 +56,10 @@ public class IncludeAnalyzerTest {
         results.setActiveUnit(new DelphiUnit("test"));
 
         File file = DelphiUtils.getResource(FILE_NAME);
-        ast = new DelphiAST(file);
+        ASTTree ast = new DelphiAST(file);
         code = new CodeTree(new CodeNode<ASTTree>(ast), new CodeNode<Tree>(ast.getChild(0)));
-        advanceToUses = new AdvanceToNodeOperation(LexerMetrics.USES);
-        advanceToImpl = new AdvanceToNodeOperation(LexerMetrics.PROCEDURE);
+        AdvanceToNodeOperation advanceToUses = new AdvanceToNodeOperation(LexerMetrics.USES);
+        AdvanceToNodeOperation advanceToImpl = new AdvanceToNodeOperation(LexerMetrics.PROCEDURE);
     }
 
     @Test

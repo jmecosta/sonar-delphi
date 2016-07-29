@@ -30,7 +30,6 @@ import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Directory;
-import org.sonar.api.resources.Project;
 import org.sonar.plugins.delphi.DelphiPlugin;
 import org.sonar.plugins.delphi.core.DelphiLanguage;
 import org.sonar.plugins.delphi.project.DelphiProject;
@@ -238,7 +237,7 @@ public class DelphiProjectHelper implements BatchExtension {
         return fs.inputFile(fs.predicates().is(file));
     }
 
-    public Directory getDirectory(java.io.File dir, Project module) {
+    public Directory getDirectory(java.io.File dir) {
         //findFileInDirectories("");
 
         Directory directory = new Directory(dir.getPath());//Directory.fromIOFile(dir, module);

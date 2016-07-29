@@ -216,7 +216,7 @@ public class DelphiSensor implements Sensor {
 
         InputFile resource = delphiProjectHelper.getFile(sourceFile);
 
-        Directory directory = delphiProjectHelper.getDirectory(sourceFile.getParentFile(), project);
+        Directory directory = delphiProjectHelper.getDirectory(sourceFile.getParentFile());
 
         if (directory == null) {
             throw new IllegalArgumentException("Directory: " + sourceFile.getParentFile() + " not found.");

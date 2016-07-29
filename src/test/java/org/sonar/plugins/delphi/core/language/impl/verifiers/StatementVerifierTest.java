@@ -50,13 +50,12 @@ public class StatementVerifierTest {
     private static final String FILE_NAME = "/org/sonar/plugins/delphi/metrics/ComplexityMetricsTest.pas";
 
     private StatementVerifier verifier;
-    private ASTTree ast;
     private CodeTree codeTree;
 
     @Before
     public void setup() throws IOException, RecognitionException {
         File astFile = DelphiUtils.getResource(FILE_NAME);
-        ast = new DelphiAST(astFile);
+        ASTTree ast = new DelphiAST(astFile);
         codeTree = new CodeTree(new CodeNode<ASTTree>(ast), new CodeNode<Tree>(ast.getChild(0)));
         verifier = new StatementVerifier(DelphiTestUtils.mockProjectHelper());
     }

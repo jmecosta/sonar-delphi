@@ -52,15 +52,14 @@ public class FunctionAnalyzerTest extends FileTestsCommon {
 
     private CodeAnalysisResults results;
 
-    private DelphiAST ast;
     private CodeTree code;
     private AdvanceToNodeOperation advanceToFunction;
 
-    public void setupFile(String fileName) throws IOException, RecognitionException {
+    public void setupFile(String fileName) throws IOException {
         loadFile(fileName);
         results = new CodeAnalysisResults();
         results.setActiveUnit(new DelphiUnit("test"));
-        ast = new DelphiAST(testFile);
+        DelphiAST ast = new DelphiAST(testFile);
         code = new CodeTree(new CodeNode<ASTTree>(ast), new CodeNode<Tree>(ast.getChild(0)));
         advanceToFunction = new AdvanceToNodeOperation(Arrays.asList(LexerMetrics.FUNCTION, LexerMetrics.PROCEDURE,
                 LexerMetrics.CONSTRUCTOR,

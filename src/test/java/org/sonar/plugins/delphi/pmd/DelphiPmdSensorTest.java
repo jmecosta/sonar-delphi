@@ -63,17 +63,14 @@ public class DelphiPmdSensorTest {
     private Project project;
     private DelphiPmdSensor sensor;
     private ResourcePerspectives perspectives;
-    private DelphiProjectHelper delphiProjectHelper;
     private Issuable issuable;
     private List<Issue> issues = new LinkedList<Issue>();
-    private DelphiPmdProfileExporter profileExporter;
-    private RulesProfile rulesProfile;
 
     @Before
     public void init() {
         project = mock(Project.class);
         perspectives = mock(ResourcePerspectives.class);
-        delphiProjectHelper = DelphiTestUtils.mockProjectHelper();
+        DelphiProjectHelper delphiProjectHelper = DelphiTestUtils.mockProjectHelper();
 
         // Don't pollute current working directory
         when(delphiProjectHelper.workDir()).thenReturn(new File("target"));
@@ -111,8 +108,8 @@ public class DelphiPmdSensorTest {
             }
         });
 
-        rulesProfile = mock(RulesProfile.class);
-        profileExporter = mock(DelphiPmdProfileExporter.class);
+        RulesProfile rulesProfile = mock(RulesProfile.class);
+        DelphiPmdProfileExporter profileExporter = mock(DelphiPmdProfileExporter.class);
 
         String fileName = getClass().getResource("/org/sonar/plugins/delphi/pmd/rules.xml").getPath();
         File rulesFile = new File(fileName);

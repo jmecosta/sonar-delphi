@@ -32,7 +32,6 @@ import static org.junit.Assert.assertEquals;
 
 public class DelphiWorkgroupTest {
 
-    private static String XML_FILE = "/org/sonar/plugins/delphi/SimpleDelphiProject/dproj/workgroup/All.groupproj";
     private DelphiWorkgroup workGroup;
 
     @Before
@@ -49,6 +48,7 @@ public class DelphiWorkgroupTest {
 
     @Test
     public void xmlWorkgroupTest() throws IOException {
+        String XML_FILE = "/org/sonar/plugins/delphi/SimpleDelphiProject/dproj/workgroup/All.groupproj";
         DelphiWorkgroup workGroup = new DelphiWorkgroup(DelphiUtils.getResource(XML_FILE));
         assertEquals(1, workGroup.getProjects().size());
         assertEquals("Simple Delphi Product", workGroup.getProjects().get(0).getName());

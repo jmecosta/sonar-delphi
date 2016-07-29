@@ -45,9 +45,8 @@ public class DelphiTestUtils {
             @Override
             public InputFile answer(InvocationOnMock invocation) throws Throwable {
                 File file = (File) invocation.getArguments()[0];
-                InputFile inputFile = new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", file.getAbsolutePath());
 
-                return inputFile;
+                return new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", file.getAbsolutePath());
             }
         });
 
@@ -61,9 +60,8 @@ public class DelphiTestUtils {
                 String fileName = (String) invocation.getArguments()[0];
 
                 File file = new File(fileName);
-                InputFile inputFile = new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", file.getPath());
 
-                return inputFile;
+                return new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", file.getPath());
             }
         });
     }
