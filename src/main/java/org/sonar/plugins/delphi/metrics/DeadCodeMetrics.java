@@ -160,15 +160,31 @@ public class DeadCodeMetrics extends DefaultMetrics implements MetricsInterface 
             if (unusedFunctions.contains(function)) {
                 Issuable issuable = perspectives.as(Issuable.class, resource);
                 if (issuable != null) {
-                    Issue issue = issuable.newIssueBuilder()
-                            .ruleKey(functionRule.ruleKey())
-                            .line(function.getLine())
-                            .message(function.getRealName() + DEAD_FUNCTION_VIOLATION_MESSAGE)
-                            .build();
 
-                    // TODO Unused functions it's not working. There are many
-                    // false positives.
-                    // issuable.addIssue(issue);
+                    //This ine ahs been added to debug since it'soften a problem
+                    DelphiUtils.LOG.debug("Line of the issue is:" + functionRule.ruleKey() + "     And the File has, amount lines:" + resource.lines());
+                    //note this has been added to get compatibility with sonar 5.2
+                    if (resource.lines() >= function.getBodyLine() && resource.lines() != -1 && function.getBodyLine() != -1) {
+                        //If the line is legit first condition holds
+                        //TODO: solve more elegantly
+                        issuable.addIssue(
+                                issuable.newIssueBuilder()
+                                        .line(function.getBodyLine())
+                                        .ruleKey(functionRule.ruleKey())
+                                        .effortToFix(0.0)
+                                        .message(function.getRealName() + DEAD_FUNCTION_VIOLATION_MESSAGE)
+                                        .build()
+                        );
+                    } else {
+                        issuable.addIssue(
+                                issuable.newIssueBuilder()
+                                        .ruleKey(functionRule.ruleKey())
+                                        .line(1)
+                                        .effortToFix(0.0)
+                                        .message(function.getRealName() + DEAD_FUNCTION_VIOLATION_MESSAGE)
+                                        .build()
+                        );
+                    }
                 }
             }
         }
@@ -226,11 +242,10 @@ public class DeadCodeMetrics extends DefaultMetrics implements MetricsInterface 
         Set<String> usedUnits = new HashSet<String>();
         List<String> result = new ArrayList<String>();
         for (UnitInterface unit : units) {
-            if (unit != null && unit.getFileName() != null && unit.getFileName().toLowerCase().endsWith(".pas")) {
+            if (unit != null) {
                 result.add(unit.getName().toLowerCase());
                 allUnits.add(unit);
             }
-
             for (String usedUnit : unit.getIncludes()) {
                 usedUnits.add(usedUnit.toLowerCase());
             }

@@ -28,7 +28,6 @@ import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.component.ResourcePerspectives;
 import org.sonar.api.issue.Issuable;
-import org.sonar.api.issue.Issue;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.measures.RangeDistributionBuilder;
@@ -49,11 +48,9 @@ import java.util.Set;
  */
 public class ComplexityMetrics extends DefaultMetrics implements MetricsInterface {
 
+    public static final RuleKey RULE_KEY_METHOD_CYCLOMATIC_COMPLEXITY = RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, "MethodCyclomaticComplexityRule");
     private static final Number[] FUNCTIONS_DISTRIB_BOTTOM_LIMITS = {1, 2, 4, 6, 8, 10, 12, 20, 30};
     private static final Number[] FILES_DISTRIB_BOTTOM_LIMITS = {1, 5, 10, 20, 30, 60, 90};
-
-    public static final RuleKey RULE_KEY_METHOD_CYCLOMATIC_COMPLEXITY = RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, "MethodCyclomaticComplexityRule");
-
     private ActiveRule methodCyclomaticComplexityRule;
 
     // FUNCTION_COMPLEXITY_DISTRIBUTION = Number of methods for given
@@ -268,14 +265,31 @@ public class ComplexityMetrics extends DefaultMetrics implements MetricsInterfac
     private void addIssue(InputFile resource, FunctionInterface func) {
         if (func.getComplexity() > threshold.intValue()) {
             Issuable issuable = perspectives.as(Issuable.class, resource);
-            if (issuable != null) {
-                Issue issue = issuable.newIssueBuilder()
-                        .ruleKey(methodCyclomaticComplexityRule.ruleKey())
-                        .line(func.getBodyLine())
-                        .message(String.format("The Cyclomatic Complexity of this method \"%s\" is %d which is greater than %d authorized.",
-                                func.getRealName(), func.getComplexity(), threshold))
-                        .build();
-                issuable.addIssue(issue);
+            //This ine ahs been added to debug since it'soften a problem
+            DelphiUtils.LOG.debug("Line of the issue is:" + methodCyclomaticComplexityRule.ruleKey() + "     And the File has, amount lines:" + resource.lines());
+            //note this has been added to get compatibility with sonar 5.2
+            if (resource.lines() >= func.getBodyLine() && resource.lines() != -1 && func.getBodyLine() != -1) {
+                //If the line is legit first condition holds
+                //TODO: solve more elegantly
+                issuable.addIssue(
+                        issuable.newIssueBuilder()
+                                .line(func.getBodyLine())
+                                .ruleKey(methodCyclomaticComplexityRule.ruleKey())
+                                .effortToFix(0.0)
+                                .message(String.format("The Cyclomatic Complexity of this method \"%s\" is %d which is greater than %d authorized.",
+                                        func.getRealName(), func.getComplexity(), threshold))
+                                .build()
+                );
+            } else {
+                issuable.addIssue(
+                        issuable.newIssueBuilder()
+                                .ruleKey(methodCyclomaticComplexityRule.ruleKey())
+                                .line(1)
+                                .effortToFix(0.0)
+                                .message(String.format("The Cyclomatic Complexity of this method \"%s\" is %d which is greater than %d authorized.",
+                                        func.getRealName(), func.getComplexity(), threshold))
+                                .build()
+                );
             }
         }
     }

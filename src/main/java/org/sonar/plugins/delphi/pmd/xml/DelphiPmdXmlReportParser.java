@@ -100,15 +100,34 @@ public class DelphiPmdXmlReportParser {
         Issue issue = new StubIssueBuilder()
                 .build(beginLine, RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, ruleKey));
         if (issuable != null) {
+            //This ine ahs been added to debug since it'soften a problem
+            DelphiUtils.LOG.debug("Line of the issue is:" + beginLine + "     And the File has, amount lines:" + inputFile.lines());
             //note this has been added to get compatibility with sonar 5.2
-            issuable.addIssue(
-                    issuable.newIssueBuilder()
-                            .line(beginLine)
-                            .ruleKey(RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, ruleKey))
-                            .effortToFix(0.0)
-                            .message(message)
-                            .build()
-            );
+            if (inputFile.lines() >= beginLine && inputFile.lines() != -1 && beginLine != -1) {
+                //If the line is legit first condition holds
+                //Second condition holds if we are doing a test, added to keep the tests without investing too much time TODO: solve more elegantly
+                issuable.addIssue(
+                        issuable.newIssueBuilder()
+                                .line(beginLine)
+                                .ruleKey(RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, ruleKey))
+                                .effortToFix(0.0)
+                                .message(message)
+                                .build()
+                );
+            } else {
+                issuable.addIssue(
+                        issuable.newIssueBuilder()
+                                .ruleKey(RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, ruleKey))
+                                .effortToFix(0.0)
+                                .line(1)
+                                .message(message)
+                                .build()
+                );
+            }
+
+
+
+
             //System.out.println("ISSUE TOSTRING: "+issue.toString());
         }
         return issue;

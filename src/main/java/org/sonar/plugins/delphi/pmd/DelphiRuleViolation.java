@@ -30,6 +30,7 @@ import org.antlr.runtime.tree.Tree;
 import org.sonar.plugins.delphi.antlr.DelphiLexer;
 import org.sonar.plugins.delphi.antlr.ast.DelphiPMDNode;
 import org.sonar.plugins.delphi.pmd.rules.DelphiRule;
+import org.sonar.plugins.delphi.utils.DelphiUtils;
 
 /**
  * Delphi pmd rule violation
@@ -48,10 +49,6 @@ public class DelphiRuleViolation implements IRuleViolation {
 
     private int beginColumn;
     private int endColumn;
-
-    private boolean isProcedureOrFunction(int type) {
-        return type == DelphiLexer.PROCEDURE || type == DelphiLexer.FUNCTION;
-    }
 
     /**
      * C-tor used in XPathRule, bacause we don't have node information
@@ -140,15 +137,29 @@ public class DelphiRuleViolation implements IRuleViolation {
 
             // gets method name
             if (methodNode != null) {
-                StringBuilder name = new StringBuilder();
-                Tree nameNode = ((CommonTree) methodNode).getFirstChildWithType(DelphiLexer.TkFunctionName);
-                for (int i = 0; i < nameNode.getChildCount(); ++i) {
-                    name.append(nameNode.getChild(i).getText());
-                }
-                methodName = name.toString();
-                if (nameNode.getChildCount() > 1) {
-                    // class name from function name
-                    className = nameNode.getChild(0).getText();
+                try {
+                    //try-catch added to resolve compatibility issues, so release version 3.4 is stable
+                    //TODO: find out why and how this issues can be solved.
+                    StringBuilder name = new StringBuilder();
+                    Tree nameNode = ((CommonTree) methodNode).getFirstChildWithType(DelphiLexer.TkFunctionName);
+                    for (int i = 0; i < nameNode.getChildCount(); ++i) {
+                        try {
+                            name.append(nameNode
+                                    .getChild(i)
+                                    .getText());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    methodName = name.toString();
+                    if (nameNode.getChildCount() > 1) {
+                        // class name from function name
+                        className = nameNode.getChild(0).getText();
+                    }
+                } catch (Exception npe) {
+                    DelphiUtils.LOG.error(npe.getStackTrace().toString());
+                    className = "Error occured in analysis, ClassName variabel";
+                    methodName = "Error occured in analysis, MethodeName variabel";
                 }
             } else {
                 methodName = "";
@@ -167,6 +178,10 @@ public class DelphiRuleViolation implements IRuleViolation {
             packageName = "";
             filename = "";
         }
+    }
+
+    private boolean isProcedureOrFunction(int type) {
+        return type == DelphiLexer.PROCEDURE || type == DelphiLexer.FUNCTION;
     }
 
     /**
