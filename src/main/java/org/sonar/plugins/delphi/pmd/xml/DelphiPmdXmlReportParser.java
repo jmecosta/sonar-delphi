@@ -100,7 +100,7 @@ public class DelphiPmdXmlReportParser {
         Issue issue = new StubIssueBuilder()
                 .build(beginLine, RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, ruleKey));
         if (issuable != null) {
-            //This ine ahs been added to debug since it'soften a problem
+            //This line has been added to debug since it'soften a problem
             DelphiUtils.LOG.debug("Line of the issue is:" + beginLine + "     And the File has, amount lines:" + inputFile.lines());
             //note this has been added to get compatibility with sonar 5.2
             if (inputFile.lines() >= beginLine && inputFile.lines() != -1 && beginLine != -1) {

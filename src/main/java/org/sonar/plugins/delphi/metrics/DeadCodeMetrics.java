@@ -161,7 +161,7 @@ public class DeadCodeMetrics extends DefaultMetrics implements MetricsInterface 
                 Issuable issuable = perspectives.as(Issuable.class, resource);
                 if (issuable != null) {
 
-                    //This ine ahs been added to debug since it'soften a problem
+                    //This line has been added to debug since it'soften a problem
                     DelphiUtils.LOG.debug("Line of the issue is:" + functionRule.ruleKey() + "     And the File has, amount lines:" + resource.lines());
                     //note this has been added to get compatibility with sonar 5.2
                     if (resource.lines() >= function.getBodyLine() && resource.lines() != -1 && function.getBodyLine() != -1) {

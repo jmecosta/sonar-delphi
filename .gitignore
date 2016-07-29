@@ -26,6 +26,7 @@ target
 .idea/vcs.xml
 .idea/jsLibraryMappings.xml
 .idea
+.idea/*
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids

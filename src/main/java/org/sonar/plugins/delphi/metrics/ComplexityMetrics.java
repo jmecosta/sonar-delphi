@@ -265,7 +265,7 @@ public class ComplexityMetrics extends DefaultMetrics implements MetricsInterfac
     private void addIssue(InputFile resource, FunctionInterface func) {
         if (func.getComplexity() > threshold.intValue()) {
             Issuable issuable = perspectives.as(Issuable.class, resource);
-            //This ine ahs been added to debug since it'soften a problem
+            //This line has been added to debug since it'soften a problem
             DelphiUtils.LOG.debug("Line of the issue is:" + methodCyclomaticComplexityRule.ruleKey() + "     And the File has, amount lines:" + resource.lines());
             //note this has been added to get compatibility with sonar 5.2
             if (resource.lines() >= func.getBodyLine() && resource.lines() != -1 && func.getBodyLine() != -1) {
