@@ -27,6 +27,7 @@ target
 .idea/jsLibraryMappings.xml
 .idea
 .idea/*
+#test commend checking if
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
