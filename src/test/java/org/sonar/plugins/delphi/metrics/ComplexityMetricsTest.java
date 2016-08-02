@@ -103,7 +103,7 @@ public class ComplexityMetricsTest {
                 "STATEMENTS"};
         double[] values = {0.0, 2.0, 3.5, 2.0, 10.0, 4.0, 2.5, 5.0, 20.0};
 
-        for (int i = 0; i < keys.length; ++i) {
+        for (String key : keys) {
             // assertEquals(keys[i] + " failure ->", values[i], metrics.getMetric(keys[i]), 0.0); //This changed TODO: Fix this test
         }
 

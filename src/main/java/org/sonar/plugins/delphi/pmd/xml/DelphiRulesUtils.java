@@ -167,7 +167,7 @@ public final class DelphiRulesUtils {
         rule.setDescription(fRule.getDescription());
         rule.setTags(fRule.getTags());
         rule.setConfigKey(fRule.getClazz());
-        List<RuleParam> ruleParams = new ArrayList<RuleParam>();
+        List<RuleParam> ruleParams = new ArrayList<>();
         if (fRule.getProperties() != null) {
             for (Property property : fRule.getProperties()) {
                 RuleParam param = rule.createParameter()
@@ -226,7 +226,7 @@ public final class DelphiRulesUtils {
             if (activeRule.getRule().getRepositoryKey().equals(DelphiPmdConstants.REPOSITORY_KEY)) {
                 String key = activeRule.getRule().getKey();
                 String priority = severityToLevel(activeRule.getPriority());
-                List<Property> properties = new ArrayList<Property>();
+                List<Property> properties = new ArrayList<>();
 
                 DelphiRule delphiRule = new DelphiRule(activeRule.getConfigKey(), priority);
                 delphiRule.setName(key);

@@ -156,7 +156,7 @@ public class ComplexityMetrics extends DefaultMetrics implements MetricsInterfac
                 fileComplexity += func.getComplexity();
                 functionComplexity += func.getComplexity();
                 statementsCount += func.getStatements().size();
-                functionDist.add(Double.valueOf(func.getComplexity()));
+                functionDist.add((double) func.getComplexity());
                 if (func.getVisibility() == DelphiParser.PUBLIC) {
                     ++publicApi;
                 }
@@ -182,7 +182,7 @@ public class ComplexityMetrics extends DefaultMetrics implements MetricsInterfac
         if (!func.isAccessor()) {
             methodsCount++;
             functionComplexity += func.getComplexity();
-            functionDist.add(Double.valueOf(func.getComplexity()));
+            functionDist.add((double) func.getComplexity());
 
             addIssue(resource, func);
 

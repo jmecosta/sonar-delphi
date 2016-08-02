@@ -120,9 +120,7 @@ public class IncludeResolver extends SourceResolver {
                             .getFirstCharPosition()
                             + directive.getLength() + REPLACEMENT_OFFSET, copyData));
 
-                } catch (IncludeResolverException e) {
-                    DelphiUtils.LOG.warn(e.getMessage());
-                } catch (IOException e) {
+                } catch (IncludeResolverException | IOException e) {
                     DelphiUtils.LOG.warn(e.getMessage());
                 }
 

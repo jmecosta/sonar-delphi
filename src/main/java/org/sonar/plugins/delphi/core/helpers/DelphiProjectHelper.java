@@ -84,7 +84,7 @@ public class DelphiProjectHelper implements BatchExtension {
      * @return List of include directories
      */
     public List<File> getIncludeDirectories() {
-        List<File> result = new ArrayList<File>();
+        List<File> result = new ArrayList<>();
         if (settings == null) {
             return result;
         }

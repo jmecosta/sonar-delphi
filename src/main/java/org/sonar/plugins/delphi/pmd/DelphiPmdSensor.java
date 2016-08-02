@@ -55,7 +55,7 @@ public class DelphiPmdSensor implements Sensor {
 
     private final ResourcePerspectives perspectives;
     private final DelphiProjectHelper delphiProjectHelper;
-    private final List<String> errors = new ArrayList<String>();
+    private final List<String> errors = new ArrayList<>();
     private final DelphiPmdProfileExporter profileExporter;
     private final RulesProfile rulesProfile;
     private List<Issue> listIssuesForTests;

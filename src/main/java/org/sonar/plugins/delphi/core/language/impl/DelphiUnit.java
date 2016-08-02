@@ -40,9 +40,9 @@ public class DelphiUnit implements UnitInterface {
     private File file = null;
     private String name = "UNKNOWN_UNIT";
     private String realName = "UNKNOWN_UNIT";
-    private Set<String> includes = new HashSet<String>();
-    private List<ClassInterface> classes = new ArrayList<ClassInterface>();
-    private List<FunctionInterface> functions = new ArrayList<FunctionInterface>();
+    private Set<String> includes = new HashSet<>();
+    private List<ClassInterface> classes = new ArrayList<>();
+    private List<FunctionInterface> functions = new ArrayList<>();
     private int line = 1;
 
     /**

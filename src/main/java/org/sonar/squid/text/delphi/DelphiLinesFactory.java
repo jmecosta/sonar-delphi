@@ -38,7 +38,7 @@ public class DelphiLinesFactory {
     private static final char LF = '\n';
     private static final char CR = '\r';
     private static final int EOF = -1;
-    private final List<Line> lines = new ArrayList<Line>();
+    private final List<Line> lines = new ArrayList<>();
     private char lastReadCharacter;
     private StringBuilder currentStringBuilder = new StringBuilder();
     private Line currentLine;
