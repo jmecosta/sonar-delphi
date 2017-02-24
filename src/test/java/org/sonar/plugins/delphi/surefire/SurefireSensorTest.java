@@ -28,6 +28,8 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.ce.measure.test.TestSettings;
+import org.sonar.api.config.MapSettings;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.delphi.DelphiTestUtils;
@@ -73,7 +75,7 @@ public class SurefireSensorTest {
             }
         });
 
-        settings = new Settings();
+        settings = new MapSettings();
     }
 
     @Test

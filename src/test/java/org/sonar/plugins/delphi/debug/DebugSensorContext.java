@@ -22,6 +22,7 @@
  */
 package org.sonar.plugins.delphi.debug;
 
+import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.AnalysisMode;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.FileSystem;
@@ -31,6 +32,7 @@ import org.sonar.api.batch.fs.InputPath;
 import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.sensor.coverage.NewCoverage;
 import org.sonar.api.batch.sensor.cpd.NewCpdTokens;
+import org.sonar.api.batch.sensor.error.NewAnalysisError;
 import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.measure.NewMeasure;
@@ -57,17 +59,17 @@ import java.util.Set;
 @SuppressWarnings("rawtypes")
 public class DebugSensorContext implements SensorContext {
 
-    private Map<String, Double> data = new HashMap<>();
-    private Map<String, String> sdata = new HashMap<>();
+    private Map<String, Double> data = new HashMap<String, Double>();
+    private Map<String, String> sdata = new HashMap<String, String>();
     /**
      * Gets the violation by its index
-     *
+     * 
      * @return violation
-     */
+    */
 
     /**
      * Gets violation count
-     *
+     * 
      * @return Violation count
      */
 
@@ -81,11 +83,11 @@ public class DebugSensorContext implements SensorContext {
             if (!sdata.containsKey(key)) {
                 throw new IllegalStateException("No key (" + key + ") for sensor context.");
             }
-            Measure<G> m = new Measure<>();
+            Measure<G> m = new Measure<G>();
             m.setData(sdata.get(key));
             return m;
         }
-        Measure<G> m = new Measure<>();
+        Measure<G> m = new Measure<G>();
         m.setValue(data.get(key));
         m.setData(key);
         return m;
@@ -102,7 +104,7 @@ public class DebugSensorContext implements SensorContext {
 
     /**
      * Get measure keys
-     *
+     * 
      * @return Keys
      */
     public Set<String> getMeasuresKeys() {
@@ -186,52 +188,6 @@ public class DebugSensorContext implements SensorContext {
     /**
      * Unused, not implemented
      */
-
-    @Override
-    public void saveSource(Resource resource, String source) {
-
-    }
-
-    /**
-     * Unused, not implemented
-     */
-
-    @Override
-    public boolean index(Resource resource) {
-        return false;
-    }
-
-    /**
-     * Unused, not implemented
-     */
-
-    @Override
-    public boolean index(Resource resource, Resource parentReference) {
-        return false;
-    }
-
-    /**
-     * Unused, not implemented
-     */
-
-    @Override
-    public boolean isExcluded(Resource reference) {
-        return false;
-    }
-
-    /**
-     * Unused, not implemented
-     */
-
-    @Override
-    public boolean isIndexed(Resource reference, boolean acceptExcluded) {
-        return false;
-    }
-
-    /**
-     * Unused, not implemented
-     */
-
     @Override
     public <R extends Resource> R getResource(R reference) {
         return null;
@@ -248,7 +204,6 @@ public class DebugSensorContext implements SensorContext {
     /**
      * Unused, not implemented
      */
-
     @Override
     public Resource getParent(Resource reference) {
         return null;
@@ -257,7 +212,6 @@ public class DebugSensorContext implements SensorContext {
     /**
      * Unused, not implemented
      */
-
     @Override
     public Collection<Resource> getChildren(Resource reference) {
         return null;
@@ -316,11 +270,9 @@ public class DebugSensorContext implements SensorContext {
     /**
      * Get analysis mode.
      */
-
     public AnalysisMode analysisMode() {
         return null;
     }
-
 
     @Override
     public <G extends Serializable> NewMeasure<G> newMeasure() {
@@ -347,7 +299,6 @@ public class DebugSensorContext implements SensorContext {
         return null;
     }
 
-
     @Override
     public NewCoverage newCoverage() {
         return null;
@@ -364,4 +315,26 @@ public class DebugSensorContext implements SensorContext {
         return null;
     }
 
+    @Override
+    public void addContextProperty(String arg0, String arg1) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public boolean isCancelled() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public NewAnalysisError newAnalysisError() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public SonarRuntime runtime() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

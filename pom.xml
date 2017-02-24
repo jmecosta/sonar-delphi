@@ -5,7 +5,7 @@
 
 
     <artifactId>sonar-delphi-plugin</artifactId>
-    <version>0.3.4-Beta</version>
+    <version>0.3.5</version>
     <groupId>org.delphi.plugin</groupId>
     <name>Sonar Delphi Plugin</name>
     <description>Enables analysis of Delphi projects.</description>
@@ -14,6 +14,14 @@
     <url>http://docs.sonarqube.org/display/SONARQUBE45/Delphi+Plugin</url>
 
     <developers>
+        <developer>
+            <id>agustins</id>
+            <email>agustins@axoft.com</email>
+            <name>Agustin Seifert</name>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
         <developer>
             <id>sandroluck</id>
             <email>sandro.luck@gmx.ch</email>
@@ -70,12 +78,12 @@
 
     <properties>
         <!--Version Fields-->
-        <sonar.version>5.6</sonar.version>
+        <sonar.version>6.2</sonar.version>
         <sonarcobertura.version>1.4</sonarcobertura.version>
         <antlr-runtime.version>3.3</antlr-runtime.version>
         <slf4j.version>1.7.5</slf4j.version>
-        <pmd.version>4.2.5</pmd.version>
-        <pmd.plugin.version>2.0</pmd.plugin.version>
+        <pmd.version>4.3</pmd.version>
+        <pmd.plugin.version>2.5</pmd.plugin.version>
         <xalan.version>2.7.1</xalan.version>
         <hamcrest-all.version>1.3</hamcrest-all.version>
         <junit.version>4.12</junit.version>
@@ -264,6 +272,7 @@
                         <value>/src/SABRE_AIRLINE_LICENSE.txt</value>
                         <value>/src/LUCK_LICENSE.txt</value>
                         <value>/src/COLOMBO_LICENSE.txt</value>
+                        <value>/src/AXOFT_LICENSE.txt</value>
                     </validHeaders>
                 </configuration>
             </plugin>

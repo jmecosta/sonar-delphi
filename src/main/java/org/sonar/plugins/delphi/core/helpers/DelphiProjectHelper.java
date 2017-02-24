@@ -27,9 +27,13 @@ import org.apache.commons.lang.StringUtils;
 import org.sonar.api.BatchExtension;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.batch.fs.InputDir;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Directory;
+import org.sonar.api.resources.Project;
+import org.sonar.api.resources.Resource;
 import org.sonar.plugins.delphi.DelphiPlugin;
 import org.sonar.plugins.delphi.core.DelphiLanguage;
 import org.sonar.plugins.delphi.project.DelphiProject;
@@ -237,16 +241,14 @@ public class DelphiProjectHelper implements BatchExtension {
         return fs.inputFile(fs.predicates().is(file));
     }
 
-    public Directory getDirectory(java.io.File dir) {
-        //findFileInDirectories("");
-
-        Directory directory = new Directory(dir.getPath());//Directory.fromIOFile(dir, module);
-
-        if (directory == null || directory.getKey() == null) {
-            return Directory.create(DEFAULT_PACKAGE_NAME);
+    public Resource getDirectory(java.io.File dir) {
+        FileSystem fs = new DefaultFileSystem((File) null);
+        InputDir inputDir = fs.inputDir(dir);
+        Resource res = new PackageResource(dir.getPath());    
+        if (inputDir == null || inputDir.key() == null) {
+            res = new PackageResource(DEFAULT_PACKAGE_NAME);
         }
-
-        return directory;
+        return res;
     }
 
     public InputFile findFileInDirectories(String fileName) throws FileNotFoundException {

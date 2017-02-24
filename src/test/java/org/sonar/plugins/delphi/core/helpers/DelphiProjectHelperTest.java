@@ -28,6 +28,7 @@ import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Directory;
 import org.sonar.api.resources.Project;
+import org.sonar.api.resources.Resource;
 
 import java.io.File;
 
@@ -58,14 +59,14 @@ public class DelphiProjectHelperTest {
 
     @Test
     public void getDirectory() {
-        Directory directory = delphiProjectHelper.getDirectory(currentDir);
+        Resource directory = delphiProjectHelper.getDirectory(currentDir);
         assertThat(directory, notNullValue());
         assertThat(directory.getKey(), is("[default]"));
     }
 
     @Test
     public void getDirectoryEqualsToBaseDir() {
-        Directory directory = delphiProjectHelper.getDirectory(baseDir);
+        Resource directory = delphiProjectHelper.getDirectory(baseDir);
         assertThat(directory, notNullValue());
         //changed this to macht sonar api 5.0
         assertThat(directory.getKey(), is("[default]"));
@@ -74,7 +75,7 @@ public class DelphiProjectHelperTest {
     @Test
     public void getInvalidRelativeDirectoryReturnsDefaultPackageName() {
         File rootDirectory = new File("/");
-        Directory directory = delphiProjectHelper.getDirectory(rootDirectory);
+        Resource directory = delphiProjectHelper.getDirectory(rootDirectory);
         assertThat(directory, notNullValue());
         assertThat(directory.getKey(), is(DelphiProjectHelper.DEFAULT_PACKAGE_NAME));
     }
