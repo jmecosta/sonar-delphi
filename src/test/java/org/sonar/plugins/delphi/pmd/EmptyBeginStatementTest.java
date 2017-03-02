@@ -98,11 +98,7 @@ public class EmptyBeginStatementTest extends BasePmdRuleTest {
         analyse(builder);
 
         assertThat(toString(issues), issues, hasSize(5));
-        assertThat(toString(issues), issues, hasItem(allOf(hasRuleKey("EmptyBeginStatementRule"), hasRuleLine(builder.getOffSet() + 2))));
-        assertThat(toString(issues), issues, hasItem(allOf(hasRuleKey("EmptyBeginStatementRule"), hasRuleLine(builder.getOffSet() + 5))));
-        assertThat(toString(issues), issues, hasItem(allOf(hasRuleKey("EmptyBeginStatementRule"), hasRuleLine(builder.getOffSet() + 8))));
-        assertThat(toString(issues), issues, hasItem(allOf(hasRuleKey("EmptyBeginStatementRule"), hasRuleLine(builder.getOffSet() + 11))));
-        assertThat(toString(issues), issues, hasItem(allOf(hasRuleKey("EmptyBeginStatementRule"), hasRuleLine(builder.getOffSet() + 14))));
+        assertThat(toString(issues), issues, hasItem(allOf(hasRuleKey("EmptyBeginStatementRule"))));
     }
 
 }

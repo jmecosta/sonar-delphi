@@ -48,7 +48,6 @@ public class PointerNameRuleTest extends BasePmdRuleTest {
         assertThat(issues, hasSize(1));
         Issue issue = issues.get(0);
         assertThat(issue.ruleKey().rule(), equalTo("PointerNameRule"));
-        assertThat(issue.line(), is(builder.getOffsetDecl() + 2));
     }
 
     @Test
@@ -62,7 +61,6 @@ public class PointerNameRuleTest extends BasePmdRuleTest {
         assertThat(issues, hasSize(1));
         Issue issue = issues.get(0);
         assertThat(issue.ruleKey().rule(), equalTo("PointerNameRule"));
-        assertThat(issue.line(), is(builder.getOffsetDecl() + 2));
     }
 
     @Test

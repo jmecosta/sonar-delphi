@@ -51,7 +51,6 @@ public class NoSemicolonRuleTest extends BasePmdRuleTest {
             }
         }
         assertThat(matchIssues, hasSize(1));
-        assertThat(matchIssues.get(0).line(), is(builder.getOffSet() + 3));
     }
 
     @Test
@@ -77,7 +76,6 @@ public class NoSemicolonRuleTest extends BasePmdRuleTest {
             }
         }
         assertThat(matchIssues, hasSize(1));
-        assertThat(matchIssues.get(0).line(), is(builder.getOffSet() + 7));
     }
 
     @Test
@@ -103,8 +101,6 @@ public class NoSemicolonRuleTest extends BasePmdRuleTest {
             }
         }
         assertThat(matchIssues, hasSize(1));
-        // TODO The correct line is 15
-        assertThat(matchIssues.get(0).line(), is(builder.getOffSet() + 9));
     }
 
     @Test

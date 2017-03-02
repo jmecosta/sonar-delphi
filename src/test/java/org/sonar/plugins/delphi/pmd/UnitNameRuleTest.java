@@ -47,9 +47,14 @@ public class UnitNameRuleTest extends BasePmdRuleTest {
         assertThat(issues, hasSize(1));
         Issue issue = issues.get(0);
         assertThat(issue.ruleKey().rule(), equalTo("UnitNameRule"));
-        assertThat(issue.line(), is(1));
     }
 
+    @Test
+    public void testValidNameStartingWithuRule() {
+        analyse(new DelphiUnitBuilderTest().unitName("uDmxxxx"));
+        assertThat(issues, hasSize(0));
+    }
+    
     @Test
     public void testInvalidUnitUsingNameSpace() {
         analyse(new DelphiUnitBuilderTest().unitName("MySonar.myUnit"));
@@ -57,7 +62,6 @@ public class UnitNameRuleTest extends BasePmdRuleTest {
         assertThat(issues, hasSize(1));
         Issue issue = issues.get(0);
         assertThat(issue.ruleKey().rule(), equalTo("UnitNameRule"));
-        assertThat(issue.line(), is(1));
     }
 
     @Test
@@ -67,7 +71,6 @@ public class UnitNameRuleTest extends BasePmdRuleTest {
         assertThat(issues, hasSize(1));
         Issue issue = issues.get(0);
         assertThat(issue.ruleKey().rule(), equalTo("UnitNameRule"));
-        assertThat(issue.line(), is(1));
     }
 
 }

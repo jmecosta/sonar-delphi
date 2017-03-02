@@ -55,14 +55,12 @@ public class MethodNameRuleTest extends BasePmdRuleTest {
         assertThat(issues.toString(), issues, hasSize(2));
 
         assertThat(issues, hasItem(allOf(
-                IssueMatchers.hasRuleKey("MethodNameRule"),
-                IssueMatchers.hasRuleLine(builder.getOffsetDecl() + 4)
-        )));
+                IssueMatchers.hasRuleKey("MethodNameRule"))
+        ));
 
         assertThat(issues, hasItem(allOf(
-                IssueMatchers.hasRuleKey("MethodNameRule"),
-                IssueMatchers.hasRuleLine(builder.getOffsetDecl() + 5)
-        )));
+                IssueMatchers.hasRuleKey("MethodNameRule"))
+        ));
     }
 
     @Test

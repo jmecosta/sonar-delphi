@@ -35,9 +35,13 @@ public class UnitNameRule extends DelphiRule {
                 if (child.getType() == DelphiLexer.DOT) {
                     continue;
                 }
-
+                //user units may starts with "u" uXxxxxxxx.pas
                 char firstChar = child.getText().charAt(0);
-                if (firstChar != Character.toUpperCase(firstChar)) {
+                char secondChar = child.getText().charAt(1);
+                if ((firstChar == 'u') && (secondChar != Character.toUpperCase(secondChar))) {
+                    addViolation(ctx, node);
+                    break;
+                } else if ((firstChar != 'u') && (firstChar != Character.toUpperCase(firstChar))) {
                     addViolation(ctx, node);
                     break;
                 }

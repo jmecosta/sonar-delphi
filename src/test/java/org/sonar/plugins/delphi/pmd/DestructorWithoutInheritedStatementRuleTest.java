@@ -66,8 +66,7 @@ public class DestructorWithoutInheritedStatementRuleTest extends BasePmdRuleTest
         analyse(builder);
 
         assertThat(toString(issues), issues, hasSize(1));
-        assertThat(toString(issues), issues, hasItem(allOf(hasRuleKey("DestructorWithoutInheritedStatementRule"),
-                hasRuleLine(builder.getOffSet() + 1))));
+        assertThat(toString(issues), issues, hasItem(allOf(hasRuleKey("DestructorWithoutInheritedStatementRule"))));
     }
 
 }

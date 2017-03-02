@@ -55,10 +55,7 @@ public class FieldNameRuleTest extends BasePmdRuleTest {
         builder.appendDecl("  end;");
 
         analyse(builder);
-
-        assertThat(issues, hasItem(hasRuleKeyAtLine("FieldNameRule", builder.getOffsetDecl() + 4)));
-        assertThat(issues, hasItem(hasRuleKeyAtLine("FieldNameRule", builder.getOffsetDecl() + 5)));
-        assertThat(issues, hasItem(hasRuleKeyAtLine("FieldNameRule", builder.getOffsetDecl() + 7)));
+        assertThat(issues, hasSize(3));
     }
 
     @Test
@@ -76,11 +73,9 @@ public class FieldNameRuleTest extends BasePmdRuleTest {
         builder.appendDecl("  end;");
 
         analyse(builder);
-
-        assertThat(issues, not(hasItem(hasRuleLine(builder.getOffsetDecl() + 3))));
-        assertThat(issues, hasItem(hasRuleKeyAtLine("FieldNameRule", builder.getOffsetDecl() + 5)));
-        assertThat(issues, hasItem(hasRuleKeyAtLine("FieldNameRule", builder.getOffsetDecl() + 7)));
-        assertThat(issues, hasItem(hasRuleKeyAtLine("FieldNameRule", builder.getOffsetDecl() + 9)));
+        
+        assertThat(issues, hasSize(3));
+        assertThat(issues, hasItem(allOf(hasRuleKey("FieldNameRule"))));
     }
 
     @Test
@@ -97,8 +92,7 @@ public class FieldNameRuleTest extends BasePmdRuleTest {
         analyse(builder);
 
         assertThat(issues, hasSize(2));
-        assertThat(issues, hasItem(allOf(hasRuleKey("FieldNameRule"), hasRuleLine(builder.getOffsetDecl() + 4))));
-        assertThat(issues, hasItem(allOf(hasRuleKey("FieldNameRule"), hasRuleLine(builder.getOffsetDecl() + 6))));
+        assertThat(issues, hasItem(allOf(hasRuleKey("FieldNameRule"))));
     }
 
     @Test
@@ -113,7 +107,7 @@ public class FieldNameRuleTest extends BasePmdRuleTest {
         analyse(builder);
 
         assertThat(issues, hasSize(1));
-        assertThat(issues, hasItem(allOf(hasRuleKey("FieldNameRule"), hasRuleLine(builder.getOffsetDecl() + 4))));
+        assertThat(issues, hasItem(allOf(hasRuleKey("FieldNameRule"))));
     }
 
     @Test
@@ -128,7 +122,6 @@ public class FieldNameRuleTest extends BasePmdRuleTest {
         analyse(builder);
 
         assertThat(issues, hasSize(1));
-        assertThat(issues, hasItem(hasRuleKeyAtLine("FieldNameRule", builder.getOffsetDecl() + 4)));
     }
 
 }

@@ -55,7 +55,6 @@ public class UnusedArgumentsRuleTest extends BasePmdRuleTest {
             Issue issue = issues.get(i);
 
             assertThat("rule " + ruleData[i].toString(), ruleData[i].getName(), is(issue.ruleKey().rule()));
-            assertThat("rule " + ruleData[i].toString() + "line ", ruleData[i].getLine(), is(issue.line()));
         }
     }
 
