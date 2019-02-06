@@ -1,4 +1,4 @@
-/*
+/**
  * Sonar Delphi Plugin
  * Copyright (C) 2011 Sabre Airline Solutions and Fabricio Colombo
  * Author(s):
@@ -20,6 +20,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
+
 package org.sonar.plugins.delphi.core.language.verifiers;
 
 import org.antlr.runtime.Token;
@@ -150,7 +151,7 @@ public class StatementVerifier {
         // replace '..' with ' .. '
         String fixedSourceCode = wholeLine.toString().replaceAll("\\.\\.", " .. ");
 
-        List<Token> tokens = new DelphiCpdTokenizer(delphiProjectHelper).tokenize(new String[]{fixedSourceCode});
+        List<Token> tokens = DelphiCpdTokenizer.tokenize(new String[]{fixedSourceCode});
         if (tokens.size() < MIN_TOKENS_FOR_COMPLEX_STMT) {
             // at least 4 tokens: id, :=, id, ;
             return false;

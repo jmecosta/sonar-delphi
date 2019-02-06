@@ -1,4 +1,4 @@
-/*
+/**
  * Sonar Delphi Plugin
  * Copyright (C) 2011 Sabre Airline Solutions and Fabricio Colombo
  * Author(s):
@@ -24,17 +24,14 @@ package org.sonar.plugins.delphi.codecoverage.delphicodecoveragetool;
 
 import org.codehaus.staxmate.in.SMHierarchicCursor;
 import org.codehaus.staxmate.in.SMInputCursor;
-import org.sonar.api.batch.SensorContext;
+
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.measures.Measure;
-import org.sonar.api.measures.PersistenceMode;
-import org.sonar.api.utils.StaxParser.XmlStreamHandler;
-import org.sonar.plugins.delphi.codecoverage.CoverageFileData;
 import org.sonar.plugins.delphi.core.helpers.DelphiProjectHelper;
-import org.sonar.plugins.delphi.utils.DelphiUtils;
 
 import javax.xml.stream.XMLStreamException;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.coverage.NewCoverage;
+import org.sonar.plugins.delphi.utils.StaxParser.XmlStreamHandler;
 
 public class DelphiCoverageToolParserStreamHandler implements XmlStreamHandler {
     private final SensorContext context;
@@ -51,59 +48,28 @@ public class DelphiCoverageToolParserStreamHandler implements XmlStreamHandler {
         SMInputCursor fileCursor = rootCursor.descendantElementCursor("srcfile");
 
         while (fileCursor.getNext() != null) {
-            CoverageFileData data = collectCoverageData(fileCursor);
-            saveCoverageData(data);
+          collectCoverageData(fileCursor);
         }
     }
 
-    private void saveCoverageData(CoverageFileData data) {
-        if (data == null) {
-            return;
-        }
-        Measure<Double> overallCoverage = new Measure<>(CoreMetrics.COVERAGE, data.getCoverage());
-        Measure<Double> lineCoverage = new Measure<>(CoreMetrics.LINE_COVERAGE, data.getCoverage());
-        Measure<Double> linesToCover = new Measure<>(CoreMetrics.LINES_TO_COVER, data.getTotalLines());
-        Measure<Double> uncoveredLines = new Measure<>(CoreMetrics.UNCOVERED_LINES, data.getUncoveredLines());
-        Measure<?> lineHits = data.getLineHitsBuilder().build().setPersistenceMode(PersistenceMode.DATABASE);
-        try {
-            context.saveMeasure(data.getResource(), overallCoverage);
-            context.saveMeasure(data.getResource(), lineCoverage);
-            context.saveMeasure(data.getResource(), linesToCover);
-            context.saveMeasure(data.getResource(), uncoveredLines);
-            context.saveMeasure(data.getResource(), lineHits);
-            DelphiUtils.LOG.debug("Saving coverage to: " + data.getResource().absolutePath());
-        } catch (Exception e) {
-            DelphiUtils.LOG.error("Error saving coverage measure.", e);
-        }
-    }
 
-    private CoverageFileData collectCoverageData(SMInputCursor fileCursor) {
+    private void collectCoverageData(SMInputCursor fileCursor) {
         try {
             String fileName = fileCursor.getAttrValue("name");
 
             InputFile sourceFile = delphiProjectHelper.findFileInDirectories(fileName);
-
-            int totalLines = 0;
-            int coveredLines = 0;
-
-            CoverageFileData data = new CoverageFileData(sourceFile);
+            NewCoverage newCoverage = context.newCoverage().onFile(sourceFile);
+            
             SMInputCursor lineCursor = fileCursor.descendantElementCursor("line");
             while (lineCursor.getNext() != null) {
                 if (!lineCursor.asEvent().isStartElement()) {
                     continue;
                 }
                 String lineNumber = lineCursor.getAttrValue("number");
-                boolean isCovered = Boolean.valueOf(lineCursor.getAttrValue("covered"));
-                data.getLineHitsBuilder().add(lineNumber, isCovered ? 1 : 0);
-                coveredLines += isCovered ? 1 : 0;
-                ++totalLines;
+                boolean isCovered = Boolean.valueOf(lineCursor.getAttrValue("covered"));               
+                newCoverage.lineHits(Integer.parseInt(lineNumber), isCovered ? 1 : 0);
             }
 
-            data.setTotalLines(totalLines);
-            data.setUncoveredLines(totalLines - coveredLines);
-            DelphiUtils.LOG.debug("Coverage (" + fileName + "): " + coveredLines + "/" + totalLines + "("
-                    + data.getCoverage() + "%)");
-            return data;
         } catch (Exception e) {
             throw new RuntimeException("Failure trying collect coverage data.", e);
         }

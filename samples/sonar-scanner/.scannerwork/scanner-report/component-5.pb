@@ -1,0 +1,1 @@
+src/Globals.pas 2delphX1hrsrc/Globals.pas

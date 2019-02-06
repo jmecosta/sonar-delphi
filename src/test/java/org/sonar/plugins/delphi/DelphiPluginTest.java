@@ -1,4 +1,4 @@
-/*
+/**
  * Sonar Delphi Plugin
  * Copyright (C) 2011 Sabre Airline Solutions and Fabricio Colombo
  * Author(s):
@@ -23,10 +23,6 @@
 package org.sonar.plugins.delphi;
 
 import org.junit.Before;
-import org.junit.Test;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
 
 /**
  * @author Evgeny Mandrikov
@@ -39,10 +35,4 @@ public class DelphiPluginTest {
     public void setUp() {
         plugin = new DelphiPlugin();
     }
-
-    @Test
-    public void testExtensions() {
-        assertThat(plugin.getExtensions().size(), greaterThan(0));
-    }
-
 }

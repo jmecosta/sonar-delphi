@@ -1,4 +1,4 @@
-/*
+/**
  * Sonar Delphi Plugin
  * Copyright (C) 2011 Sabre Airline Solutions and Fabricio Colombo
  * Author(s):
@@ -31,10 +31,12 @@ import org.sonar.plugins.delphi.pmd.xml.DelphiRulesUtils;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
+import org.sonar.api.batch.ScannerSide;
 
 /**
  * exports Delphi rules profile into Sonar
  */
+@ScannerSide
 public class DelphiPmdProfileExporter extends ProfileExporter {
 
     /**

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd version="4.3" timestamp="2019-02-06T15:51:26.133">
+<file name="E:\prod\OtherDevelopment\SonarQube\sonar-delphi\samples\sonar-scanner\src\AccessorsTest.pas">
+<violation beginline="49" endline="49" begincolumn="0" endcolumn="0" rule="EmptyBeginStatementRule" ruleset="" priority="2">
+
+</violation>
+<violation beginline="53" endline="53" begincolumn="0" endcolumn="0" rule="EmptyBeginStatementRule" ruleset="" priority="2">
+
+</violation>
+<violation beginline="57" endline="57" begincolumn="0" endcolumn="0" rule="EmptyBeginStatementRule" ruleset="" priority="2">
+
+</violation>
+</file>
+<file name="E:\prod\OtherDevelopment\SonarQube\sonar-delphi\samples\sonar-scanner\src\CommentsTest.pas">
+<violation beginline="39" endline="39" begincolumn="8" endcolumn="8" rule="FieldNameRule" ruleset="" class="TCommentsTest" priority="4">
+
+</violation>
+</file>
+<file name="E:\prod\OtherDevelopment\SonarQube\sonar-delphi\samples\sonar-scanner\src\FunctionTest.pas">
+<violation beginline="39" endline="39" begincolumn="8" endcolumn="8" rule="FieldNameRule" ruleset="" class="TFunctionTest" priority="4">
+
+</violation>
+</file>
+<file name="E:\prod\OtherDevelopment\SonarQube\sonar-delphi\samples\sonar-scanner\src\MainWindow.pas">
+<violation beginline="35" endline="35" begincolumn="8" endcolumn="8" rule="FieldNameRule" ruleset="" class="TMainWindow" priority="4">
+
+</violation>
+</file>
+<file name="E:\prod\OtherDevelopment\SonarQube\sonar-delphi\samples\sonar-scanner\src\OverloadTest.pas">
+<violation beginline="37" endline="37" begincolumn="8" endcolumn="8" rule="FieldNameRule" ruleset="" class="TOverloadTest" priority="4">
+
+</violation>
+<violation beginline="55" endline="55" begincolumn="0" endcolumn="0" rule="UnusedArgumentsRule" ruleset="" priority="3">
+Unused argument: 'x' at TOverloadTest.over1
+</violation>
+<violation beginline="55" endline="55" begincolumn="0" endcolumn="0" rule="UnusedArgumentsRule" ruleset="" priority="3">
+Unused argument: 'y' at TOverloadTest.over1
+</violation>
+<violation beginline="60" endline="60" begincolumn="0" endcolumn="0" rule="UnusedArgumentsRule" ruleset="" priority="3">
+Unused argument: 'x' at TOverloadTest.over1
+</violation>
+<violation beginline="65" endline="65" begincolumn="0" endcolumn="0" rule="UnusedArgumentsRule" ruleset="" priority="3">
+Unused argument: 'x' at TOverloadTest.over1
+</violation>
+</file>
+<file name="E:\prod\OtherDevelopment\SonarQube\sonar-delphi\samples\sonar-scanner\src\StatementTest.pas">
+<violation beginline="55" endline="55" begincolumn="23" endcolumn="23" rule="NoSemicolonRule" ruleset="" priority="4">
+
+</violation>
+<violation beginline="62" endline="62" begincolumn="23" endcolumn="23" rule="NoBeginAfterDoRule" ruleset="" class="TStatementTest" method="TStatementTest.bar" priority="4">
+
+</violation>
+</file>
+</pmd>

@@ -1,0 +1,6 @@
+projectKey=org.codehaus.sonar:delphi-sonar-runner
+serverUrl=http://localhost:9000
+serverVersion=7.3.0.15553
+dashboardUrl=http://localhost:9000/dashboard?id=org.codehaus.sonar%3Adelphi-sonar-runner
+ceTaskId=AWjDE-W8BmlpauhFQjts
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AWjDE-W8BmlpauhFQjts

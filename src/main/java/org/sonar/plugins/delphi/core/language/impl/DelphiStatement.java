@@ -1,4 +1,4 @@
-/*
+/**
  * Sonar Delphi Plugin
  * Copyright (C) 2011 Sabre Airline Solutions and Fabricio Colombo
  * Author(s):
@@ -20,6 +20,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
+
 package org.sonar.plugins.delphi.core.language.impl;
 
 import org.antlr.runtime.Token;
@@ -127,7 +128,7 @@ public class DelphiStatement implements StatementInterface {
         ClassFieldInterface[] fields = fromClass.getFields();
         List<ClassFieldInterface> result = new ArrayList<>();
 
-        List<Token> tokens = new DelphiCpdTokenizer(delphiProjectHelper).tokenize(new String[]{text});
+        List<Token> tokens = DelphiCpdTokenizer.tokenize(new String[]{text});
 
         for (Token token : tokens) {
             if (token.getType() == DelphiLexer.TkIdentifier) {

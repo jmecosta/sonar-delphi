@@ -1,4 +1,4 @@
-/*
+/**
  * Sonar Delphi Plugin
  * Copyright (C) 2011 Sabre Airline Solutions and Fabricio Colombo
  * Author(s):
@@ -22,7 +22,7 @@
  */
 package org.sonar.plugins.delphi.codecoverage;
 
-import org.sonar.api.batch.SensorContext;
+import org.sonar.api.batch.sensor.SensorContext;
 
 public interface DelphiCodeCoverageParser {
     void parse(SensorContext context);

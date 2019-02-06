@@ -1,4 +1,4 @@
-/*
+/**
  * Sonar Delphi Plugin
  * Copyright (C) 2011 Sabre Airline Solutions and Fabricio Colombo
  * Author(s):
@@ -20,6 +20,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
+
 package org.sonar.plugins.delphi.metrics;
 
 import org.antlr.runtime.RecognitionException;
@@ -33,7 +34,6 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.rule.ActiveRules;
-import org.sonar.api.component.ResourcePerspectives;
 import org.sonar.api.issue.Issuable;
 import org.sonar.api.issue.Issue;
 import org.sonar.plugins.delphi.DelphiTestUtils;
@@ -49,7 +49,6 @@ import org.sonar.plugins.delphi.core.language.impl.DelphiClass;
 import org.sonar.plugins.delphi.core.language.impl.DelphiClassProperty;
 import org.sonar.plugins.delphi.core.language.impl.DelphiFunction;
 import org.sonar.plugins.delphi.core.language.impl.DelphiUnit;
-import org.sonar.plugins.delphi.debug.DebugSensorContext;
 import org.sonar.plugins.delphi.pmd.StubIssueBuilder;
 import org.sonar.plugins.delphi.utils.DelphiUtils;
 
@@ -63,6 +62,10 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import org.sonar.api.batch.fs.internal.DefaultFileSystem;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.plugins.delphi.utils.TestUtils;
 
 @Ignore("Unused functions it's not working. There are many false positives.")
 public class DeadCodeMetricsTest {
@@ -116,22 +119,6 @@ public class DeadCodeMetricsTest {
         units.add(u2);
         units.add(u3);
 
-        ResourcePerspectives perspectives = mock(ResourcePerspectives.class);
-
-        Issuable issuable = mock(Issuable.class);
-
-        when(perspectives.as(Matchers.eq(Issuable.class), Matchers.isA(InputFile.class))).thenReturn(issuable);
-
-        when(issuable.newIssueBuilder()).thenReturn(new StubIssueBuilder());
-
-        when(issuable.addIssue(Matchers.any(Issue.class))).then(new Answer<Boolean>() {
-            @Override
-            public Boolean answer(InvocationOnMock invocation) throws Throwable {
-                Issue issue = (Issue) invocation.getArguments()[0];
-                issues.add(issue);
-                return Boolean.TRUE;
-            }
-        });
 
         ActiveRule activeRuleUnusedFunction = mock(ActiveRule.class);
         ActiveRule activeRuleUnusedUnit = mock(ActiveRule.class);
@@ -143,16 +130,15 @@ public class DeadCodeMetricsTest {
         when(activeRules.find(DeadCodeMetrics.RULE_KEY_UNUSED_FUNCTION)).thenReturn(activeRuleUnusedUnit);
         when(activeRules.find(DeadCodeMetrics.RULE_KEY_UNUSED_UNIT)).thenReturn(activeRuleUnusedUnit);
 
-        metrics = new DeadCodeMetrics(activeRules, perspectives);
+        metrics = new DeadCodeMetrics(activeRules);
     }
 
     @Test
     public void analyseTest() {
-        DebugSensorContext context = new DebugSensorContext();
-        metrics.analyse(null, context, classes, functions, units);
-        metrics.save(new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", pathTo("unit3")), context);
-        metrics.save(new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", pathTo("unit2")), context);
-
+        DefaultFileSystem fs = TestUtils.mockFileSystem("");
+        SensorContext debugContext = SensorContextTester.create(fs.baseDir());
+        metrics.analyse(null, debugContext, classes, functions, units);
+        
         assertThat(issues, hasSize(2));
         int lines[] = {123, 321};
         for (int i = 0; i < issues.size(); ++i) {
@@ -167,14 +153,13 @@ public class DeadCodeMetricsTest {
 
     @Test
     public void analyseFileTest() throws IllegalStateException, IOException, RecognitionException {
-        DebugSensorContext context = new DebugSensorContext();
+        DefaultFileSystem fs = TestUtils.mockFileSystem("");
+        SensorContext debugContext = SensorContextTester.create(fs.baseDir());
         DelphiAST ast = new DelphiAST(DelphiUtils.getResource(TEST_FILE));
         ASTAnalyzer analyser = new DelphiASTAnalyzer(DelphiTestUtils.mockProjectHelper());
         assertFalse("Grammar error", ast.isError());
         CodeAnalysisResults results = analyser.analyze(ast);
-        metrics.analyse(null, context, results.getClasses(), results.getFunctions(), results.getCachedUnitsAsList());
-
-        metrics.save(new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", DEAD_FILE), context);
+        metrics.analyse(null, debugContext, results.getClasses(), results.getFunctions(), results.getCachedUnitsAsList());
         assertThat(issues, hasSize(2));
     }
 

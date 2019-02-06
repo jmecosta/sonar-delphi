@@ -1,4 +1,4 @@
-/*
+/**
  * Sonar Delphi Plugin
  * Copyright (C) 2011 Sabre Airline Solutions and Fabricio Colombo
  * Author(s):
@@ -29,10 +29,12 @@ import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.plugins.delphi.core.helpers.DelphiProjectHelper;
 
 import java.io.File;
+import java.nio.charset.Charset;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 
 public class DelphiTestUtils {
 
@@ -46,7 +48,9 @@ public class DelphiTestUtils {
             public InputFile answer(InvocationOnMock invocation) throws Throwable {
                 File file = (File) invocation.getArguments()[0];
 
-                return new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", file.getAbsolutePath());
+    InputFile inputFile = TestInputFileBuilder.create("moduleKey", new File(""), file).setType(InputFile.Type.MAIN)
+      .setContents("").setCharset(Charset.forName("UTF-8")).build();                
+                return inputFile;
             }
         });
 
@@ -60,8 +64,10 @@ public class DelphiTestUtils {
                 String fileName = (String) invocation.getArguments()[0];
 
                 File file = new File(fileName);
-
-                return new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", file.getPath());
+    InputFile inputFile = TestInputFileBuilder.create("moduleKey", new File(""), file).setType(InputFile.Type.MAIN)
+      .setContents("").setCharset(Charset.forName("UTF-8")).build();      
+    
+                return inputFile;
             }
         });
     }

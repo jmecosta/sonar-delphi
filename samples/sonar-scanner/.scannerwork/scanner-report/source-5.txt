@@ -1,4 +1,4 @@
-/*
+\{*
  * Sonar Delphi Plugin
  * Copyright (C) 2011 Sabre Airline Solutions and Fabricio Colombo
  * Author(s):
@@ -19,19 +19,31 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
- */
-package org.sonar.plugins.delphi.colorizer;
+ *\}
 
-import org.junit.Test;
+unit Globals;
 
-import static org.junit.Assert.assertTrue;
+interface
 
-public class DelphiColorizerFormatTest {
+    procedure globalProcedure();
+    function globalFunction(): integer;
 
-    @Test
-    public void getTokenizersTest() {
-        DelphiColorizerFormat format = new DelphiColorizerFormat();
-        assertTrue(format.getTokenizers().size() >= 5);
-    }
+var
+    globalX, globalY: Integer;
+    globalR: real;
 
-}
+implementation
+
+procedure globalProcedure();
+begin
+    globalX := 5;
+    writeln();
+end;
+
+{*** Documented public global function ****}
+function globalFunction(): integer;
+begin
+    result := 7;
+end;
+
+end.

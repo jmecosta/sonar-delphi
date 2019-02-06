@@ -1,4 +1,4 @@
-/*
+/**
  * Sonar Delphi Plugin
  * Copyright (C) 2011 Sabre Airline Solutions and Fabricio Colombo
  * Author(s):
@@ -20,6 +20,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
+
 package org.sonar.plugins.delphi.pmd;
 
 import org.apache.commons.io.FileUtils;
@@ -27,23 +28,17 @@ import org.junit.After;
 import org.mockito.Matchers;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.fs.internal.DefaultInputFile;
-import org.sonar.api.component.ResourcePerspectives;
 import org.sonar.api.issue.Issuable;
 import org.sonar.api.issue.Issue;
 import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.resources.Project;
 import org.sonar.plugins.delphi.DelphiTestUtils;
 import org.sonar.plugins.delphi.core.helpers.DelphiProjectHelper;
-import org.sonar.plugins.delphi.debug.DebugSensorContext;
 import org.sonar.plugins.delphi.pmd.profile.DelphiPmdProfileExporter;
 import org.sonar.plugins.delphi.project.DelphiProject;
 import org.sonar.plugins.delphi.utils.DelphiUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -51,31 +46,30 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import org.sonar.api.batch.fs.internal.DefaultFileSystem;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.plugins.delphi.utils.TestUtils;
 
 public abstract class BasePmdRuleTest {
 
     protected static final String ROOT_DIR_NAME = "/org/sonar/plugins/delphi/PMDTest";
     protected static final File ROOT_DIR = DelphiUtils.getResource(ROOT_DIR_NAME);
     protected DelphiPmdSensor sensor;
-    protected Project project;
     protected List<Issue> issues = new LinkedList<>();
-    private ResourcePerspectives perspectives;
     private Issuable issuable;
     private File testFile;
 
-    public List<Issue> analyse(DelphiUnitBuilderTest builder) {
+    public void analyse(DelphiUnitBuilderTest builder) {
         configureTest(builder);
 
-        DebugSensorContext sensorContext = new DebugSensorContext();
-        sensor.analyse(project, sensorContext);
-        issues.addAll(sensor.getListIssuesForTests());
-
-
+        DefaultFileSystem fs = TestUtils.mockFileSystem(ROOT_DIR_NAME);
+        SensorContext sensorContext = SensorContextTester.create(fs.baseDir());
+        
+        sensor.execute(sensorContext);
         assertThat("Errors: " + sensor.getErrors(), sensor.getErrors(), is(empty()));
-        return sensor.getListIssuesForTests();
     }
 
     private void configureTest(DelphiUnitBuilderTest builder) {
@@ -87,8 +81,6 @@ public abstract class BasePmdRuleTest {
     }
 
     protected void configureTest(String testFileName) {
-        project = mock(Project.class);
-        perspectives = mock(ResourcePerspectives.class);
         DelphiProjectHelper delphiProjectHelper = DelphiTestUtils.mockProjectHelper();
 
         // Don't pollute current working directory
@@ -96,27 +88,9 @@ public abstract class BasePmdRuleTest {
 
         File srcFile = DelphiUtils.getResource(testFileName);
 
-        InputFile inputFile = new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", srcFile.getPath()).setModuleBaseDir(Paths.get(ROOT_DIR_NAME));
-
         DelphiProject delphiProject = new DelphiProject("Default Project");
-        delphiProject.setSourceFiles(Collections.singletonList(inputFile));
 
         issuable = mock(Issuable.class);
-
-        when(delphiProjectHelper.getWorkgroupProjects()).thenReturn(Collections.singletonList(delphiProject));
-        when(delphiProjectHelper.getFile(anyString())).thenAnswer(new Answer<InputFile>() {
-            @Override
-            public InputFile answer(InvocationOnMock invocation) throws Throwable {
-                InputFile inputFile = new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", (new File((String) invocation
-                        .getArguments()[0])).getPath()).setModuleBaseDir(Paths.get(ROOT_DIR_NAME));
-
-                when(perspectives.as(Issuable.class, inputFile)).thenReturn(issuable);
-
-                when(issuable.newIssueBuilder()).thenReturn(new StubIssueBuilder());
-
-                return inputFile;
-            }
-        });
 
         when(issuable.addIssue(Matchers.any(Issue.class))).then(new Answer<Boolean>() {
             @Override
@@ -140,7 +114,7 @@ public abstract class BasePmdRuleTest {
 
         when(profileExporter.exportProfileToString(rulesProfile)).thenReturn(rulesXmlContent);
 
-        sensor = new DelphiPmdSensor(delphiProjectHelper, perspectives, rulesProfile, profileExporter);
+        sensor = new DelphiPmdSensor(delphiProjectHelper, rulesProfile, profileExporter);
     }
 
     @After

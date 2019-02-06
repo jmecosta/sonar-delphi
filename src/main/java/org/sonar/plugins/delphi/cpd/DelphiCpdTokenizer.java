@@ -1,4 +1,4 @@
-/*
+/**
  * Sonar Delphi Plugin
  * Copyright (C) 2011 Sabre Airline Solutions and Fabricio Colombo
  * Author(s):
@@ -22,96 +22,100 @@
  */
 package org.sonar.plugins.delphi.cpd;
 
-import net.sourceforge.pmd.cpd.SourceCode;
-import net.sourceforge.pmd.cpd.TokenEntry;
-import net.sourceforge.pmd.cpd.Tokenizer;
-import net.sourceforge.pmd.cpd.Tokens;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 import org.sonar.plugins.delphi.antlr.DelphiLexer;
 import org.sonar.plugins.delphi.antlr.sanitizer.DelphiSourceSanitizer;
-import org.sonar.plugins.delphi.core.helpers.DelphiProjectHelper;
 import org.sonar.plugins.delphi.utils.DelphiUtils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.TextRange;
+import org.sonar.api.batch.sensor.Sensor;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.SensorDescriptor;
+import org.sonar.api.batch.sensor.cpd.NewCpdTokens;
+import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
+import org.sonar.api.batch.sensor.highlighting.TypeOfText;
+import org.sonar.plugins.delphi.core.DelphiLanguage;
 
 /**
  * DelphiLanguage tokenizer class. It creates tokens based on antlr Lexer class.
  */
-public class DelphiCpdTokenizer implements Tokenizer {
+public class DelphiCpdTokenizer implements Sensor {
 
-    private final List<File> excluded;
-    private final DelphiProjectHelper delphiProjectHelper;
+  public DelphiCpdTokenizer() {
+  }
 
-    public DelphiCpdTokenizer(DelphiProjectHelper delphiProjectHelper) {
-        this.delphiProjectHelper = delphiProjectHelper;
-        this.excluded = delphiProjectHelper.getExcludedSources();
-    }
+  @Override
+  public void describe(SensorDescriptor descriptor) {
+    descriptor.onlyOnLanguage(DelphiLanguage.KEY).name("DelphiCpdTokenizer");
+  }
 
-    /**
-     * Create tokens (stored in cpdTokens) from source.
-     *
-     * @param source    The source code to parse for tokens
-     * @param cpdTokens Where tokens will be held
-     */
+  @Override
+  public void execute(SensorContext context) {
+    Set<String> keywords = DelphiKeywords.get();
+    Iterable<InputFile> inputFiles = context.fileSystem().inputFiles(context.fileSystem().predicates()
+            .and(context.fileSystem().predicates()
+                    .hasLanguage(DelphiLanguage.KEY), context.fileSystem().predicates()
+                    .hasType(InputFile.Type.MAIN)));
 
-    @Override
-    public final void tokenize(SourceCode source, Tokens cpdTokens) {
-        String fileName = source.getFileName();
-        if (!canTokenize(fileName)) {
-            return;
+    for (InputFile inputFile : inputFiles) {
+      NewHighlighting newHighlighting = context.newHighlighting().onFile(inputFile);
+      NewCpdTokens cpdTokens = context.newCpdTokens().onFile(inputFile);
+
+      try {
+        DelphiLexer lexer = new DelphiLexer(new DelphiSourceSanitizer(inputFile.filename()));
+        Token token = lexer.nextToken();
+        while (token.getType() != Token.EOF) {
+          TextRange range = inputFile.newRange(token.getLine(), token.getCharPositionInLine(),
+                  token.getLine(), token.getCharPositionInLine() + token.getText().length());
+
+          cpdTokens.addToken(range, token.getText());
+          
+          if(keywords.contains(token.getText()))
+          {
+            newHighlighting.highlight(token.getLine(), token.getCharPositionInLine(),
+                  token.getLine(), token.getCharPositionInLine() + token.getText().length(), TypeOfText.KEYWORD);            
+          }
+          
+          token = lexer.nextToken();
         }
-        doTokenize(cpdTokens, fileName);
-    }
 
-    private void doTokenize(Tokens cpdTokens, String fileName) {
-        try {
-            DelphiLexer lexer = new DelphiLexer(new DelphiSourceSanitizer(fileName));
-            Token token = lexer.nextToken();
-            while (token.getType() != Token.EOF) {
-                cpdTokens.add(new TokenEntry(token.getText(), fileName, token.getLine()));
-                token = lexer.nextToken();
-            }
-        } catch (FileNotFoundException ex) {
-            DelphiUtils.LOG.error("Cpd could not find : " + fileName, ex);
-        } catch (IOException ex) {
-            DelphiUtils.LOG.error("Cpd IO Exception on " + fileName, ex);
-        }
-        cpdTokens.add(TokenEntry.getEOF());
-    }
+      } catch (IllegalArgumentException | IllegalStateException | IOException e) {
+        // ignore range errors: parsing errors could lead to wrong location data
+        DelphiUtils.LOG.error("CPD error in file '{}'", inputFile.filename());
+      }
 
-    private boolean canTokenize(String fileName) {
-        Set<String> includedFiles = DelphiSourceSanitizer.getIncludedFiles();
-        return !includedFiles.contains(fileName) && !delphiProjectHelper.isExcluded(fileName, excluded);
+      cpdTokens.save();
     }
+  }
 
-    /**
-     * Create tokens from text.
-     *
-     * @param source The source code to parse for tokens
-     * @return List of found tokens
-     */
-    public final List<Token> tokenize(String[] source) {
-        List<Token> tokens = new ArrayList<>();
+  /**
+   * Create tokens from text.
+   *
+   * @param source The source code to parse for tokens
+   * @return List of found tokens
+   */
+  public static final List<Token> tokenize(String[] source) {
+    List<Token> tokens = new ArrayList<>();
 
-        for (String string : source) {
-            DelphiLexer lexer = new DelphiLexer(new ANTLRStringStream(string));
-            Token token = lexer.nextToken();
-            token.setText(token.getText().toLowerCase());
-            while (token.getType() != Token.EOF) {
-                tokens.add(token);
-                token = lexer.nextToken();
-            }
-        }
-        //has been changed to add compatibility for sonarqube 5.2
-        tokens.add(new CommonToken((-1)));
-        return tokens;
+    for (String string : source) {
+      DelphiLexer lexer = new DelphiLexer(new ANTLRStringStream(string));
+      Token token = lexer.nextToken();
+      token.setText(token.getText().toLowerCase());
+      while (token.getType() != Token.EOF) {
+        tokens.add(token);
+        token = lexer.nextToken();
+      }
     }
+    //has been changed to add compatibility for sonarqube 5.2
+    tokens.add(new CommonToken((-1)));
+    return tokens;
+  }
 
 }

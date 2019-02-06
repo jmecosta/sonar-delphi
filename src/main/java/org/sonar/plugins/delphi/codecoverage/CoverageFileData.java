@@ -1,4 +1,4 @@
-/*
+/**
  * Sonar Delphi Plugin
  * Copyright (C) 2011 Sabre Airline Solutions and Fabricio Colombo
  * Author(s):
@@ -24,7 +24,7 @@ package org.sonar.plugins.delphi.codecoverage;
 
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.measures.PropertiesBuilder;
+import org.sonar.api.utils.KeyValueFormat;
 
 /**
  * Class that holds coverage data for each source file, used in AQTime purifier
@@ -36,7 +36,6 @@ public class CoverageFileData {
     private double totalLines = 0.0;
     private double uncoveredLines = 0.0;
     private InputFile resource;
-    private PropertiesBuilder<String, Integer> lineHitsBuilder;
 
     /**
      * ctor
@@ -45,7 +44,6 @@ public class CoverageFileData {
      */
     public CoverageFileData(InputFile resource) {
         this.resource = resource;
-        lineHitsBuilder = new PropertiesBuilder<>(CoreMetrics.COVERAGE_LINE_HITS_DATA);
     }
 
     /**
@@ -88,12 +86,5 @@ public class CoverageFileData {
      */
     public InputFile getResource() {
         return resource;
-    }
-
-    /**
-     * @return the lineHitsBuilder
-     */
-    public PropertiesBuilder<String, Integer> getLineHitsBuilder() {
-        return lineHitsBuilder;
     }
 }

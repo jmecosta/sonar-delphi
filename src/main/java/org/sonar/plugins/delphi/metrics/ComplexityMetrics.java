@@ -1,4 +1,4 @@
-/*
+/**
  * Sonar Delphi Plugin
  * Copyright (C) 2011 Sabre Airline Solutions and Fabricio Colombo
  * Author(s):
@@ -20,17 +20,13 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
+
 package org.sonar.plugins.delphi.metrics;
 
-import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.rule.ActiveRules;
-import org.sonar.api.component.ResourcePerspectives;
-import org.sonar.api.issue.Issuable;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.measures.PersistenceMode;
-import org.sonar.api.measures.RangeDistributionBuilder;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.plugins.delphi.antlr.DelphiParser;
 import org.sonar.plugins.delphi.core.language.ClassInterface;
@@ -42,255 +38,248 @@ import org.sonar.plugins.delphi.utils.DelphiUtils;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.issue.NewIssue;
 
 /**
  * Class counting function cyclomatic complexity.
  */
 public class ComplexityMetrics extends DefaultMetrics implements MetricsInterface {
 
-    public static final RuleKey RULE_KEY_METHOD_CYCLOMATIC_COMPLEXITY = RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, "MethodCyclomaticComplexityRule");
-    private static final Number[] FUNCTIONS_DISTRIB_BOTTOM_LIMITS = {1, 2, 4, 6, 8, 10, 12, 20, 30};
-    private static final Number[] FILES_DISTRIB_BOTTOM_LIMITS = {1, 5, 10, 20, 30, 60, 90};
-    private ActiveRule methodCyclomaticComplexityRule;
+  public static final RuleKey RULE_KEY_METHOD_CYCLOMATIC_COMPLEXITY = RuleKey.of(DelphiPmdConstants.REPOSITORY_KEY, "MethodCyclomaticComplexityRule");
+  private static final Number[] FUNCTIONS_DISTRIB_BOTTOM_LIMITS = {1, 2, 4, 6, 8, 10, 12, 20, 30};
+  private static final Number[] FILES_DISTRIB_BOTTOM_LIMITS = {1, 5, 10, 20, 30, 60, 90};
+  private ActiveRule methodCyclomaticComplexityRule;
 
-    // FUNCTION_COMPLEXITY_DISTRIBUTION = Number of methods for given
-    // complexities
-    private RangeDistributionBuilder functionDist = new RangeDistributionBuilder(
-            CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION,
-            FUNCTIONS_DISTRIB_BOTTOM_LIMITS);
-    // FILE COMPLEXITY DISTRIBUTION = Number of files for given complexities
-    private RangeDistributionBuilder fileDist = new RangeDistributionBuilder(CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION,
-            FILES_DISTRIB_BOTTOM_LIMITS);
+  /**
+   * The Cyclomatic Complexity Number.
+   */
+  private double fileComplexity = 0;
+  /**
+   * Average cyclomatic complexity number by method.
+   */
+  private double functionComplexity = 0;
+  /**
+   * Number of classes including nested classes, interfaces, enums and
+   * annotations.
+   */
+  private double classCount = 0;
+  /**
+   * Average complexity by class.
+   */
+  private double classComplexity = 0;
+  /**
+   * Number of Methods without including accessors. A constructor is considered
+   * to be a method.
+   */
+  private double methodsCount = 0;
+  /**
+   * Number of getter and setter methods used to get(reading) or set(writing) a
+   * class' property.
+   */
+  private double accessorsCount = 0;
+  /**
+   * Number of statements as defined in the DelphiLanguage Language
+   * Specification but without block definitions.
+   */
+  private double statementsCount = 0;
+  /**
+   * Number of public classes, public methods (without accessors) and public
+   * properties (without public final static ones).
+   */
+  private double publicApi = 0;
 
-    /**
-     * The Cyclomatic Complexity Number.
-     */
-    private double fileComplexity = 0;
-    /**
-     * Average cyclomatic complexity number by method.
-     */
-    private double functionComplexity = 0;
-    /**
-     * Number of classes including nested classes, interfaces, enums and annotations.
-     */
-    private double classCount = 0;
-    /**
-     * Average complexity by class.
-     */
-    private double classComplexity = 0;
-    /**
-     * Number of Methods without including  accessors. A constructor is considered  to be a method.
-     */
-    private double methodsCount = 0;
-    /**
-     * Number of getter and setter methods used to get(reading) or set(writing) a class' property.
-     */
-    private double accessorsCount = 0;
-    /**
-     * Number of statements as defined in the DelphiLanguage Language Specification but without block  definitions.
-     */
-    private double statementsCount = 0;
-    /**
-     * Number of public classes, public methods  (without accessors) and public properties  (without public final static ones).
-     */
-    private double publicApi = 0;
+  private Integer threshold;
 
-    private ResourcePerspectives perspectives;
-    private Integer threshold;
+  /**
+   * {@inheritDoc}
+   */
+  public ComplexityMetrics(ActiveRules activeRules) {
+    super();
+    methodCyclomaticComplexityRule = activeRules.find(RULE_KEY_METHOD_CYCLOMATIC_COMPLEXITY);
+    threshold = Integer.valueOf(methodCyclomaticComplexityRule.param("Threshold"));
 
-    /**
-     * {@inheritDoc}
-     */
-    public ComplexityMetrics(ActiveRules activeRules, ResourcePerspectives perspectives) {
-        super();
-        this.perspectives = perspectives;
-        methodCyclomaticComplexityRule = activeRules.find(RULE_KEY_METHOD_CYCLOMATIC_COMPLEXITY);
-        threshold = Integer.valueOf(methodCyclomaticComplexityRule.param("Threshold"));
+  }
 
+  /**
+   * Analyses DelphiLanguage source file
+   *
+   * @param resource DelphiLanguage source file (.pas) to analyse
+   * @param sensorContext Sensor context, given by Sonar
+   * @param classes Classes that were found in that file
+   * @param functions Functions that were found in that file
+   */
+  @Override
+  public void analyse(InputFile resource, SensorContext sensorContext, List<ClassInterface> classes,
+          List<FunctionInterface> functions,
+          Set<UnitInterface> units) {
+    reset();
+    Set<String> processedFunc = new HashSet<>();
+    if (classes != null) {
+      for (ClassInterface cl : classes) {
+        if (cl == null) {
+          continue;
+        }
+
+        ++classCount;
+        fileComplexity += cl.getComplexity();
+        classComplexity += cl.getComplexity();
+        accessorsCount += cl.getAccessorCount();
+        publicApi += cl.getPublicApiCount();
+
+        for (FunctionInterface func : cl.getFunctions()) {
+          processFunction(resource, func, sensorContext);
+          processedFunc.add(func.getName());
+        }
+      }
     }
 
-    /**
-     * Analyses DelphiLanguage source file
-     *
-     * @param resource      DelphiLanguage source file (.pas) to analyse
-     * @param sensorContext Sensor context, given by Sonar
-     * @param classes       Classes that were found in that file
-     * @param functions     Functions that were found in that file
-     */
-
-    @Override
-    public void analyse(InputFile resource, SensorContext sensorContext, List<ClassInterface> classes,
-                        List<FunctionInterface> functions,
-                        Set<UnitInterface> units) {
-        reset();
-        Set<String> processedFunc = new HashSet<>();
-        if (classes != null) {
-            for (ClassInterface cl : classes) {
-                if (cl == null) {
-                    continue;
-                }
-
-                ++classCount;
-                fileComplexity += cl.getComplexity();
-                classComplexity += cl.getComplexity();
-                accessorsCount += cl.getAccessorCount();
-                publicApi += cl.getPublicApiCount();
-
-                for (FunctionInterface func : cl.getFunctions()) {
-                    processFunction(resource, func);
-                    processedFunc.add(func.getName());
-                }
-            }
+    // procesing stand-alone (global) functions, not merged with any class
+    if (functions != null) {
+      for (FunctionInterface func : functions) {
+        if (func == null) {
+          continue;
         }
-
-        // procesing stand-alone (global) functions, not merged with any class
-        if (functions != null) {
-            for (FunctionInterface func : functions) {
-                if (func == null) {
-                    continue;
-                }
-                if (processedFunc.contains(func.getName())) {
-                    continue;
-                }
-                methodsCount += 1 + func.getOverloadsCount();
-                fileComplexity += func.getComplexity();
-                functionComplexity += func.getComplexity();
-                statementsCount += func.getStatements().size();
-                functionDist.add((double) func.getComplexity());
-                if (func.getVisibility() == DelphiParser.PUBLIC) {
-                    ++publicApi;
-                }
-                processedFunc.add(func.getName());
-
-                addIssue(resource, func);
-            }
+        if (processedFunc.contains(func.getName())) {
+          continue;
         }
-
-        fileDist.add(fileComplexity);
-
-        if (methodsCount != 0.0) {
-            functionComplexity /= methodsCount;
-        }
-        if (classCount != 0.0) {
-            classComplexity /= classCount;
-        }
-
-        saveAllMetrics();
-    }
-
-    private void processFunction(InputFile resource, FunctionInterface func) {
-        if (!func.isAccessor()) {
-            methodsCount++;
-            functionComplexity += func.getComplexity();
-            functionDist.add((double) func.getComplexity());
-
-            addIssue(resource, func);
-
-            for (FunctionInterface over : func.getOverloadedFunctions()) {
-                processFunction(resource, over);
-            }
-        }
+        methodsCount += 1 + func.getOverloadsCount();
+        fileComplexity += func.getComplexity();
+        functionComplexity += func.getComplexity();
         statementsCount += func.getStatements().size();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-
-    @Override
-    public void save(InputFile resource, SensorContext sensorContext) {
-        if (resource == null || sensorContext == null) {
-            return;
+        if (func.getVisibility() == DelphiParser.PUBLIC) {
+          ++publicApi;
         }
-        try {
-            // Number of statements as defined in the DelphiLanguage Language Specification but without block definitions.
-            sensorContext.saveMeasure(resource, CoreMetrics.STATEMENTS, getMetric("STATEMENTS"));
-            // The Cyclomatic Complexity Number
-            sensorContext.saveMeasure(resource, CoreMetrics.COMPLEXITY, getMetric("COMPLEXITY"));
-            // Average complexity by class
-            sensorContext.saveMeasure(resource, CoreMetrics.CLASS_COMPLEXITY, getMetric("CLASS_COMPLEXITY"));
+        processedFunc.add(func.getName());
 
-            // Average cyclomatic complexity number by method
-            sensorContext.saveMeasure(resource, CoreMetrics.FUNCTION_COMPLEXITY, getMetric("FUNCTION_COMPLEXITY"));
-
-            // Number of classes including nested classes, interfaces, enums and annotations
-            sensorContext.saveMeasure(resource, CoreMetrics.CLASSES, getMetric("CLASSES"));
-            // Number of Methods without including accessors. A constructor is considered to be a method.
-            sensorContext.saveMeasure(resource, CoreMetrics.FUNCTIONS, getMetric("FUNCTIONS"));
-            // Number of getter and setter methods used to get(reading) or set(writing) a class' property .
-            sensorContext.saveMeasure(resource, CoreMetrics.ACCESSORS, getMetric("ACCESSORS"));
-            // Number of public classes, public methods (without accessors) and public properties (without public static final ones)
-            sensorContext.saveMeasure(resource, CoreMetrics.PUBLIC_API, getMetric("PUBLIC_API"));
-            sensorContext.saveMeasure(resource, functionDist.build().setPersistenceMode(PersistenceMode.MEMORY));
-            sensorContext.saveMeasure(resource, fileDist.build().setPersistenceMode(PersistenceMode.MEMORY));
-        } catch (IllegalStateException ise) {
-            DelphiUtils.LOG.error(ise.getMessage());
-        }
+        addIssue(resource, func, sensorContext);
+      }
     }
 
-    private void saveAllMetrics() {
-        setMetric("STATEMENTS", statementsCount);
-        setMetric("COMPLEXITY", fileComplexity);
-        setMetric("CLASS_COMPLEXITY", classComplexity);
-        setMetric("FUNCTION_COMPLEXITY", functionComplexity);
-        setMetric("CLASSES", classCount);
-        setMetric("FUNCTIONS", methodsCount);
-        setMetric("ACCESSORS", accessorsCount);
-        setMetric("PUBLIC_API", publicApi);
+    if (methodsCount != 0.0) {
+      functionComplexity /= methodsCount;
+    }
+    if (classCount != 0.0) {
+      classComplexity /= classCount;
     }
 
-    private void reset() {
-        fileComplexity = 0;
-        functionComplexity = 0;
-        classCount = 0;
-        classComplexity = 0;
-        methodsCount = 0;
-        accessorsCount = 0;
-        statementsCount = 0;
-        publicApi = 0;
-        functionDist.clear();
-        fileDist.clear();
-        clearMetrics();
-    }
+    saveAllMetrics();
+  }
 
-    /**
-     * {@inheritDoc}
-     */
+  private void processFunction(InputFile resource, FunctionInterface func, SensorContext sensor) {
+    if (!func.isAccessor()) {
+      methodsCount++;
+      functionComplexity += func.getComplexity();
 
-    @Override
-    public boolean executeOnResource(InputFile resource) {
-        return DelphiUtils.acceptFile(resource.absolutePath());
-    }
+      addIssue(resource, func, sensor);
 
-    private void addIssue(InputFile resource, FunctionInterface func) {
-        if (func.getComplexity() > threshold) {
-            Issuable issuable = perspectives.as(Issuable.class, resource);
-            //This line has been added to debug since it'soften a problem
-            DelphiUtils.LOG.debug("Line of the issue is:" + methodCyclomaticComplexityRule.ruleKey() + "     And the File has, amount lines:" + resource.lines());
-            //note this has been added to get compatibility with sonar 5.2
-            if (resource.lines() >= func.getBodyLine() && resource.lines() != -1 && func.getBodyLine() != -1) {
-                //If the line is legit first condition holds
-                //TODO: solve more elegantly
-                issuable.addIssue(
-                        issuable.newIssueBuilder()
-                                .line(func.getBodyLine())
-                                .ruleKey(methodCyclomaticComplexityRule.ruleKey())
-                                .effortToFix(0.0)
-                                .message(String.format("The Cyclomatic Complexity of this method \"%s\" is %d which is greater than %d authorized.",
-                                        func.getRealName(), func.getComplexity(), threshold))
-                                .build()
-                );
-            } else {
-                issuable.addIssue(
-                        issuable.newIssueBuilder()
-                                .ruleKey(methodCyclomaticComplexityRule.ruleKey())
-                                .line(1)
-                                .effortToFix(0.0)
-                                .message(String.format("The Cyclomatic Complexity of this method \"%s\" is %d which is greater than %d authorized.",
-                                        func.getRealName(), func.getComplexity(), threshold))
-                                .build()
-                );
-            }
-        }
+      for (FunctionInterface over : func.getOverloadedFunctions()) {
+        processFunction(resource, over, sensor);
+      }
     }
+    statementsCount += func.getStatements().size();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void save(InputFile resource, SensorContext sensorContext) {
+    if (resource == null || sensorContext == null) {
+      return;
+    }
+    try {
+      // Number of statements as defined in the DelphiLanguage Language Specification but without block definitions.         
+      sensorContext.<Integer>newMeasure()
+              .forMetric(CoreMetrics.STATEMENTS)
+              .on(sensorContext.module())
+              .withValue((int) (getMetric("STATEMENTS")))
+              .save();
+
+      // The Cyclomatic Complexity Number
+      sensorContext.<Integer>newMeasure()
+              .forMetric(CoreMetrics.COMPLEXITY)
+              .on(sensorContext.module())
+              .withValue((int) (getMetric("COMPLEXITY")))
+              .save();
+
+      // Number of classes including nested classes, interfaces, enums and annotations
+      sensorContext.<Integer>newMeasure()
+              .forMetric(CoreMetrics.CLASSES)
+              .on(sensorContext.module())
+              .withValue((int) (getMetric("CLASSES")))
+              .save();
+
+      // Number of Methods without including accessors. A constructor is considered to be a method.
+      sensorContext.<Integer>newMeasure()
+              .forMetric(CoreMetrics.FUNCTIONS)
+              .on(sensorContext.module())
+              .withValue((int) (getMetric("FUNCTIONS")))
+              .save();
+
+      // Number of public classes, public methods (without accessors) and public properties (without public static final ones)
+      sensorContext.<Integer>newMeasure()
+              .forMetric(CoreMetrics.PUBLIC_API)
+              .on(sensorContext.module())
+              .withValue((int) (getMetric("PUBLIC_API")))
+              .save();
+    } catch (IllegalStateException ise) {
+      DelphiUtils.LOG.error(ise.getMessage());
+    }
+  }
+
+  private void saveAllMetrics() {
+    setMetric("STATEMENTS", statementsCount);
+    setMetric("COMPLEXITY", fileComplexity);
+    setMetric("CLASS_COMPLEXITY", classComplexity);
+    setMetric("FUNCTION_COMPLEXITY", functionComplexity);
+    setMetric("CLASSES", classCount);
+    setMetric("FUNCTIONS", methodsCount);
+    setMetric("ACCESSORS", accessorsCount);
+    setMetric("PUBLIC_API", publicApi);
+  }
+
+  private void reset() {
+    fileComplexity = 0;
+    functionComplexity = 0;
+    classCount = 0;
+    classComplexity = 0;
+    methodsCount = 0;
+    accessorsCount = 0;
+    statementsCount = 0;
+    publicApi = 0;
+    clearMetrics();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean executeOnResource(InputFile resource) {
+    return true;
+  }
+
+  private void addIssue(InputFile resource, FunctionInterface func, SensorContext sensorContext) {
+    if (func.getComplexity() > threshold) {
+
+      //This line has been added to debug since it'soften a problem
+      DelphiUtils.LOG.debug("Line of the issue is:" + methodCyclomaticComplexityRule.ruleKey() + "     And the File has, amount lines:" + resource.lines());
+      //note this has been added to get compatibility with sonar 5.2
+      if (resource.lines() >= func.getBodyLine() && resource.lines() != -1 && func.getBodyLine() != -1) {
+        NewIssue newIssue = sensorContext.newIssue().forRule(RULE_KEY_METHOD_CYCLOMATIC_COMPLEXITY);
+        newIssue.newLocation()
+                .on(resource).at(resource.selectLine(func.getBodyLine()))
+                .message(String.format("The Cyclomatic Complexity of this method \"%s\" is %d which is greater than %d authorized."));
+        
+        newIssue.save();        
+      } else {
+        NewIssue newIssue = sensorContext.newIssue().forRule(RULE_KEY_METHOD_CYCLOMATIC_COMPLEXITY);
+        newIssue.newLocation()
+                .on(resource).at(resource.selectLine(1))
+                .message(String.format("The Cyclomatic Complexity of this method \"%s\" is %d which is greater than %d authorized."));
+        
+        newIssue.save();  
+      }
+    }
+  }
 }

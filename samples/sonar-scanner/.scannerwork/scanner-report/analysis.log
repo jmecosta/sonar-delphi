@@ -1,0 +1,154 @@
+Environment variables:
+  - =::=::\
+  - =E:=E:\prod\OtherDevelopment\SonarQube\sonar-delphi\samples\sonar-scanner
+  - ALLUSERSPROFILE=C:\ProgramData
+  - APPDATA=C:\Users\jocs\AppData\Roaming
+  - ATLAS_HOME=C:\Applications\Atlassian\atlassian-plugin-sdk-6.3.12
+  - COMPUTERNAME=JOCS11
+  - COVFILE=C:\Users\jocs\Documents\test.cov
+  - ChocolateyInstall=C:\ProgramData\chocolatey
+  - ChocolateyLastPathUpdate=su tammi 20 11:08:22 2019
+  - ComSpec=C:\WINDOWS\system32\cmd.exe
+  - CommonProgramFiles=C:\Program Files\Common Files
+  - CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
+  - CommonProgramW6432=C:\Program Files\Common Files
+  - DriverData=C:\Windows\System32\Drivers\DriverData
+  - ERROR_CODE=0
+  - HOME=C:\Users\jocs
+  - HOMEDRIVE=M:
+  - HOMEPATH=\
+  - HOMESHARE=\\a-manta\users\jocs
+  - JAVA_EXEC="C:\tools\sonar-scanner-3.3.0.1492-windows\bin\..\jre\bin\java.exe"
+  - JAVA_HOME=C:\tools\sonar-scanner-3.3.0.1492-windows\bin\..\jre
+  - LOCALAPPDATA=C:\Users\jocs\AppData\Local
+  - LOGONSERVER=\\AD-EMEA2
+  - NUMBER_OF_PROCESSORS=12
+  - OS=Windows_NT
+  - OneDrive=C:\Users\jocs\OneDrive
+  - PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+  - PROCESSOR_ARCHITECTURE=AMD64
+  - PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
+  - PROCESSOR_LEVEL=6
+  - PROCESSOR_REVISION=9e0a
+  - PROJECT_HOME=E:\prod\OtherDevelopment\SonarQube\sonar-delphi\samples\sonar-scanner
+  - PROMPT=$P$G
+  - PSModulePath=C:\Program Files (x86)\Outercurve Foundation\Modules\;C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+  - PUBLIC=C:\Users\Public
+  - Path=C:\Program Files (x86)\BullseyeCoverage\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;C:\Program Files\SysinternalsSuite;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\Program Files (x86)\GitExtensions\;C:\Program Files\dotnet\;C:\Program Files (x86)\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\jocs\AppData\Local\Microsoft\WindowsApps;C:\Users\jocs\.dotnet\tools;C:\Users\jocs\AppData\Roaming\npm;C:\Applications\Atlassian\atlassian-plugin-sdk-6.3.12\bin
+  - ProgramData=C:\ProgramData
+  - ProgramFiles=C:\Program Files
+  - ProgramFiles(x86)=C:\Program Files (x86)
+  - ProgramW6432=C:\Program Files
+  - QT_DEVICE_PIXEL_RATIO=auto
+  - SESSIONNAME=Console
+  - SHFBROOT=C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\
+  - SONAR_SCANNER_HOME=C:\tools\sonar-scanner-3.3.0.1492-windows\bin\..
+  - SystemDrive=C:
+  - SystemRoot=C:\WINDOWS
+  - TEMP=C:\Users\jocs\AppData\Local\Temp
+  - TMP=C:\Users\jocs\AppData\Local\Temp
+  - UATDATA=C:\WINDOWS\CCM\UATData\D9F8C395-CAB8-491d-B8AC-179A1FE1BE77
+  - USERDNSDOMAIN=TEKLAAD.TEKLA.COM
+  - USERDOMAIN=TEKLAAD
+  - USERDOMAIN_ROAMINGPROFILE=TEKLAAD
+  - USERNAME=jocs
+  - USERPROFILE=C:\Users\jocs
+  - VS140COMNTOOLS=C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\
+  - scriptdir=C:\tools\sonar-scanner-3.3.0.1492-windows\bin
+  - snow_agent=C:\Program Files\Snow Software\Inventory\Agent
+  - use_embedded_jre=true
+  - windir=C:\WINDOWS
+System properties:
+  - awt.toolkit=sun.awt.windows.WToolkit
+  - file.encoding=Cp1252
+  - file.encoding.pkg=sun.io
+  - file.separator=\
+  - java.awt.graphicsenv=sun.awt.Win32GraphicsEnvironment
+  - java.awt.headless=true
+  - java.awt.printerjob=sun.awt.windows.WPrinterJob
+  - java.class.path=C:\tools\sonar-scanner-3.3.0.1492-windows\bin\..\lib\sonar-scanner-cli-3.3.0.1492.jar
+  - java.class.version=52.0
+  - java.endorsed.dirs=C:\tools\sonar-scanner-3.3.0.1492-windows\jre\lib\endorsed
+  - java.ext.dirs=C:\tools\sonar-scanner-3.3.0.1492-windows\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext
+  - java.home=C:\tools\sonar-scanner-3.3.0.1492-windows\jre
+  - java.io.tmpdir=C:\Users\jocs\AppData\Local\Temp\
+  - java.library.path=C:\tools\sonar-scanner-3.3.0.1492-windows\jre\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\BullseyeCoverage\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;C:\Program Files\SysinternalsSuite;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\Program Files (x86)\GitExtensions\;C:\Program Files\dotnet\;C:\Program Files (x86)\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\jocs\AppData\Local\Microsoft\WindowsApps;C:\Users\jocs\.dotnet\tools;C:\Users\jocs\AppData\Roaming\npm;C:\Applications\Atlassian\atlassian-plugin-sdk-6.3.12\bin;.
+  - java.runtime.name=Java(TM) SE Runtime Environment
+  - java.runtime.version=1.8.0_121-b13
+  - java.specification.name=Java Platform API Specification
+  - java.specification.vendor=Oracle Corporation
+  - java.specification.version=1.8
+  - java.vendor=Oracle Corporation
+  - java.vendor.url=http://java.oracle.com/
+  - java.vendor.url.bug=http://bugreport.sun.com/bugreport/
+  - java.version=1.8.0_121
+  - java.vm.info=mixed mode
+  - java.vm.name=Java HotSpot(TM) 64-Bit Server VM
+  - java.vm.specification.name=Java Virtual Machine Specification
+  - java.vm.specification.vendor=Oracle Corporation
+  - java.vm.specification.version=1.8
+  - java.vm.vendor=Oracle Corporation
+  - java.vm.version=25.121-b13
+  - line.separator=
+
+  - os.arch=amd64
+  - os.name=Windows 10
+  - os.version=10.0
+  - path.separator=;
+  - project.home=E:\prod\OtherDevelopment\SonarQube\sonar-delphi\samples\sonar-scanner
+  - scanner.home=C:\tools\sonar-scanner-3.3.0.1492-windows\bin\..
+  - sun.arch.data.model=64
+  - sun.boot.class.path=C:\tools\sonar-scanner-3.3.0.1492-windows\jre\lib\resources.jar;C:\tools\sonar-scanner-3.3.0.1492-windows\jre\lib\rt.jar;C:\tools\sonar-scanner-3.3.0.1492-windows\jre\lib\sunrsasign.jar;C:\tools\sonar-scanner-3.3.0.1492-windows\jre\lib\jsse.jar;C:\tools\sonar-scanner-3.3.0.1492-windows\jre\lib\jce.jar;C:\tools\sonar-scanner-3.3.0.1492-windows\jre\lib\charsets.jar;C:\tools\sonar-scanner-3.3.0.1492-windows\jre\lib\jfr.jar;C:\tools\sonar-scanner-3.3.0.1492-windows\jre\classes
+  - sun.boot.library.path=C:\tools\sonar-scanner-3.3.0.1492-windows\jre\bin
+  - sun.cpu.endian=little
+  - sun.cpu.isalist=amd64
+  - sun.desktop=windows
+  - sun.io.unicode.encoding=UnicodeLittle
+  - sun.java.command=org.sonarsource.scanner.cli.Main -X
+  - sun.java.launcher=SUN_STANDARD
+  - sun.jnu.encoding=Cp1252
+  - sun.management.compiler=HotSpot 64-Bit Tiered Compilers
+  - sun.os.patch.level=
+  - sun.stderr.encoding=cp850
+  - sun.stdout.encoding=cp850
+  - user.country=GB
+  - user.country.format=FI
+  - user.dir=E:\prod\OtherDevelopment\SonarQube\sonar-delphi\samples\sonar-scanner
+  - user.home=C:\Users\jocs
+  - user.language=en
+  - user.language.format=fi
+  - user.name=jocs
+  - user.script=
+  - user.timezone=Europe/Helsinki
+  - user.variant=
+SonarQube plugins:
+  - Delphi 0.3.7 (delphi)
+  - SonarPython 1.10.0.2131 (python)
+  - SonarCSS 1.0.1.508 (cssfamily)
+  - SonarGo 1.1.0.1612 (go)
+  - SonarKotlin 1.0.1.965 (kotlin)
+  - Svn 1.8.0.1168 (scmsvn)
+  - SonarJS 4.2.0.6476 (javascript)
+  - SonarC# 7.3.2.6129 (csharp)
+  - SonarJava 5.6.1.15064 (java)
+  - LDAP 2.2.0.608 (ldap)
+  - Git 1.4.1.1128 (scmgit)
+  - SonarFlex 2.4.0.1222 (flex)
+  - SonarXML 1.5.1.1452 (xml)
+  - SonarPHP 2.14.0.3569 (php)
+  - SonarTS 1.7.0.2893 (typescript)
+Global properties:
+  - sonar.core.id=BF41A1F2-AWjDCJ3IB_JBbYEWbo3b
+  - sonar.core.startTime=2019-02-06T15:49:33+0200
+Settings for module: org.codehaus.sonar:delphi-sonar-runner
+  - sonar.host.url=http://localhost:9000
+  - sonar.projectBaseDir=E:\prod\OtherDevelopment\SonarQube\sonar-delphi\samples\sonar-scanner
+  - sonar.projectKey=org.codehaus.sonar:delphi-sonar-runner
+  - sonar.projectName=Delphi project analyzed with the SonarQube Runner
+  - sonar.projectVersion=1.0
+  - sonar.scanner.app=ScannerCli
+  - sonar.scanner.appVersion=3.3.0.1492
+  - sonar.sourceEncoding=UTF-8
+  - sonar.sources=src
+  - sonar.verbose=true
+  - sonar.working.directory=E:\prod\OtherDevelopment\SonarQube\sonar-delphi\samples\sonar-scanner\.scannerwork

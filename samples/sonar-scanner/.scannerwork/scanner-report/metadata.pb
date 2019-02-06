@@ -1,0 +1,59 @@
+¿Øœòå-&org.codehaus.sonar:delphi-sonar-runner(:2
+cs,
+AWjDCMq2B_JBbYEWbqD1	Sonar waycs ÿé£òå-:4
+css-
+AWjDCMtJB_JBbYEWbqHi	Sonar waycss ÿé£òå-:8
+delph/
+AWjDCMyQB_JBbYEWbqS3	Sonar waydelph ¿ñ£òå-:6
+java.
+AWjDCMv-B_JBbYEWbqND	Sonar wayjava ¿ñ£òå-:6
+flex.
+AWjDCMzUB_JBbYEWbqUS	Sonar wayflex ¿ñ£òå-:4
+xml-
+AWjDCM0PB_JBbYEWbqVD	Sonar wayxml ¿ñ£òå-:2
+go,
+AWjDCM1yB_JBbYEWbqWb	Sonar waygo ¿ñ£òå-::
+kotlin0
+AWjDCM1BB_JBbYEWbqVh	Sonar waykotlin ¿ñ£òå-:2
+js,
+AWjDCM4pB_JBbYEWbqcM	Sonar wayjs ¿ñ£òå-:4
+php-
+AWjDCM77B_JBbYEWbqgP	Sonar wayphp ¿ñ£òå-:2
+py,
+AWjDCM9JB_JBbYEWbqiI	Sonar waypy ®û£òå-:2
+ts,
+AWjDCM-KB_JBbYEWbqje	Sonar wayts ®û£òå-B
+delphi
+delphiÕŸ»òå-B
+python
+pythonê”¢òå-B
+	cssfamily
+	cssfamilyê”¢òå-B
+go
+goê”¢òå-B
+kotlin
+kotlinê”¢òå-B
+scmsvn
+scmsvnê”¢òå-B!
+
+javascript
+
+javascriptê”¢òå-B
+csharp
+csharpê”¢òå-B
+java
+javaê”¢òå-B
+ldap
+ldapê”¢òå-B
+scmgit
+scmgitê”¢òå-B
+flex
+flexê”¢òå-B
+xml
+xmlê”¢òå-B
+php
+phpê”¢òå-B!
+
+typescript
+
+typescriptê”¢òå-bsamples/sonar-scannerj(6094d6d528d5d5a027ee3a11561d5cfb9095e039

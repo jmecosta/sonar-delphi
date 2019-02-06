@@ -1,4 +1,4 @@
-/*
+/**
  * Sonar Delphi Plugin
  * Copyright (C) 2011 Sabre Airline Solutions and Fabricio Colombo
  * Author(s):
@@ -24,12 +24,15 @@ package org.sonar.plugins.delphi.pmd;
 
 import org.junit.Test;
 import org.sonar.api.issue.Issue;
-import org.sonar.plugins.delphi.debug.DebugSensorContext;
 
 import java.util.Arrays;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import org.sonar.api.batch.fs.internal.DefaultFileSystem;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.plugins.delphi.utils.TestUtils;
 
 public class UnusedArgumentsRuleTest extends BasePmdRuleTest {
 
@@ -37,8 +40,9 @@ public class UnusedArgumentsRuleTest extends BasePmdRuleTest {
     public void testRule() {
         configureTest(ROOT_DIR_NAME + "/UnusedArgumentRule.pas");
 
-        DebugSensorContext debugContext = new DebugSensorContext();
-        sensor.analyse(project, debugContext);
+        DefaultFileSystem fs = TestUtils.mockFileSystem(ROOT_DIR_NAME);
+        SensorContext debugContext = SensorContextTester.create(fs.baseDir());
+        sensor.execute(debugContext);
 
         // all expected rule violations and their lines
         RuleData ruleData[] = {

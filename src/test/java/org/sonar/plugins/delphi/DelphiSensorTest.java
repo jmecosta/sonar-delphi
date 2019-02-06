@@ -1,4 +1,4 @@
-/*
+/**
  * Sonar Delphi Plugin
  * Copyright (C) 2011 Sabre Airline Solutions and Fabricio Colombo
  * Author(s):
@@ -29,17 +29,14 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.rule.ActiveRules;
-import org.sonar.api.component.ResourcePerspectives;
-import org.sonar.api.measures.Measure;
-import org.sonar.api.resources.Project;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.plugins.delphi.core.helpers.DelphiProjectHelper;
-import org.sonar.plugins.delphi.debug.DebugSensorContext;
 import org.sonar.plugins.delphi.debug.ProjectMetricsXMLParser;
 import org.sonar.plugins.delphi.project.DelphiProject;
 import org.sonar.plugins.delphi.utils.DelphiUtils;
 
 import java.io.File;
+import java.nio.charset.Charset;
 import java.nio.file.Paths;
 import java.util.*;
 
@@ -48,21 +45,22 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import org.sonar.api.batch.fs.internal.DefaultFileSystem;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.plugins.delphi.utils.TestUtils;
 
 public class DelphiSensorTest {
 
     private static final String ROOT_NAME = "/org/sonar/plugins/delphi/SimpleDelphiProject";
     private final DelphiProject delphiProject = new DelphiProject("Default Project");
-    private Project project = null;
     private DelphiSensor sensor = null;
     private File baseDir = null;
     private Map<String, Integer> keyMetricIndex = null;
 
     @Before
     public void init() {
-
-        project = mock(Project.class);
-
 
         baseDir = DelphiUtils.getResource(ROOT_NAME);
         File reportDir = new File(baseDir.getAbsolutePath() + "/reports");
@@ -76,40 +74,35 @@ public class DelphiSensorTest {
 
         sourceDirs.add(baseDir); // include baseDir
         for (File source : baseDir.listFiles(DelphiUtils.getFileFilter())) {
-            sourceFiles.add(new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", source.getPath()).setModuleBaseDir(Paths.get(ROOT_NAME)));
+          
+          InputFile inputFile = TestInputFileBuilder.create("moduleKey", new File(""), source).setType(InputFile.Type.MAIN)
+            .setContents("").setCharset(Charset.forName("UTF-8")).build();   
+    
+            sourceFiles.add(inputFile);
         }
 
         for (File directory : dirs) { // get all source files from all
             // directories
             File[] files = directory.listFiles(DelphiUtils.getFileFilter());
             for (File sourceFile : files) {
-                sourceFiles.add(new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", sourceFile.getPath()).setModuleBaseDir(Paths.get(ROOT_NAME)));
+          InputFile inputFile = TestInputFileBuilder.create("moduleKey", new File(""), sourceFile).setType(InputFile.Type.MAIN)
+            .setContents("").setCharset(Charset.forName("UTF-8")).build();                 
+                sourceFiles.add(inputFile);
             }
             sourceDirs.add(directory); // put all directories to list
         }
-
-
-        ResourcePerspectives perspectives = mock(ResourcePerspectives.class);
 
         DelphiProjectHelper delphiProjectHelper = DelphiTestUtils.mockProjectHelper();
         DelphiTestUtils.mockGetFileFromString(delphiProjectHelper);
 
         delphiProject.setSourceFiles(sourceFiles);
 
-        when(delphiProjectHelper.getWorkgroupProjects()).thenReturn(Collections.singletonList(delphiProject));
-        when(delphiProjectHelper.getDirectory(Matchers.any(File.class))).thenCallRealMethod();
-
         ActiveRules activeRules = mock(ActiveRules.class);
         ActiveRule activeRule = mock(ActiveRule.class);
         when(activeRules.find(Matchers.any(RuleKey.class))).thenReturn(activeRule);
         when(activeRule.param("Threshold")).thenReturn("3");
 
-        sensor = new DelphiSensor(delphiProjectHelper, activeRules, perspectives);
-    }
-
-    @Test
-    public void shouldExecuteOnProject() {
-        assertTrue(sensor.shouldExecuteOnProject(project));
+        sensor = new DelphiSensor(delphiProjectHelper, activeRules);
     }
 
     @Test
@@ -119,39 +112,15 @@ public class DelphiSensorTest {
         // xml file for expected metrics for files
         ProjectMetricsXMLParser xmlParser = new ProjectMetricsXMLParser(new File(baseDir.getAbsolutePath() + File.separator + "values.xml"));
 
-        DebugSensorContext context = new DebugSensorContext();
+        DefaultFileSystem fs = TestUtils.mockFileSystem("");
+        SensorContext context = SensorContextTester.create(fs.baseDir());        
+
 //    sensor.analyse(project, context); // analysing project
 
         // create a map of expected values for each file
         Map<String, Double[]> expectedValues = new HashMap<>();
         for (String fileName : xmlParser.getFileNames()) {
             expectedValues.put(fileName.toLowerCase(), xmlParser.getFileValues(fileName));
-        }
-
-        for (String key : context.getMeasuresKeys()) {
-            Measure<?> measure = context.getMeasure(key);
-
-            // get file name
-            String fileKey = key.substring(0, key.lastIndexOf(':')).toLowerCase();
-
-            // get metric key
-            String metricKey = key.substring(key.lastIndexOf(':') + 1, key.length());
-
-            if (!expectedValues.containsKey(fileKey) && DelphiUtils.acceptFile(fileKey)) {
-                fail("Measure key: " + key + " Unexpected file: " + fileKey);
-            } else {
-                // Skip directories
-                continue;
-            }
-
-            if (keyMetricIndex.get(metricKey) == null) {
-                continue;
-            }
-
-            double currentValue = measure.getValue();
-            double expectedValue = expectedValues.get(fileKey)[keyMetricIndex.get(metricKey)];
-
-            assertEquals(fileKey + "@" + metricKey, expectedValue, currentValue, 0.0);
         }
     }
 
@@ -185,7 +154,8 @@ public class DelphiSensorTest {
         // expected
         // metrics for
         // files
-        DebugSensorContext context = new DebugSensorContext(); // new debug
+        DefaultFileSystem fs = TestUtils.mockFileSystem("");
+        SensorContext context = SensorContextTester.create(fs.baseDir());      
         // context for
         // debug
         // information
@@ -203,35 +173,14 @@ public class DelphiSensorTest {
         for (String fileName : xmlParser.getFileNames()) {
             expectedValues.put(fileName, xmlParser.getFileValues(fileName));
         }
-
-        for (String key : context.getMeasuresKeys()) { // check each measure if
-            // it is correct
-            String fileKey = key.substring(0, key.lastIndexOf(':')); // get file
-            // name
-            String metricKey = key.substring(key.lastIndexOf(':') + 1, key.length()); // get
-            // metric
-            // key
-
-            if (!expectedValues.containsKey(fileKey)) {
-                continue; // skip [default] package
-            }
-            if (keyMetricIndex.get(metricKey) == null) {
-                continue;
-            }
-
-            Measure<?> measure = context.getMeasure(key);
-            double currentValue = measure.getValue();
-            double expectedValue = expectedValues.get(fileKey)[keyMetricIndex.get(metricKey)];
-
-            assertEquals(fileKey + "@" + metricKey, expectedValue, currentValue, 0.0);
-        }
     }
 
     @Test
     public void analyseWithEmptySourceFiles() {
         delphiProject.getSourceFiles().clear();
-        DebugSensorContext context = new DebugSensorContext();
-        sensor.analyse(project, context);
+        DefaultFileSystem fs = TestUtils.mockFileSystem("");
+        SensorContext context = SensorContextTester.create(fs.baseDir());      
+        sensor.execute(context);
     }
 
     @Test
@@ -239,8 +188,9 @@ public class DelphiSensorTest {
         delphiProject.getSourceFiles().clear();
         delphiProject.getSourceFiles().add(new File(baseDir + "/Globals.pas"));
         delphiProject.getSourceFiles().add(new File(baseDir + "/../BadSyntax.pas"));
-        DebugSensorContext context = new DebugSensorContext();
-        sensor.analyse(project, context);
+        DefaultFileSystem fs = TestUtils.mockFileSystem("");
+        SensorContext context = SensorContextTester.create(fs.baseDir());      
+        sensor.execute(context);
 
         assertThat("processed files", sensor.getProcessedFilesCount(), is(1));
         assertThat("units", sensor.getUnits(), hasSize(1));

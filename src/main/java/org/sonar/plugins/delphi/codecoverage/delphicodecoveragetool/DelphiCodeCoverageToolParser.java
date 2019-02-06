@@ -1,4 +1,4 @@
-/*
+/**
  * Sonar Delphi Plugin
  * Copyright (C) 2011 Sabre Airline Solutions and Fabricio Colombo
  * Author(s):
@@ -22,14 +22,14 @@
  */
 package org.sonar.plugins.delphi.codecoverage.delphicodecoveragetool;
 
-import org.sonar.api.batch.SensorContext;
-import org.sonar.api.utils.StaxParser;
 import org.sonar.plugins.delphi.codecoverage.DelphiCodeCoverageParser;
 import org.sonar.plugins.delphi.core.helpers.DelphiProjectHelper;
 import org.sonar.plugins.delphi.utils.DelphiUtils;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.plugins.delphi.utils.StaxParser;
 
 public class DelphiCodeCoverageToolParser implements DelphiCodeCoverageParser {
     private final File reportFile;

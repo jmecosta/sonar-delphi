@@ -1,4 +1,4 @@
-/*
+/**
  * Sonar Delphi Plugin
  * Copyright (C) 2011 Sabre Airline Solutions and Fabricio Colombo
  * Author(s):
@@ -20,6 +20,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
+
 package org.sonar.plugins.delphi.metrics;
 
 import org.junit.Before;
@@ -31,7 +32,6 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.rule.ActiveRules;
-import org.sonar.api.component.ResourcePerspectives;
 import org.sonar.api.issue.Issuable;
 import org.sonar.api.issue.Issue;
 import org.sonar.plugins.delphi.DelphiTestUtils;
@@ -44,39 +44,22 @@ import org.sonar.plugins.delphi.pmd.StubIssueBuilder;
 import org.sonar.plugins.delphi.utils.DelphiUtils;
 
 import java.io.File;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 
 public class ComplexityMetricsTest {
 
     private static final String FILE_NAME = "/org/sonar/plugins/delphi/metrics/ComplexityMetricsTest.pas";
     private static final String FILE_NAME_LIST_UTILS = "/org/sonar/plugins/delphi/metrics/ListUtils.pas";
-    private final List<Issue> issues = new ArrayList<>();
-    private ResourcePerspectives perspectives;
     private ActiveRules activeRules;
 
     @Before
     public void setup() {
-        perspectives = mock(ResourcePerspectives.class);
-
-        final Issuable issuable = mock(Issuable.class);
-
-        when(perspectives.as(Matchers.eq(Issuable.class), Matchers.isA(InputFile.class))).thenReturn(issuable);
-
-        when(issuable.newIssueBuilder()).thenReturn(new StubIssueBuilder());
-
-        when(issuable.addIssue(Matchers.any(Issue.class))).then(new Answer<Boolean>() {
-            @Override
-            public Boolean answer(InvocationOnMock invocation) throws Throwable {
-                Issue issue = (Issue) invocation.getArguments()[0];
-                issues.add(issue);
-                return Boolean.TRUE;
-            }
-        });
-
         activeRules = mock(ActiveRules.class);
         ActiveRule activeRule = mock(ActiveRule.class);
         when(activeRules.find(ComplexityMetrics.RULE_KEY_METHOD_CYCLOMATIC_COMPLEXITY)).thenReturn(activeRule);
@@ -94,10 +77,14 @@ public class ComplexityMetricsTest {
         final CodeAnalysisResults results = analyzer.analyze(new DelphiAST(testFile));
 
         // processing
-        ComplexityMetrics metrics = new ComplexityMetrics(activeRules, perspectives);
-        DefaultInputFile defInputFile = new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", "test");
+        ComplexityMetrics metrics = new ComplexityMetrics(activeRules);
+        
+    InputFile inputFile = TestInputFileBuilder.create("moduleKey", new File(""), new File("")).setType(InputFile.Type.MAIN)
+      .setContents("ROOT_KEY_CHANGE_AT_SONARAPI_5").setCharset(Charset.forName("UTF-8")).build();
+    
+        //InputFile defInputFile = new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", "test");
         //codeAnalysisRes=results.getClasses();
-        metrics.analyse(defInputFile, null, null, null, null);
+        metrics.analyse(null, null, null, null, null);
         String[] keys = {"ACCESSORS", "CLASS_COMPLEXITY", "CLASSES", "COMPLEXITY", "FUNCTIONS", "FUNCTION_COMPLEXITY",
                 "PUBLIC_API",
                 "STATEMENTS"};
@@ -120,8 +107,10 @@ public class ComplexityMetricsTest {
         CodeAnalysisResults results = analyzer.analyze(new DelphiAST(testFile));
 
         // processing
-        ComplexityMetrics metrics = new ComplexityMetrics(activeRules, perspectives);
-        metrics.analyse(new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", "test"), null, results.getClasses(), results.getFunctions(), null);
+        ComplexityMetrics metrics = new ComplexityMetrics(activeRules);
+    InputFile inputFile = TestInputFileBuilder.create("moduleKey", new File(""), new File("")).setType(InputFile.Type.MAIN)
+      .setContents("ROOT_KEY_CHANGE_AT_SONARAPI_5").setCharset(Charset.forName("UTF-8")).build();        
+        metrics.analyse(inputFile, null, results.getClasses(), results.getFunctions(), null);
     }
 
 }

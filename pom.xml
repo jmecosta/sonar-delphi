@@ -3,12 +3,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-
+  
     <artifactId>sonar-delphi-plugin</artifactId>
-    <version>0.3.6</version>
+    <version>0.3.8</version>
     <groupId>org.delphi.plugin</groupId>
     <name>Sonar Delphi Plugin</name>
     <description>Enables analysis of Delphi projects.</description>
+    <!-- this is important for sonar-packaging-maven-plugin -->
+    <packaging>sonar-plugin</packaging>
+    
 
     <inceptionYear>2011</inceptionYear>
     <url>http://docs.sonarqube.org/display/SONARQUBE45/Delphi+Plugin</url>
@@ -78,7 +81,7 @@
 
     <properties>
         <!--Version Fields-->
-        <sonar.version>6.2</sonar.version>
+        <sonar.version>6.7</sonar.version>
         <sonarcobertura.version>1.4</sonarcobertura.version>
         <antlr-runtime.version>3.3</antlr-runtime.version>
         <slf4j.version>1.7.5</slf4j.version>
@@ -98,12 +101,8 @@
         <sonar.pluginClass>org.sonar.plugins.delphi.DelphiPlugin</sonar.pluginClass>
         <sonar.exclusions>org.sonar.plugins.delphi.antlr.DelphiParser,org.sonar.plugins.delphi.antlr.DelphiLexer
         </sonar.exclusions>
-        <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 
     </properties>
-
-    <!-- this is important for sonar-packaging-maven-plugin -->
-    <packaging>sonar-plugin</packaging>
 
     <dependencies>
 
@@ -268,6 +267,7 @@
                 <artifactId>maven-license-plugin</artifactId>
                 <version>1.8.0</version>
                 <configuration>
+                    <header>src/license.txt</header>
                     <validHeaders>
                         <value>/src/SABRE_AIRLINE_LICENSE.txt</value>
                         <value>/src/LUCK_LICENSE.txt</value>
@@ -280,22 +280,6 @@
                 <groupId>org.antlr</groupId>
                 <artifactId>antlr3-maven-plugin</artifactId>
                 <version>3.5.2</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.4</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <source>1.8</source>
-                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>

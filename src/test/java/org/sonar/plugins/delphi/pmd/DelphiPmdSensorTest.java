@@ -1,4 +1,4 @@
-/*
+/**
  * Sonar Delphi Plugin
  * Copyright (C) 2011 Sabre Airline Solutions and Fabricio Colombo
  * Author(s):
@@ -20,6 +20,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
+
 package org.sonar.plugins.delphi.pmd;
 
 import org.apache.commons.io.FileUtils;
@@ -30,15 +31,11 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
-import org.sonar.api.component.ResourcePerspectives;
 import org.sonar.api.issue.Issuable;
 import org.sonar.api.issue.Issue;
 import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.resources.Project;
 import org.sonar.plugins.delphi.DelphiTestUtils;
 import org.sonar.plugins.delphi.core.helpers.DelphiProjectHelper;
-import org.sonar.plugins.delphi.debug.DebugSensorContext;
-import org.sonar.plugins.delphi.pmd.profile.DelphiPmdProfileExporter;
 import org.sonar.plugins.delphi.project.DelphiProject;
 import org.sonar.plugins.delphi.utils.DelphiUtils;
 
@@ -55,22 +52,25 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import org.sonar.api.batch.fs.internal.DefaultFileSystem;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import static org.sonar.plugins.delphi.pmd.BasePmdRuleTest.ROOT_DIR_NAME;
+import org.sonar.plugins.delphi.pmd.profile.DelphiPmdProfileExporter;
+import org.sonar.plugins.delphi.utils.TestUtils;
 
 public class DelphiPmdSensorTest {
 
     private static final String ROOT_NAME = "/org/sonar/plugins/delphi/PMDTest";
     private static final String TEST_FILE = "/org/sonar/plugins/delphi/PMDTest/pmd.pas";
 
-    private Project project;
     private DelphiPmdSensor sensor;
-    private ResourcePerspectives perspectives;
     private Issuable issuable;
     private List<Issue> issues = new LinkedList<>();
 
     @Before
     public void init() {
-        project = mock(Project.class);
-        perspectives = mock(ResourcePerspectives.class);
+
         DelphiProjectHelper delphiProjectHelper = DelphiTestUtils.mockProjectHelper();
 
         // Don't pollute current working directory
@@ -78,27 +78,11 @@ public class DelphiPmdSensorTest {
 
         File srcFile = DelphiUtils.getResource(TEST_FILE);
 
-        InputFile inputFile = new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", srcFile.getPath());
 
         DelphiProject delphiProject = new DelphiProject("Default Project");
         //delphiProject.setSourceFiles(Arrays.asList(inputFile));
 
         issuable = mock(Issuable.class);
-
-        when(delphiProjectHelper.getWorkgroupProjects()).thenReturn(Collections.singletonList(delphiProject));
-        when(delphiProjectHelper.getFile(anyString())).thenAnswer(new Answer<InputFile>() {
-            @Override
-            public InputFile answer(InvocationOnMock invocation) throws Throwable {
-                InputFile inputFile = new DefaultInputFile("ROOT_KEY_CHANGE_AT_SONARAPI_5", (new File((String) invocation
-                        .getArguments()[0])).getPath());
-
-                when(perspectives.as(Issuable.class, inputFile)).thenReturn(issuable);
-
-                when(issuable.newIssueBuilder()).thenReturn(new StubIssueBuilder());
-
-                return inputFile;
-            }
-        });
 
         when(issuable.addIssue(Matchers.any(Issue.class))).then(new Answer<Boolean>() {
             @Override
@@ -123,20 +107,15 @@ public class DelphiPmdSensorTest {
 
         when(profileExporter.exportProfileToString(rulesProfile)).thenReturn(rulesXmlContent);
 
-        sensor = new DelphiPmdSensor(delphiProjectHelper, perspectives, rulesProfile, profileExporter);
+        sensor = new DelphiPmdSensor(delphiProjectHelper, rulesProfile, profileExporter);
     }
-
-    @Test
-    public void shouldExecuteOnProjectTest() {
-        assertTrue(sensor.shouldExecuteOnProject(project));
-    }
-
     @Test
     public void analyseTest() {
         // TODO Create one test per violation
 
-        DebugSensorContext debugContext = new DebugSensorContext();
-        sensor.analyse(project, debugContext);
+        DefaultFileSystem fs = TestUtils.mockFileSystem(ROOT_DIR_NAME);
+        SensorContext debugContext = SensorContextTester.create(fs.baseDir());
+        sensor.execute(debugContext);
 
         RuleData ruleData[] = // all expected rule violations and their lines
                 {new RuleData("ClassNameRule", 7),
